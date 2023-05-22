@@ -1,1 +1,1 @@
-# zarf-package-uds-idam
+# uds-idam
