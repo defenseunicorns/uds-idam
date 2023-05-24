@@ -1,0 +1,14 @@
+package:
+  create: 
+    max_package_size: "1000000000"
+    set:
+      version: "0.0.1"
+      domain: bigbang.dev
+      realm: cocowow
+      terraform_version: "1.4.2"
+      terraform_provider_aws_version: 4.59.0
+  deploy:
+    set:
+      keycloak_key_file: bigbang.dev.key
+      keycloak_cert_file: bigbang.dev.cert 
+      realm: cocowow
