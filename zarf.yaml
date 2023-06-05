@@ -55,8 +55,6 @@ components:
         before:
           - cmd: "terraform init -upgrade"
             dir: rds
-        after:
-          - cmd: "test -d ./run/ && chmod -R ugo+rwx ./run/ || echo $?"
     files:
     # terraform code
     - source: rds/.terraform
@@ -65,6 +63,10 @@ components:
       target: run/main.tf
     - source: rds/outputs.tf
       target: run/outputs.tf
+    - source: rds/variables.tf
+      target: run/variables.tf
+    - source: rds/terraform.tfvars
+      target: run/terraform.tfvars
     - source: rds/.terraform.lock.hcl
       target: run/.terraform.lock.hcl
   - name: execute-terraform
@@ -102,11 +104,6 @@ components:
             dir: run
             setVariables:
               - name: KC_DB_PASSWORD
-  - name: test
-    required: true
-    files:
-      - source: test.sh
-        target: updated.sh
   - name: keycloak
     required: false
     charts:

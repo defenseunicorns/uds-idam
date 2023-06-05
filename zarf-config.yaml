@@ -1,5 +1,5 @@
 package:
-  create: 
+  create:
     max_package_size: "1000000000"
     set:
       version: "0.0.1"
@@ -10,5 +10,8 @@ package:
   deploy:
     set:
       keycloak_key_file: bigbang.dev.key
-      keycloak_cert_file: bigbang.dev.cert 
+      keycloak_cert_file: bigbang.dev.cert
       realm: cocowow
+      vpc_cidr: "192.168.0.0/19"
+      secondary_cidr_block: "192.168.64.0/19" #https://aws.amazon.com/blogs/containers/optimize-ip-addresses-usage-by-pods-in-your-amazon-eks-cluster/
+      region: "us-east-2"

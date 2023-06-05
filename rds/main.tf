@@ -10,7 +10,6 @@ module "rds" {
   vpc_cidr = var.vpc_cidr
   vpc_id   = var.vpc_id
 
-  database_subnet_group_name = module.vpc.database_subnet_group_name
   db_name                    = "keycloak"
   username                   = "kcadmin"
   engine                     = "postgres"
