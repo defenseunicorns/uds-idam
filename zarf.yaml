@@ -105,15 +105,11 @@ components:
             setVariables:
               - name: KC_DB_PASSWORD
   - name: keycloak
-    required: false
-    charts:
-      - name: keycloak
-        url: https://repo1.dso.mil/big-bang/product/packages/keycloak.git
-        gitPath: chart
-        namespace: keycloak
-        version: 18.4.0-bb.3
-        valuesFiles:
-          - values/values.yaml
-    images:
-      - "registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.0.2"
-      - "registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1"
+    required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: "echo $ZARF_VAR_KC_DB_URL"
+          - cmd: "echo $ZARF_VAR_KC_DB_NAME"
+          - cmd: "echo $ZARF_VAR_KC_DB_USERNAME"
+          - cmd: "echo $ZARF_VAR_KC_DB_PASSWORD"
