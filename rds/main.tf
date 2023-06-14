@@ -4,8 +4,13 @@ provider "aws" {
   region = var.region
 }
 
+provider "aws" {
+  alias  = "replication_region"
+  region = var.replication_region
+}
+
 module "rds" {
-  source = "git::https://github.com/defenseunicorns/uds-iac-aws-rds?ref=b04d4b2b3c5a8985690797fd63f7eaf4f6ffec08"
+  source = "git::https://github.com/defenseunicorns/terraform-aws-uds-rds?ref=v0.0.1-alpha"
 
   vpc_cidr = var.vpc_cidr
   vpc_id   = var.vpc_id
@@ -20,4 +25,8 @@ module "rds" {
   allocated_storage          = "10"
   max_allocated_storage      = 20
   identifier                 = "keycloak-postgres"
+
+  providers = {
+    aws.region2 = aws.replication_region
+  }
 }

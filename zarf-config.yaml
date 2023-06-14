@@ -15,3 +15,4 @@ package:
       vpc_cidr: "192.168.0.0/19"
       secondary_cidr_block: "192.168.64.0/19" #https://aws.amazon.com/blogs/containers/optimize-ip-addresses-usage-by-pods-in-your-amazon-eks-cluster/
       region: "us-east-2"
+      replication_region: "us-west-2"

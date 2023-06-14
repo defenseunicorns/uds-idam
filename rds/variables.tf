@@ -16,6 +16,12 @@ variable "region" {
   default     = ""
 }
 
+variable "replication_region" {
+  description = "AWS region that will host the backups"
+  type        = string
+  default     = ""
+}
+
 variable "secondary_cidr_blocks" {
   description = "Secondary CIDR blocks"
   type        = list(string)
