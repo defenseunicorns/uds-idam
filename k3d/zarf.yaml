@@ -8,22 +8,6 @@ metadata:
   architecture: amd64 
 
 variables:
-  - name: REALM
-    default: baby-yoda
-    prompt: false
-  - name: KC_ADM_USER
-    default: admin
-    prompt: false
-  - name: KC_ADM_PASSWORD
-    default: sup3r-secret-p@ssword
-    prompt: false
-  - name: KEYCLOAK_KEY_FILE
-    default: bigbang.dev.key
-    prompt: false
-  - name: KEYCLOAK_CERT_FILE
-    default: bigbang.dev.cert
-    prompt: false
-  # k3d
   - name: HOST_PATH
     default: "/var/local-path-provisioner/*"
     prompt: false
@@ -64,39 +48,10 @@ components:
   - name: load-keycloak-certs
     required: true
     import:
-      name: load-certs
-      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
-    files:
-      - source: ../idam/scripts/cat_keycloak_cert.sh
-        target: cat_keycloak_cert.sh
-        executable: true
-      - source: ../idam/scripts/cat_keycloak_key.sh
-        target: cat_keycloak_key.sh
-        executable: true
-    actions:
-      onDeploy:
-        after:
-        - cmd: ./cat_keycloak_cert.sh
-          description: read the cert
-          setVariables:
-          - name: KEYCLOAK_CERT
-        - cmd: ./cat_keycloak_key.sh
-          description: read the cert
-          setVariables:
-          - name: KEYCLOAK_KEY
-  - name: import-bigbang
+      name: load-keycloak-certs
+      path: ../idam
+  - name: bigbang-keycloak
     required: true
     import:
-      name: bigbang
-      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
-    images:
-      - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
-      - ghcr.io/kirankt/keycloak-custom-theme:0.1.2
-    extensions:
-      bigbang:
-        version: "###ZARF_PKG_TMPL_BIGBANG_VERSION###"
-        valuesFiles:
-        - ../values/authservice.yaml
-        - ../values/keycloak.yaml
-        - ../values/pepr-bb-values.yaml
-        - ../values/disable-unrelated.yaml
+      name: bigbang-keycloak
+      path: ../idam
