@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+
+kind: ZarfPackageConfig
+metadata:
+  name: dubbd-plus-idam
+  description: "An opinionated distribution of the Defense Unicorn Big Bang Distro (DUBBD) with SSO enabled by default"
+  version: "0.1"
+  architecture: amd64 
+
+components:
+  - name: bigbang
+    required: true
+    import:
+      name: bigbang
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+    extensions:
+      bigbang:
+        version: "###ZARF_PKG_TMPL_BIGBANG_VERSION###"
+        valuesFiles:
+        - ../standalone-values/authservice.yaml
+        - ../standalone-values/pepr-bb-values.yaml
+        - ../standalone-values/disable-unrelated.yaml
+
