@@ -45,13 +45,28 @@ components:
     import:
       name: download-flux
       url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+  - name: bigbang
+    required: true
+    import:
+      name: bigbang
+      path: ../dubbd-with-idam
   - name: load-keycloak-certs
     required: true
     import:
       name: load-keycloak-certs
-      path: ../idam
-  - name: bigbang-keycloak
+      path: ../keycloak
+  - name: keycloak-ingressgateway-addon
     required: true
     import:
-      name: bigbang-keycloak
-      path: ../idam
+      name: keycloak-ingressgateway-addon
+      path: ../keycloak
+  - name: keycloak-values
+    required: true
+    import:
+      name: keycloak-values
+      path: ../keycloak
+  - name: keycloak
+    required: true
+    import:
+      name: keycloak
+      path: ../keycloak
