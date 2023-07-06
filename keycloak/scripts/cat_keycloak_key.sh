@@ -1,0 +1,1 @@
+cat ###ZARF_VAR_KEYCLOAK_KEY_FILE### | base64 -w 0

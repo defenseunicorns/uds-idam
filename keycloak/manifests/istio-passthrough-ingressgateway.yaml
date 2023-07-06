@@ -1,0 +1,24 @@
+
+
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: keycloak-ingressgateway
+  namespace: istio-system
+spec:
+  hub: registry1.dso.mil/ironbank/opensource/istio 
+  profile: empty
+  components:
+    ingressGateways:
+    - name: keycloak-ingressgateway
+      namespace: istio-system
+      enabled: true
+      label:
+        # Set a unique label for the gateway. This is required to ensure Gateways
+        # can select this workload
+        app: keycloak-ingressgateway
+        istio: ingressgateway
+      k8s:
+        service:
+          type: LoadBalancer
+          loadBalancerIP: 172.28.0.3

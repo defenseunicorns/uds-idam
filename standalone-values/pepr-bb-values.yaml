@@ -1,0 +1,75 @@
+addons:
+  authservice:
+    enabled: false
+
+    chains:
+      foo:
+        callback_uri: https://foo.bigbang.dev/login
+        client_id: foo
+        client_secret: 2mMLbBB2V7ngoGOY0N6fP0i47f68eDNP
+        logout_path: /logout
+        match:
+          header: :authority
+          prefix: foo.bigbang.dev
+
+monitoring:
+  enabled: true
+    
+  values:
+    networkPolicies:
+      enabled: true
+    grafana:
+      persistence:
+        enabled: false
+    prometheus:
+      prometheusSpec:
+        storageSpec: null
+
+neuvector:
+  enabled: true
+  values:
+    k3s:
+      enabled: true
+      runtimePath: /run/k3s/containerd/containerd.sock
+
+    containerd:
+      enabled: false
+
+kyvernoPolicies:
+  enabled: true
+  values:
+    policies:
+      restrict-image-registries:
+        parameters:
+          allow:
+          - registry1.dso.mil
+          - registry.dso.mil
+          - 127.0.0.1 # zarf registry
+          - ghcr.io   # For keycloak custom themekyvernoPolicies:
+      disallow-host-namespaces:
+        exclude:
+          any:
+          # Istio does not inject itself
+          - resources:
+              namespaces:
+              - metallb-system
+      restrict-host-path-mount:
+        parameters:
+          allow:
+           - "###ZARF_VAR_HOST_PATH###"
+      restrict-host-path-mount-pv:
+        parameters:
+          allow:
+           - "###ZARF_VAR_HOST_PATH###"
+      restrict-host-path-write:
+        parameters:
+          allow:
+           - "###ZARF_VAR_HOST_PATH###"
+      restrict-host-ports:
+        exclude:
+          any:
+          # Istio does not inject itself
+          - resources:
+              namespaces:
+              - metallb-system
+    
