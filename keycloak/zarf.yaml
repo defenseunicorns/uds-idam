@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+
+kind: ZarfPackageConfig
+metadata:
+  name: keycloak
+  description: "An opinionated distribution of the Defense Unicorn Big Bang Distro (DUBBD) with SSO enabled by default"
+  version: "0.1"
+  architecture: amd64 
+
+variables:
+  - name: REALM
+    default: baby-yoda
+    prompt: false
+  - name: KC_ADM_USER
+    default: admin
+    prompt: false
+  - name: KC_ADM_PASSWORD
+    default: sup3r-secret-p@ssword
+    prompt: false
+  - name: KEYCLOAK_KEY_FILE
+    default: bigbang.dev.key
+    prompt: false
+  - name: KEYCLOAK_CERT_FILE
+    default: bigbang.dev.cert
+    prompt: false
+
+components:
+  - name: load-keycloak-certs
+    required: true
+    import:
+      name: load-certs
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+    files:
+      - source: scripts/cat_keycloak_cert.sh
+        target: cat_keycloak_cert.sh
+        executable: true
+      - source: scripts/cat_keycloak_key.sh
+        target: cat_keycloak_key.sh
+        executable: true
+    actions:
+      onDeploy:
+        after:
+        - cmd: ./cat_keycloak_cert.sh
+          description: read the cert
+          setVariables:
+          - name: KEYCLOAK_CERT
+        - cmd: ./cat_keycloak_key.sh
+          description: read the cert
+          setVariables:
+          - name: KEYCLOAK_KEY
+  - name: keycloak-ingressgateway-addon
+    required: true
+    manifests:
+      - name: keycloak-ingressgateway-addon
+        kustomizations:
+          - ./keycloak-ingress
+    images:
+      - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.17.2-tetratefips-v0
+  - name: keycloak-values
+    files:
+      - source: ./values-keycloak.yaml
+        target: ./values-keycloak.yaml
+  - name: keycloak
+    required: true
+    description: "Deploy keycloak via flux"
+    actions:
+      onDeploy:
+        before:
+          - cmd: cat values-keycloak.yaml
+            description: Read keycloak values into variable.
+            setVariables:
+            - name: KEYCLOAK_VALUES
+              autoIndent: true
+    charts:
+      - name: flux-app
+        version: 1.0.0
+        url: https://github.com/defenseunicorns/flux-app-helm-chart.git
+        gitPath: charts
+        namespace: bigbang
+        valuesFiles:
+          - keycloak-flux-values.yaml
+    repos:
+      - https://repo1.dso.mil/big-bang/product/packages/keycloak.git
+    images:
+      - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
+      - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.14
+      - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
+      - ghcr.io/kirankt/keycloak-custom-theme:0.1.2
+
