@@ -52,11 +52,10 @@ components:
     required: true
     manifests:
       - name: keycloak-ingressgateway-addon
-        files: 
-          - ./manifests/istio-passthrough-ingressgateway.yaml
-          - ./manifests/passthrough-gateway.yaml
+        kustomizations:
+          - ./keycloak-ingress
     images:
-      - registry1.dso.mil/ironbank/opensource/istio/proxyv2:1.17.2 
+      - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.17.2-tetratefips-v0
   - name: keycloak-values
     files:
       - source: ./values-keycloak.yaml

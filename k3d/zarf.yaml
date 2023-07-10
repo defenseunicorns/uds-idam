@@ -49,7 +49,13 @@ components:
     required: true
     import:
       name: bigbang
-      path: ../dubbd-with-idam
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+    extensions:
+      bigbang:
+        version: "###ZARF_PKG_TMPL_BIGBANG_VERSION###"
+        valuesFiles:
+        - ../values/base-values.yaml
+        - ../values/disable-unrelated.yaml
   - name: load-keycloak-certs
     required: true
     import:
@@ -57,9 +63,12 @@ components:
       path: ../keycloak
   - name: keycloak-ingressgateway-addon
     required: true
-    import:
-      name: keycloak-ingressgateway-addon
-      path: ../keycloak
+    manifests:
+      - name: keycloak-ingressgateway-addon
+        kustomizations:
+          - ./keycloak-ingress
+    images:
+      - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.17.2-tetratefips-v0
   - name: keycloak-values
     required: true
     import:
