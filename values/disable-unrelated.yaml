@@ -1,52 +1,50 @@
-# jaeger:
-#   enabled: false
+jaeger:
+  enabled: false
 
-# kiali:
-#   enabled: false
+kiali:
+  enabled: false
 
-# clusterAuditor:
-#   enabled: false
+clusterAuditor:
+  enabled: false
 
-# gatekeeper:
-#   enabled: false
+gatekeeper:
+  enabled: false
 
-# elasticsearchKibana:
-#   enabled: false
+elasticsearchKibana:
+  enabled: false
 
-# eckOperator:
-#   enabled: false
+eckOperator:
+  enabled: false
 
-# fluentbit:
-#   enabled: false
+fluentbit:
+  enabled: false
 
-# promtail:
-#   enabled: false
+promtail:
+  enabled: false
 
-# loki:
-#   enabled: false
+loki:
+  enabled: false
 
-# tempo:
-#   enabled: false
+tempo:
+  enabled: false
 
-# # enabled
-# monitoring:
-#   enabled: false
+monitoring:
+  enabled: false
 
-# twistlock:
-#   enabled: false
+twistlock:
+  enabled: false
 
-# neuvector:
-#   enabled: false
-#   values:
-#     k3s:
-#       enabled: true
+neuvector:
+  enabled: false
+  values:
+    k3s:
+      enabled: true
 
-# # enabled
-# kyvernoReporter:
-#   enabled: false
+kyvernoReporter:
+  enabled: false
 
-# kyvernoPolicies:
-#   enabled: false
+kyvernoPolicies:
+  enabled: false
 
-# kyverno:
-#   enabled: false
+kyverno:
+  enabled: false
