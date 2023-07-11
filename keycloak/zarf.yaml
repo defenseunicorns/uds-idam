@@ -57,6 +57,7 @@ components:
     images:
       - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.17.2-tetratefips-v0
   - name: keycloak-values
+    required: true
     files:
       - source: ./values-keycloak.yaml
         target: ./values-keycloak.yaml
