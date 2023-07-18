@@ -28,7 +28,7 @@ variables:
     type: file
     autoIndent: true
   - name: REALM_IMPORT_FILE
-    default: baby-yoda.json
+    default: realm.json
     prompt: false
     type: file
     autoIndent: true
