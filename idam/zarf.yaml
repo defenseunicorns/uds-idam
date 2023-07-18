@@ -2,8 +2,8 @@
 
 kind: ZarfPackageConfig
 metadata:
-  name: keycloak
-  description: "An opinionated distribution of the Defense Unicorn Big Bang Distro (DUBBD) with SSO enabled by default"
+  name: uds-idam
+  description: "UDS Keycloak deployed via flux"
   version: "0.1"
   architecture: amd64 
 

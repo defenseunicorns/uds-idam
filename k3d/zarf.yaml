@@ -2,8 +2,8 @@
 
 kind: ZarfPackageConfig
 metadata:
-  name: uds-idam-k3d
-  description: "An opinionated distribution of the Defense Unicorn Big Bang Distro (DUBBD) with SSO enabled by default"
+  name: k3d-dubbd-base
+  description: "Basic DUBBD install with MetalLB"
   version: "0.1"
   architecture: amd64 
 
