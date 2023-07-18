@@ -38,7 +38,7 @@ variables:
     type: file
     autoIndent: true
   - name: REALM_CUSTOM_REG_FILE
-    default: baby-yoda.yaml
+    default: customreg.yaml
     prompt: false
     type: file
     autoIndent: true
