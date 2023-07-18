@@ -20,34 +20,34 @@ variables:
   - name: KEYCLOAK_KEY_FILE
     default: bigbang.dev.key
     prompt: false
+    type: file
+    autoIndent: true
   - name: KEYCLOAK_CERT_FILE
     default: bigbang.dev.cert
     prompt: false
-
+    type: file
+    autoIndent: true
+  - name: REALM_IMPORT_FILE
+    default: baby-yoda.json
+    prompt: false
+    type: file
+    autoIndent: true
+  - name: REALM_TRUSTSTORE_FILE
+    default: truststore.jks.b64
+    prompt: false
+    type: file
+    autoIndent: true
+  - name: REALM_CUSTOM_REG_FILE
+    default: baby-yoda.yaml
+    prompt: false
+    type: file
+    autoIndent: true
+  - name: KEYCLOAK_VALUES
+    default: dst-values-keycloak.yaml
+    prompt: false
+    type: file
+    autoIndent: true
 components:
-  - name: load-keycloak-certs
-    required: true
-    import:
-      name: load-certs
-      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
-    files:
-      - source: scripts/cat_keycloak_cert.sh
-        target: cat_keycloak_cert.sh
-        executable: true
-      - source: scripts/cat_keycloak_key.sh
-        target: cat_keycloak_key.sh
-        executable: true
-    actions:
-      onDeploy:
-        after:
-        - cmd: ./cat_keycloak_cert.sh
-          description: read the cert
-          setVariables:
-          - name: KEYCLOAK_CERT
-        - cmd: ./cat_keycloak_key.sh
-          description: read the cert
-          setVariables:
-          - name: KEYCLOAK_KEY
   - name: keycloak-ingressgateway-addon
     required: true
     manifests:
@@ -56,22 +56,27 @@ components:
           - ./keycloak-ingress
     images:
       - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.17.2-tetratefips-v0
+  - name: realm-config-default-files
+    required: true
+    files:
+      - source: certs/bigbang.dev.cert
+        target: bigbang.dev.cert
+      - source: certs/bigbang.dev.key
+        target: bigbang.dev.key
+      - source: realm/baby-yoda.json
+        target: realm.json
+      - source: realm/baby-yoda.yaml
+        target: customreg.yaml
+      - source: realm/truststore.jks.b64
+        target: truststore.jks.b64
   - name: keycloak-values
     required: true
     files:
-      - source: ./values-keycloak.yaml
-        target: ./values-keycloak.yaml
+      - source: src-values-keycloak.yaml
+        target: dst-values-keycloak.yaml
   - name: keycloak
     required: true
     description: "Deploy keycloak via flux"
-    actions:
-      onDeploy:
-        before:
-          - cmd: cat values-keycloak.yaml
-            description: Read keycloak values into variable.
-            setVariables:
-            - name: KEYCLOAK_VALUES
-              autoIndent: true
     charts:
       - name: flux-app
         version: 1.0.0
@@ -86,5 +91,4 @@ components:
       - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.14
       - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
-      - ghcr.io/kirankt/keycloak-custom-theme:0.1.2
 
