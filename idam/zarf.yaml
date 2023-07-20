@@ -1,10 +1,11 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
-
 kind: ZarfPackageConfig
 metadata:
   name: uds-idam
   description: "UDS Keycloak deployed via flux"
-  version: "0.1"
+  # x-release-please-start-version
+  version: "0.1.0"
+  # x-release-please-end
   architecture: amd64 
 
 variables:
@@ -50,6 +51,7 @@ variables:
     prompt: false
     type: file
     autoIndent: true
+
 components:
   - name: keycloak-ingressgateway-addon
     required: true
