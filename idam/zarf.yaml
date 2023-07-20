@@ -74,6 +74,11 @@ components:
         target: customreg.yaml
       - source: realm/truststore.jks.b64
         target: truststore.jks.b64
+  - name: keycloak-values
+    required: true
+    files:
+      - source: values-keycloak.yaml
+        target: values-keycloak.yaml
   - name: keycloak
     required: true
     description: "Deploy keycloak via flux"
