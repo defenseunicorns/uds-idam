@@ -25,7 +25,7 @@ extraEnv: |-
   - name: KC_HTTP_RELATIVE_PATH
     value: /auth
   - name: KC_HOSTNAME
-    value: keycloak.bigbang.dev
+    value: ###ZARF_VAR_DOMAIN###
   - name: KC_HOSTNAME_STRICT
     value: "true"
   - name: KC_HOSTNAME_STRICT_HTTPS
@@ -139,6 +139,8 @@ secrets:
   env:
     stringData:
       X509_CA_BUNDLE: /etc/x509/https/cas.pem
+      KEYCLOAK_ADMIN: ###ZARF_VAR_KC_ADM_USER###
+      KEYCLOAK_ADMIN_PASSWORD: ###ZARF_VAR_KC_ADM_PASSWORD###
   quarkusproperties:
     stringData:
       quarkus.properties: |-
