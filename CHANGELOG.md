@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/defenseunicorns/uds-idam/compare/v0.1.1...v0.1.2) (2023-07-20)
+
+
+### Miscellaneous
+
+* **ci:** fix publish step ([25ceea1](https://github.com/defenseunicorns/uds-idam/commit/25ceea1dd32c9fcbc616fd06005cd35420cda91a))
+
 ## [0.1.1](https://github.com/defenseunicorns/uds-idam/compare/v0.1.0...v0.1.1) (2023-07-20)
 
 
