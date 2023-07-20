@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/defenseunicorns/uds-idam/compare/v0.1.2...v0.1.3) (2023-07-20)
+
+
+### Miscellaneous
+
+* **ci:** bump package version ([195bcf7](https://github.com/defenseunicorns/uds-idam/commit/195bcf71bb43d2f2b7fa51e417f600fae4d07341))
+
 ## [0.1.2](https://github.com/defenseunicorns/uds-idam/compare/v0.1.1...v0.1.2) (2023-07-20)
 
 
