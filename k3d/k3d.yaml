@@ -2,10 +2,10 @@ apiVersion: k3d.io/v1alpha4
 kind: Simple
 metadata:
   name: zarf-pepr
-agents: 1
+agents: 2
 subnet: "172.28.0.0/16"
 hostAliases:
-  - ip: 172.28.0.3
+  - ip: 172.28.0.4
     hostnames:
       - keycloak.bigbang.dev
 options:
