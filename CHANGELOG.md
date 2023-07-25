@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.5](https://github.com/defenseunicorns/uds-idam/compare/v0.1.4...v0.1.5) (2023-07-25)
+
+
+### Bug Fixes
+
+* update default base domain ([cd025b0](https://github.com/defenseunicorns/uds-idam/commit/cd025b0aca1d6e196d43869fbc30f72de247d05e))
+* use zarf var for gateway hostname ([180fa54](https://github.com/defenseunicorns/uds-idam/commit/180fa54441d7d9395ad91f498cbee5b624140625))
+
 ## [0.1.4](https://github.com/defenseunicorns/uds-idam/compare/v0.1.3...v0.1.4) (2023-07-20)
 
 
