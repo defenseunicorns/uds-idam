@@ -25,7 +25,7 @@ extraEnv: |-
   - name: KC_HTTP_RELATIVE_PATH
     value: /auth
   - name: KC_HOSTNAME
-    value: ###ZARF_VAR_DOMAIN###
+    value: keycloak.###ZARF_VAR_DOMAIN###
   - name: KC_HOSTNAME_STRICT
     value: "true"
   - name: KC_HOSTNAME_STRICT_HTTPS
@@ -121,6 +121,9 @@ istio:
     enabled: true
     gateways:
     - istio-system/passthrough
+    hosts:
+    - keycloak.###ZARF_VAR_DOMAIN###
+
 monitoring:
   enabled: false
 networkPolicies:

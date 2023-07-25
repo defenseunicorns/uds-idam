@@ -13,7 +13,7 @@ variables:
     default: baby-yoda
     prompt: false
   - name: DOMAIN
-    default: keycloak.bigbang.dev
+    default: bigbang.dev
     prompt: false  
   - name: KC_ADM_USER
     default: admin

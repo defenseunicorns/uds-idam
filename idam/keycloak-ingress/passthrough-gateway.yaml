@@ -8,7 +8,7 @@ spec:
     app: keycloak-ingressgateway
   servers:
   - hosts:
-    - "###ZARF_VAR_DOMAIN###"
+    - keycloak.###ZARF_VAR_DOMAIN###
     port:
       name: http
       number: 8080
@@ -16,7 +16,7 @@ spec:
     tls:
       httpsRedirect: true
   - hosts:
-    - "###ZARF_VAR_DOMAIN###"
+    - keycloak.###ZARF_VAR_DOMAIN###
     port:
       name: https
       number: 8443
