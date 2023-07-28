@@ -1,8 +1,12 @@
 application:
   name: keycloak
+  createNamespace: ###ZARF_VAR_KEYCLOAK_CREATE_NAMESPACE###
   namespace: keycloak
   path: chart
   repository: https://repo1.dso.mil/big-bang/product/packages/keycloak.git
-  tag: 18.4.3-bb.1
+  ref:
+    tag: 18.4.3-bb.1
   values: |
     ###ZARF_VAR_KEYCLOAK_VALUES###
+  dependsOn:
+    ###ZARF_VAR_KEYCLOAK_DEPENDS_ON###
