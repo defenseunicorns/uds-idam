@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.6](https://github.com/defenseunicorns/uds-idam/compare/v0.1.5...v0.1.6) (2023-07-28)
+
+
+### Bug Fixes
+
+* template realm routes ([1f8efe3](https://github.com/defenseunicorns/uds-idam/commit/1f8efe36d7c4970e1af67b17d80ae921e7c5d819))
+* use latest flux support chart ([d1ed822](https://github.com/defenseunicorns/uds-idam/commit/d1ed82281ca73c60468c72b5a9a11ba0b938d3c6))
+* wait for HelmRelease ([ce06bc0](https://github.com/defenseunicorns/uds-idam/commit/ce06bc00583a0efa08fd1f17ce2af8e6bc30e714))
+
+
+### Miscellaneous
+
+* **deps:** update dependency stefanprodan/podinfo to v6.4.0 ([644b263](https://github.com/defenseunicorns/uds-idam/commit/644b2636f3a2a9566b4e6b6933d38ced7a18246a))
+* metallb and podinfo test packages ([fff743c](https://github.com/defenseunicorns/uds-idam/commit/fff743cc23d3630c5ceac61634397e57032de9ff))
+* move dev packages around ([c80b3c0](https://github.com/defenseunicorns/uds-idam/commit/c80b3c0472f91f3ec0124573163e785a94448943))
+* remove k3d dir, use dubbd for testing ([06a6d4b](https://github.com/defenseunicorns/uds-idam/commit/06a6d4b89dcbcbe26ae0ef67eeb72527f15e6aba))
+
 ## [0.1.5](https://github.com/defenseunicorns/uds-idam/compare/v0.1.4...v0.1.5) (2023-07-25)
 
 
