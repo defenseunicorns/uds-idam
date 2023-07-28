@@ -3,15 +3,9 @@ ZARF_VERSION := v0.28.3
 SSO_VERSION := 0.1.2
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
-.PHONY: k3d sso test metallb
-
 cluster/create:
-	k3d cluster delete -c k3d/k3d.yaml
-	k3d cluster create -c k3d/k3d.yaml
-
-deploy/test:
-	cd test-mission-app && zarf package create --tmpdir=/tmp --architecture amd64 --confirm
-	cd test-mission-app && zarf package deploy -ltrace --tmpdir=/tmp --confirm zarf-package-podinfo-amd64-0.1.tar.zst
+	k3d cluster delete -c dev/k3d.yaml
+	k3d cluster create -c dev/k3d.yaml
 
 cluster/full: cluster/create build/all deploy/all  ## This will destroy any existing cluster, create a new one, then build and deploy all
 
@@ -49,9 +43,9 @@ deploy/sso: ## Deploy sso
 	cd ./build && zarf package deploy --confirm zarf-package-uds-sso-amd64-*.tar.zst
 
 deploy/metallb:
-	cd metallb && zarf package create --tmpdir=/tmp --architecture amd64 --confirm
-	cd metallb && zarf package deploy -ltrace --tmpdir=/tmp --confirm zarf-package-metallb-amd64-*.tar.zst
+	cd dev/metallb && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../../build
+	cd ./build && zarf package deploy -ltrace --tmpdir=/tmp --confirm zarf-package-metallb-amd64-*.tar.zst
 
 deploy/test:
-	cd test-mission-app && zarf package create --tmpdir=/tmp --architecture amd64 --confirm
-	cd test-mission-app && zarf package deploy -ltrace --tmpdir=/tmp --confirm zarf-package-podinfo-amd64-*.tar.zst
+	cd dev/test-mission-app && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../../build
+	cd ./build && zarf package deploy --tmpdir=/tmp --confirm zarf-package-podinfo-amd64-*.tar.zst
