@@ -97,4 +97,10 @@ components:
       - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.14
       - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
+    actions:
+      onDeploy:
+        after:
+          - cmd: ./zarf tools wait-for HelmRelease keycloak ready -n bigbang
+            maxRetries: 3
+            maxTotalSeconds: 300
 
