@@ -51,6 +51,10 @@ variables:
     prompt: false
     type: file
     autoIndent: true
+  - name: KEYCLOAK_DEPENDS_ON
+    default: "[]"
+  - name: KEYCLOAK_CREATE_NAMESPACE
+    default: "true"
 
 components:
   - name: keycloak-ingressgateway-addon
@@ -83,11 +87,12 @@ components:
     required: true
     description: "Deploy keycloak via flux"
     charts:
+    charts:
+    # renovate: datasource=helm
       - name: flux-app
         releaseName: keycloak-flux
-        version: 1.0.0
-        url: https://github.com/defenseunicorns/flux-app-helm-chart.git
-        gitPath: charts
+        version: 1.0.5
+        url: https://defenseunicorns.github.io/uds-support-charts/
         namespace: bigbang
         valuesFiles:
           - keycloak-flux-values.yaml
