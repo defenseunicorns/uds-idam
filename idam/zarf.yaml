@@ -87,7 +87,6 @@ components:
     required: true
     description: "Deploy keycloak via flux"
     charts:
-    charts:
     # renovate: datasource=helm
       - name: flux-app
         releaseName: keycloak-flux
