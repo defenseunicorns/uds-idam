@@ -12,7 +12,7 @@
   ],
   "timezone": "America/New_York",
   "rebaseStalePrs": true,
-  "schedule": ["after 7am and before 9am every weekday"],
+  "schedule": ["after 7am and before 9pm every weekday"],
   "dependencyDashboard": true,
   "platform": "github",
   "onboarding": false,
