@@ -90,7 +90,7 @@ components:
     # renovate: datasource=helm
       - name: flux-app
         releaseName: keycloak-flux
-        version: 1.0.5
+        version: 1.0.4
         url: https://defenseunicorns.github.io/uds-support-charts/
         namespace: bigbang
         valuesFiles:
