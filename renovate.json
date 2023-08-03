@@ -76,12 +76,36 @@
     {
       "fileMatch": [".*\/?zarf\\.ya?ml$"],
       "matchStrings": [
-        "-\\s+['\"](?<depName>[^:]+):(?<currentValue>.*)['\"]"
+        "images:\\s*\\n((\\s+-\\s+.+\\n)+)",
+        "-\\s+(?<depName>[^:]+):(?<currentValue>.*)"
       ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver-coerced{{/if}}",
+      "matchStringsStrategy": "recursive",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
       "datasourceTemplate": "docker",
       "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^(?<version>.*)${{/if}}"
     },
+    {
+      "fileMatch": [".*\/?ingressgateway\\.ya?ml$"],
+      "matchStrings": [
+        "\\s+spec:\\s+hub:\\s+\\S+\\s+tag:\\s+(?<currentValue>\\S+)"
+      ],
+      "depNameTemplate": "registry1.dso.mil/ironbank/tetrate/istio/proxyv2",
+      "matchStringsStrategy": "recursive",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      "datasourceTemplate": "docker",
+      "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^(?<version>.*)${{/if}}"
+    },
+    {
+      "fileMatch": [".*\/?keycloak\\.ya?ml$"],
+      "matchStrings": [
+        "\\s+image:\\s+\\S+[^:]+:(?<currentValue>\\S+)"
+      ],
+      "depNameTemplate": "registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin",
+      "matchStringsStrategy": "recursive",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
+      "datasourceTemplate": "docker",
+      "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^(?<version>.*)${{/if}}"
+    },    
     {
       "fileMatch": ["^Makefile$"],
       "matchStrings": [
@@ -101,7 +125,7 @@
     {
       "matchPackagePatterns": ["big-bang/.*"],
       "matchDatasources": ["gitlab-tags"],
-      "allowedVersions": "!/^v.*$/"
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-bb\\.(?<build>\\d+)$"
     }
   ]
 }
