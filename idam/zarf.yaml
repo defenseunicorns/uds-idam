@@ -91,10 +91,10 @@ components:
       - name: flux-app
         url: https://defenseunicorns.github.io/uds-support-charts/
         version: 1.0.5
+        releaseName: keycloak-flux
         namespace: bigbang
         valuesFiles:
           - keycloak-flux-values.yaml
-        releaseName: keycloak-flux
     repos:
       - https://repo1.dso.mil/big-bang/product/packages/keycloak.git
     images:
