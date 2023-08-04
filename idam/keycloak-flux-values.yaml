@@ -5,6 +5,7 @@ application:
   path: chart
   repository: https://repo1.dso.mil/big-bang/product/packages/keycloak.git
   ref:
+    # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
     tag: 18.4.3-bb.1
   values: |
     ###ZARF_VAR_KEYCLOAK_VALUES###

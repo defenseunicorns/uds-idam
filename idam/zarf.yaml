@@ -87,12 +87,11 @@ components:
     required: true
     description: "Deploy keycloak via flux"
     charts:
-    charts:
     # renovate: datasource=helm
       - name: flux-app
-        releaseName: keycloak-flux
-        version: 1.0.5
         url: https://defenseunicorns.github.io/uds-support-charts/
+        version: 1.0.5
+        releaseName: keycloak-flux
         namespace: bigbang
         valuesFiles:
           - keycloak-flux-values.yaml
@@ -108,4 +107,3 @@ components:
           - cmd: ./zarf tools wait-for HelmRelease keycloak ready -n bigbang
             maxRetries: 3
             maxTotalSeconds: 300
-
