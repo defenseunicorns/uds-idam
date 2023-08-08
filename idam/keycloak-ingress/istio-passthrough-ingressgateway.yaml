@@ -5,7 +5,7 @@ metadata:
   namespace: istio-system
 spec:
   hub: registry1.dso.mil/ironbank/tetrate/istio
-  tag: 1.17.2-tetratefips-v0
+  tag: 1.18.2-tetratefips-v0
   profile: empty
   components:
     ingressGateways:

@@ -5,6 +5,9 @@ metadata:
   description: "MetalLB"
   version: "0.1.0"
   architecture: amd64 
+constants:
+  - name: METALLB_VERSION
+    value: "###ZARF_PKG_TMPL_METALLB_VERSION###"
 components:
   - name: metallb
     required: true
@@ -12,10 +15,10 @@ components:
       - name: metallb
         namespace: metallb-system
         files:
-          - metallb-native.yaml
+          - "https://raw.githubusercontent.com/metallb/metallb/###ZARF_PKG_TMPL_METALLB_VERSION###/config/manifests/metallb-native.yaml"
     images:
-      - quay.io/metallb/controller:v0.13.9
-      - quay.io/metallb/speaker:v0.13.9
+      - quay.io/metallb/controller:###ZARF_PKG_TMPL_METALLB_VERSION###
+      - quay.io/metallb/speaker:###ZARF_PKG_TMPL_METALLB_VERSION###
   - name: metallb-config
     required: true
     manifests:

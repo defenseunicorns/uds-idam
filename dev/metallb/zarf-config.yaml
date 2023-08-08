@@ -1,0 +1,6 @@
+package:
+  create:
+    set:
+      # renovate: datasource=docker depName=quay.io/metallb/controller extractVersion=^(?<version>\d+\.\d+\.\d+) 
+      METALLB_VERSION: v0.13.10
+  
