@@ -98,7 +98,7 @@ components:
     repos:
       - https://repo1.dso.mil/big-bang/product/packages/keycloak.git
     images:
-      - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:22.0.1
+      - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15
       - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
     actions:
