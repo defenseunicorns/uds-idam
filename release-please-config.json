@@ -11,7 +11,8 @@
       ],
       "versioning": "always-bump-patch",
       "extra-files": [
-        "idam/zarf.yaml"
+        "idam/zarf.yaml",
+        "aws/zarf.yaml"
       ]
     }
   }
