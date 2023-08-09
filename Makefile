@@ -31,6 +31,9 @@ build/dubbd-pull-k3d.sha256: | build ## Download dubbd k3d oci package
 build/idam: | build ## Download idam
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
 
+build/idam-aws: | build ## Download idam
+	cd aws && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
+
 deploy/all: deploy/init deploy/metallb deploy/dubbd-k3d deploy/idam deploy/sso deploy/test
 
 deploy/init:
@@ -41,6 +44,9 @@ deploy/dubbd-k3d: ## Deploy the k3d flavor of DUBBD
 
 deploy/idam: ## Deploy idam
 	cd ./build && zarf package deploy zarf-package-uds-idam-amd64-*.tar.zst --confirm
+
+deploy/idam-aws: 
+	cd ./build && zarf package deploy zarf-package-uds-idam-aws-amd64-*.tar.zst --confirm
 
 deploy/sso: ## Deploy sso
 	cd ./build && zarf package deploy --confirm zarf-package-uds-sso-amd64-*.tar.zst

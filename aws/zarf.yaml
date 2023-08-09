@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: uds-idam-aws
+  description: "UDS Keycloak deployed via flux"
+  # x-release-please-start-version
+  version: "0.1.6"
+  # x-release-please-end
+  architecture: amd64 
+
+variables:
+  - name: PRIVATE_KEYCLOAK_LB
+    default: "true"
+    description: "Provision a private/internal load balancer for the keycloak ingress gateway"
+
+components:
+  - name: keycloak-ingressgateway-addon
+    required: true
+    manifests:
+      - name: keycloak-ingressgateway-addon
+        kustomizations:
+          - ./keycloak-ingress
+    images:
+      - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.18.2-tetratefips-v0
+  - name: realm-config-default-files
+    required: true
+    import:
+      path: ../idam
+  - name: keycloak-values
+    required: true
+    import:
+      path: ../idam
+  - name: keycloak
+    required: true
+    import:
+      path: ../idam

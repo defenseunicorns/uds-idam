@@ -43,7 +43,7 @@ jobs:
         run: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-amd64 --no-progress --confirm
         timeout-minutes: 60
 
-      - name: Deploy keycloak package
+      - name: Deploy IDAM package
         run: zarf package deploy zarf-package-*.tar.zst  --no-progress --confirm
         working-directory: idam
 
