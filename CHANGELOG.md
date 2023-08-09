@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.7](https://github.com/defenseunicorns/uds-idam/compare/v0.1.6...v0.1.7) (2023-08-08)
+
+
+### Bug Fixes
+
+* clean up renovate stuff and things ([2696884](https://github.com/defenseunicorns/uds-idam/commit/2696884216b734008f2da17bc999f769b999754d))
+* remove duplicated helm parameter ([31a9b57](https://github.com/defenseunicorns/uds-idam/commit/31a9b57bf3483a82cfc165dc8f117691b695d611))
+* remove unneeded idam config file ([135a803](https://github.com/defenseunicorns/uds-idam/commit/135a803641111b7ec2121cfb3c59221655c57f3f))
+* renovate comment regex ordering ([d862316](https://github.com/defenseunicorns/uds-idam/commit/d862316f78c687d09b0361cdd04d0461277768a2))
+* renovate expects no quotes, more consistent ([d5d8994](https://github.com/defenseunicorns/uds-idam/commit/d5d899428194c86dc3cf05fdda9dd5df81ac84ad))
+* renovate updates for catching more deps ([bdf7472](https://github.com/defenseunicorns/uds-idam/commit/bdf74725df08a75a23673ce49deafa2edda92534))
+* rerun github action for MR ([33f621e](https://github.com/defenseunicorns/uds-idam/commit/33f621ec1bcf41e27fb5697dec2d796408b4a2b1))
+* update renovate configurations ([d2f7d00](https://github.com/defenseunicorns/uds-idam/commit/d2f7d004afa20ab5a170cd213b7f3566cda44af9))
+
+
+### Miscellaneous
+
+* **deps:** update all dependencies ([f65d4b8](https://github.com/defenseunicorns/uds-idam/commit/f65d4b814de634fccaa5697d36a1af87643b9250))
+
 ## [0.1.6](https://github.com/defenseunicorns/uds-idam/compare/v0.1.5...v0.1.6) (2023-07-28)
 
 
