@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.8](https://github.com/defenseunicorns/uds-idam/compare/v0.1.7...v0.1.8) (2023-08-09)
+
+
+### Bug Fixes
+
+* ci workflow reference ([aa2c9b3](https://github.com/defenseunicorns/uds-idam/commit/aa2c9b3232c41be95285e276a25869455f7e411e))
+* move ip range for dev ([4e1ad30](https://github.com/defenseunicorns/uds-idam/commit/4e1ad300acf22acd55fb6e0c654c8de2b3b793ff))
+
 ## [0.1.7](https://github.com/defenseunicorns/uds-idam/compare/v0.1.6...v0.1.7) (2023-08-08)
 
 
