@@ -1,6 +1,6 @@
 {
-  "id": "baby-yoda",
-  "realm": "baby-yoda",
+  "id": "###ZARF_VAR_REALM###",
+  "realm": "###ZARF_VAR_REALM###",
   "displayName": "DoD Platform One",
   "displayNameHtml": "DevSecOps Collaboration Workspace",
   "notBefore": 0,
@@ -53,12 +53,12 @@
         "description": "${role_offline-access}",
         "composite": false,
         "clientRole": false,
-        "containerId": "baby-yoda",
+        "containerId": "###ZARF_VAR_REALM###",
         "attributes": {}
       },
       {
         "id": "35d729cd-81aa-40bd-bdce-6e4d15ccfb58",
-        "name": "default-roles-baby-yoda",
+        "name": "default-roles-###ZARF_VAR_REALM###",
         "description": "${role_default-roles}",
         "composite": true,
         "composites": {
@@ -70,7 +70,7 @@
           }
         },
         "clientRole": false,
-        "containerId": "baby-yoda",
+        "containerId": "###ZARF_VAR_REALM###",
         "attributes": {}
       },
       {
@@ -79,7 +79,7 @@
         "description": "${role_uma_authorization}",
         "composite": false,
         "clientRole": false,
-        "containerId": "baby-yoda",
+        "containerId": "###ZARF_VAR_REALM###",
         "attributes": {}
       }
     ],
@@ -456,11 +456,11 @@
   ],
   "defaultRole": {
     "id": "35d729cd-81aa-40bd-bdce-6e4d15ccfb58",
-    "name": "default-roles-baby-yoda",
+    "name": "default-roles-###ZARF_VAR_REALM###",
     "description": "${role_default-roles}",
     "composite": true,
     "clientRole": false,
-    "containerId": "baby-yoda"
+    "containerId": "###ZARF_VAR_REALM###"
   },
   "requiredCredentials": [
     "password"
@@ -525,14 +525,14 @@
       "name": "<h1>Developer</h1><h4>Account Login</h4>",
       "description": "https://repo1.dso.mil/big-bang/apps/product-tools/keycloak-p1-auth-plugin/-/raw/main/p1-keycloak-plugin/src/main/resources/theme/p1-sso/custom-resources/img/nerd.png",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/baby-yoda/account/",
+      "baseUrl": "/realms/###ZARF_VAR_REALM###/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "/realms/baby-yoda/account/*"
+        "/realms/###ZARF_VAR_REALM###/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -557,14 +557,14 @@
       "clientId": "account-console",
       "name": "${client_account-console}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/baby-yoda/account/",
+      "baseUrl": "/realms/###ZARF_VAR_REALM###/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "/realms/baby-yoda/account/*"
+        "/realms/###ZARF_VAR_REALM###/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -1727,14 +1727,14 @@
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
       "rootUrl": "${authAdminUrl}",
-      "baseUrl": "/admin/baby-yoda/console/",
+      "baseUrl": "/admin/###ZARF_VAR_REALM###/console/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "/admin/baby-yoda/console/*"
+        "/admin/###ZARF_VAR_REALM###/console/*"
       ],
       "webOrigins": [
         "+"
