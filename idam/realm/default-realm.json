@@ -1,7 +1,7 @@
 {
   "id": "###ZARF_VAR_REALM###",
   "realm": "###ZARF_VAR_REALM###",
-  "displayName": "DoD Platform One",
+  "displayName": "UDS IDAM",
   "displayNameHtml": "DevSecOps Collaboration Workspace",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
@@ -406,15 +406,6 @@
       "subGroups": []
     },
     {
-      "id": "95a210e4-2cb7-4dfe-aaba-68ee4ce5e2f7",
-      "name": "Nexus",
-      "path": "/Nexus",
-      "attributes": {},
-      "realmRoles": [],
-      "clientRoles": {},
-      "subGroups": []
-    },
-    {
       "id": "05f1d35f-3fc3-4958-9ed1-ac9568064e52",
       "name": "User admins",
       "path": "/User admins",
@@ -427,15 +418,6 @@
           "view-users"
         ]
       },
-      "subGroups": []
-    },
-    {
-      "id": "d455b296-d2fe-481e-ab4b-a1543205c99e",
-      "name": "vault-admin",
-      "path": "/vault-admin",
-      "attributes": {},
-      "realmRoles": [],
-      "clientRoles": {},
       "subGroups": []
     }
   ],
