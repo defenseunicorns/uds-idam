@@ -72,7 +72,7 @@ components:
         target: bigbang.dev.cert
       - source: certs/bigbang.dev.key
         target: bigbang.dev.key
-      - source: realm/baby-yoda.json
+      - source: realm/default-realm.json
         target: realm.json
       - source: realm/baby-yoda.yaml
         target: customreg.yaml

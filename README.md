@@ -20,7 +20,7 @@ make cluster/full
 
 | Name                  | Description                         | Default                  | Type  | Notes                   |
 |-----------------------|-------------------------------------|--------------------------|-------|-------------------------|
-| REALM                 | Keycloak realm name                 | baby-yoda                |       |                         |
+| REALM                 | Keycloak realm name                 | default-realm            |       |                         |
 | DOMAIN                | Base Domain                         | bigbang.dev              |       |                         |
 | KC_ADM_USER           | Default admin username              | admin                    |       |                         |
 | KC_ADM_PASSWORD       | Default admin password              | sup3r-secret-p@ssword    |       |                         |
