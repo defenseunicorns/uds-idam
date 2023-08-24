@@ -1,0 +1,12 @@
+{
+  "name": "uds-idam",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "cy.open": "cypress open",
+    "cy.run": "cypress run -q"
+  },
+  "devDependencies": {
+    "cypress": "^12.17.4"
+  }
+}

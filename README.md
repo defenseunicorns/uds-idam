@@ -7,6 +7,7 @@ Pre-built Zarf Package of to support identity and access management to complimen
 - Zarf is installed locally with a minimum version of [v0.28.3](https://github.com/defenseunicorns/zarf/releases/tag/v0.28.3)
 - Optional: A working Kubernetes cluster on v1.26+ -- e.g k3d, k3s, KinD, etc (Zarf can be used to deploy a built-in k3s distribution)
 - Working kube context (`kubectl get nodes` <-- this command works)
+- Cypress testing requires [Node.js version 16.x, 18.x, 20.x](https://docs.cypress.io/guides/getting-started/installing-cypress#Nodejs)
 
 
 ### Getting Started
@@ -59,3 +60,30 @@ The most important prefixes you should have in mind are:
   (indicated by the `!`) and will result in a SemVer major.
 
 When the change is merged to the trunk, Release Please will calculate what changes are included and will create another PR to increase the version and tag a new release. This will also automatically generate a new set of packages in the OCI registry.
+
+### Cypress Testing
+
+#### [Cypress Website / Docs](https://docs.cypress.io/)
+
+[A few Example Cypress Tests](cypress/e2e/example_spec.cy.js)
+
+| FileName                  | Description                     |
+|---------------------------|---------------------------------|
+| [package.json](package.json) | Cypress is a node based framework and depends on a lot of node artifacts. The package.json file defines useful scripts and dependencies that are necessary for running cypress tests.       |
+| [package-lock.json](package-lock.json) | File for maintaining and keep track of dependency versions across environments and developers      |
+| [cypress.config.js](cypress.config.js) | A configuration file that's a great place to put reusable behavior such as custom commands or global overrides that you want to be applied and available to all of your spec files. For example turning off video recording of tests run with `cypress run`. [More Configuration options](https://docs.cypress.io/guides/references/configuration)     |
+| [cypress/e2e/*.cy.js](cypress/e2e/example_spec.cy.js) | These files are where the Cypress tests are kept and defined      |
+| [cypress/fixtures/*.json](cypress/fixtures/example.json) | Fixtures are used as external pieces of static data that can be used by your tests    |
+| [cypress/support/commands.js](cypress/support/commands.js) | Very similiar to config files but for adding Cypress commands that are more complex, for example adding beforeEach and AfterEach methods or in the case of IdAM, a Login and Logout method    |
+| [cypress/support/e2e.js](cypress/support/e2e.js) | This file controls if the support/commands.js file is served up automatically to the e2e tests      |
+
+#### NPM Scripts
+`cy.open` - `cypress open` - Setup the interactive Cypress Testing UI
+
+`cy.run` - `cypress run` - Shortcut for running cypress commands
+
+#### Running Tests
+
+An [npm script](package.json#L7) has been configured to run all Cypress Tests with the `-q` flag for less output : `npm run cy.run`
+
+To run a specific spec file use the `-s <spec file name>` flag with the npm test script : `npm run cy.run -- -s cypress/e2e/example_spec.cy.js`

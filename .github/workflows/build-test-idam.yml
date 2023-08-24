@@ -47,6 +47,13 @@ jobs:
         run: zarf package deploy zarf-package-*.tar.zst  --no-progress --confirm
         working-directory: idam
 
+      - name: Cypress run
+        uses: cypress-io/github-actions@v5
+        with:
+          start: npm run cy.run
+          browser: chrome
+
+
       - name: Teardown k3d cluster
         if: always()
         # renovate: datasource=github-tags depName=defenseunicorns/uds-aws-ci-k3d versioning=semver
