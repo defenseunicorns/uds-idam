@@ -1,0 +1,12 @@
+{
+  "themes": [
+    {
+      "name": "uds-idam",
+      "types": [
+        "admin",
+        "account",
+        "login"
+      ]
+    }
+  ]
+}

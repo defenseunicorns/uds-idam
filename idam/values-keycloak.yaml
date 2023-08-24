@@ -49,6 +49,18 @@ extraInitContainers: |-
     volumeMounts:
     - name: plugin
       mountPath: "/init"
+  - name: theme
+    image: ###ZARF_VAR_THEME_IMAGE###
+    imagePullPolicy: Always
+    command:
+    - sh
+    - -c
+    - |
+      cp /app/theme.jar /init/default-theme.jar
+      ls -l /init
+    volumeMounts:
+    - name: theme
+      mountPath: "/init"
 extraVolumeMounts: |-
   - name: certauthority
     mountPath: /etc/x509/https/cas.pem
@@ -70,6 +82,9 @@ extraVolumeMounts: |-
   - name: truststore
     mountPath: /opt/keycloak/conf/truststore.jks
     subPath: truststore.jks
+  - name: theme
+    mountPath: /opt/keycloak/providers/default-theme.jar
+    subPath: default-theme.jar
 extraVolumeMountsBigBang:
 - mountPath: /etc/x509/https/tls.crt
   name: tlscert
@@ -88,11 +103,13 @@ extraVolumeMountsBigBang:
   readOnly: true
   subPath: tls.key
 extraVolumes: |-
+  - name: plugin
+    emptyDir: {}
+  - name: theme
+    emptyDir: {}
   - name: certauthority
     secret:
       secretName: {{ include "keycloak.fullname" . }}-certauthority
-  - name: plugin
-    emptyDir: {}
   - name: quarkusproperties
     secret:
       secretName: {{ include "keycloak.fullname" . }}-quarkusproperties
