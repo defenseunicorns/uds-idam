@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.9](https://github.com/defenseunicorns/uds-idam/compare/v0.1.8...v0.1.9) (2023-08-23)
+
+
+### Features
+
+* remove hardcoded realm names ([0cde515](https://github.com/defenseunicorns/uds-idam/commit/0cde515e81c196362bc3fd5dd4368f861383aa93))
+
+
+### Bug Fixes
+
+* remove DUBBD nexus client ([b466876](https://github.com/defenseunicorns/uds-idam/commit/b466876b4b6aecb54fb13ea498fa4a4d6f6c61d6))
+* remove P1 defined clientScopes ([1619a18](https://github.com/defenseunicorns/uds-idam/commit/1619a18253a13eeffb1c595dc93adb56345d3b43))
+* remove P1 groups ([9871394](https://github.com/defenseunicorns/uds-idam/commit/9871394f2e04ac2cf1425dc99c7cb6a668fc1fec))
+* update readme to reference new REALM variable ([3c4dfe8](https://github.com/defenseunicorns/uds-idam/commit/3c4dfe8d1b54f83f012507b6ad94f91a1f53def6))
+
+
+### Miscellaneous
+
+* update key certs for keycloak browser certs ([9a8d9e5](https://github.com/defenseunicorns/uds-idam/commit/9a8d9e56b52d60ecce761c581068da239fe28b04))
+
 ## [0.1.8](https://github.com/defenseunicorns/uds-idam/compare/v0.1.7...v0.1.8) (2023-08-09)
 
 
