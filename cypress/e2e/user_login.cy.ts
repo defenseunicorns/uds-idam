@@ -59,4 +59,41 @@ describe('User Login Tests', () => {
 
     })
 
+    it('User Login', () => {
+        // Go to Keycloak Authentication Testing Webapp
+        cy.visit('https://keycloak.org/app')
+
+        // Clear and Enter Keycloak information for Authentication
+        cy.get('input[id="url"]').clear().type('https://keycloak.bigbang.dev/auth')
+        cy.get('input[id="realm"]').clear().type('baby-yoda')
+        cy.get('input[id="client"]').clear().type('dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_testingclient')
+
+        // Save configuration and assert URL is correct
+        cy.get('button').contains('Save').click()
+        cy.url().should('include', 'https://keycloak.bigbang.dev/auth&realm=baby-yoda&client=dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_testingclient')
+
+        // Click on the Sign in button to initiate User Login and assert on the keycloak login page
+        cy.get('a[id="login"]').contains('Sign in').click()
+
+        // Due to Keycloak Webapp changing URL, need to encapsulate the following commands to change the origin
+        cy.origin('https://keycloak.bigbang.dev', () => {
+
+            cy.get('header').contains('Sign in to your account')
+
+            // Enter Users Credentials and assert they are entered correcrtly 
+            cy.get('input[id="username"]').type('cchance')
+            cy.get('input[id="password"]').type('Purple.14.Sunrise')
+
+            // Click Sign In to Authenticate User and assert that the terms and conditions prompt is displayed
+            cy.get('input[id="kc-login"]').click()
+            cy.url().should('include', '/auth/realms/baby-yoda/login-actions/required-action?execution=TERMS_AND_CONDITIONS')
+            cy.get('header').contains('Terms and Conditions')
+
+            // Accept the terms and conditions and assert that the MFA is then prompted
+            cy.get('input[id="kc-accept"]').contains('Accept').click()
+            cy.url().should('include', '/auth/realms/baby-yoda/login-actions/required-action?execution=CONFIGURE_TOTP')
+            cy.get('header').contains('Mobile Authenticator Setup')
+        })
+    })
+
 })
