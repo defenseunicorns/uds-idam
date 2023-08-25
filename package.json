@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "cy.open": "cypress open",
-    "cy.run": "cypress run -q"
+    "cy.run": "cypress run"
   },
   "devDependencies": {
     "cypress": "^12.17.4"

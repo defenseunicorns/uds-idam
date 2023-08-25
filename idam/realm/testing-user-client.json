@@ -1,0 +1,77 @@
+{
+  "roles": {
+    "client": {
+      "dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_testingclient": []
+    }
+  },
+  "clients": [
+    {
+      "id": "aae1ba61-79b1-415d-81d5-18f55d92fb82",
+      "clientId": "dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_testingclient",
+      "name": "",
+      "description": "",
+      "rootUrl": "",
+      "adminUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": [
+        "https://www.keycloak.org/app/*",
+        "https://keycloak.org/*"
+      ],
+      "webOrigins": [
+        "https://keycloak.bigbang.dev",
+        "https://www.keycloak.org"
+      ],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "client.secret.creation.time": "1692983418",
+        "backchannel.logout.session.required": "true",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "defaultClientScopes": [
+        "acr"
+      ],
+      "optionalClientScopes": [
+        "offline_access"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "test-user",
+      "createdTimestamp" : 1692983593,
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "TEST",
+      "lastName": "USER",
+      "email": "test-user@defenseunicorns.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "TestUser!123!"
+        }
+      ],
+      "groups":[
+        "Impact Level 2 Authorized"
+      ]
+    }
+  ]
+}

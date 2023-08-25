@@ -44,6 +44,10 @@ jobs:
         run: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-amd64 --no-progress --confirm
         timeout-minutes: 60
 
+      - name: Create Testing Realm Import file
+        run: |
+          jq -s '.[0] * .[1]' idam/realm/default-realm.json idam/realm/testing-user-client.json >> default-realm.json
+
       - name: Deploy IDAM package
         run: zarf package deploy zarf-package-*.tar.zst  --no-progress --confirm
         working-directory: idam
@@ -51,7 +55,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          start: npm run cy.run
+          start: make test/idam
           browser: chrome
 
 

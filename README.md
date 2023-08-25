@@ -63,19 +63,29 @@ When the change is merged to the trunk, Release Please will calculate what chang
 
 ### Cypress Testing
 
-#### [Cypress Website / Docs](https://docs.cypress.io/)
-
-[A few Example Cypress Tests](cypress/e2e/example_spec.cy.js)
+#### [Cypress Docs](https://docs.cypress.io/)
 
 | FileName                  | Description                     |
 |---------------------------|---------------------------------|
 | [package.json](package.json) | Cypress is a node based framework and depends on a lot of node artifacts. The package.json file defines useful scripts and dependencies that are necessary for running cypress tests.       |
 | [package-lock.json](package-lock.json) | File for maintaining and keep track of dependency versions across environments and developers      |
 | [cypress.config.js](cypress.config.js) | A configuration file that's a great place to put reusable behavior such as custom commands or global overrides that you want to be applied and available to all of your spec files. For example turning off video recording of tests run with `cypress run`. [More Configuration options](https://docs.cypress.io/guides/references/configuration)     |
-| [cypress/e2e/*.cy.js](cypress/e2e/example_spec.cy.js) | These files are where the Cypress tests are kept and defined      |
-| [cypress/fixtures/*.json](cypress/fixtures/example.json) | Fixtures are used as external pieces of static data that can be used by your tests    |
+| [cypress/e2e/*.cy.js](cypress/e2e/) | These files are where the Cypress tests are kept and defined      |
+| [cypress/fixtures/*.json](cypress/fixtures/) | Fixtures are used as external pieces of static data that can be used by your tests    |
 | [cypress/support/commands.js](cypress/support/commands.js) | Very similiar to config files but for adding Cypress commands that are more complex, for example adding beforeEach and AfterEach methods or in the case of IdAM, a Login and Logout method    |
 | [cypress/support/e2e.js](cypress/support/e2e.js) | This file controls if the support/commands.js file is served up automatically to the e2e tests      |
+
+#### Current Tests
+
+| [Admin Authn Console Tests](cypress/e2e/admin_login.cy.js) | Description |
+|---------------------------|---------------------------------|
+| Verify Keycloak Admin Console is Reachable | Test to make sure that the admin console is up and reachable for cypress testing |
+| Successfully Login | Validate the flow where an admin is presented the Admin Authn Console Login page, admin enters their username and password and clicks the submit button. Then they should be inside of the console and there should be at a minimum three active cookies for tracking their session in keycloak. |
+| Invalid Credential Login | Validate that when an admin enters the wrong username or password that the they dont get authenticated and instead there is a warning popup that they entered the wrong credentials. |
+
+| [User Authn Console Tests](cypress/e2e/user.cy.js) | Description |
+|---------------------------|---------------------------------|
+| | |
 
 #### NPM Scripts
 `cy.open` - `cypress open` - Setup the interactive Cypress Testing UI
