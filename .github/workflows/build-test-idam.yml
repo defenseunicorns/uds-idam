@@ -52,10 +52,6 @@ jobs:
         run: zarf package deploy zarf-package-*.tar.zst  --no-progress --confirm
         working-directory: idam
 
-      - name: Sleep for 30 minutes
-        run: sleep 1800s
-        shell: bash
-
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
