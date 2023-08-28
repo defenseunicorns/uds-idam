@@ -1,0 +1,13 @@
+{
+    "admin": {
+        "username": "admin",
+        "password": "sup3r-secret-p@ssword",
+        "hostname": "keycloak.bigbang.dev"
+    },
+    "user": {
+        "username": "test-user",
+        "password": "TestUser!123!"
+    },
+    "realm": "cypress-testing",
+    "client": "dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_cypresstesting"
+}

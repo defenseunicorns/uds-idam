@@ -2,23 +2,26 @@
 describe('Admin Login Tests', () => {
 
     // Before each test go to the keycloak admin console page
-    // to start the login process
     beforeEach(() => {
-        // Navigate to Keycloak Admin Console
-        cy.visit('https://keycloak.bigbang.dev/auth/admin/master/console')
+        cy.fixture('properties.json').then((properties) => {
+            // Navigate to Keycloak Admin Console
+            cy.visit('https://'+properties.admin.hostname+'/auth/admin/master/console')
+        })
     })
 
+    // Assert that we can reach the admin console
     it('Verify Keycloak Admin Console is Reachable', () => {
         // Assert that location is the login page
         cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
     })
 
+    // Attempt to Login as the Admin user to the Admin Console
     it('Successfully Login', () => {      
-        // Use the admin_login fixture for configuring the admin username and password
-        cy.fixture('admin_login.json').then((login) => {
+        // Use the properties fixture for configuring the admin username and password
+        cy.fixture('properties.json').then((properties) => {
             // defined from fixture
-            const username = login.admin_username;
-            const password = login.admin_password;
+            const username = properties.admin.username;
+            const password = properties.admin.password;
 
             // Enter Admin Username and Assert it was entered correctly
             cy.get('input[id="username"]').type(username)
@@ -28,13 +31,12 @@ describe('Admin Login Tests', () => {
             cy.get('input[id="password"]').type(password)
             cy.get('input[id="password"]').should('have.value', password)
     
+            // Click the submit login button on the login page and assert
+            // that the new location is the signed in admin console page
+            cy.get('input[id="kc-login"]').click()
+            cy.url().should('eq', 'https://'+properties.admin.hostname+'/auth/admin/master/console/')
         })
 
-        // Click the submit login button on the login page and assert
-        // that the new location is the signed in admin console page
-        cy.get('input[id="kc-login"]').click()
-        cy.url().should('eq', 'https://keycloak.bigbang.dev/auth/admin/master/console/')
-    
         // Also for further verification login success check that the
         // correct cookies are created
         cy.getCookie("AUTH_SESSION_ID").should('exist')
@@ -42,11 +44,12 @@ describe('Admin Login Tests', () => {
         cy.getCookie("KEYCLOAK_SESSION").should('exist')
     })
 
+    // Attempt to Login to the Admin Console with invalid Credentials
     it('Invalid Credential Login', () => {
-        // Use the admin_login fixture for configuring the admin username
-        cy.fixture('admin_login.json').then((login) => {
+        // Use the properties fixture for configuring the admin username
+        cy.fixture('properties.json').then((properties) => {
             // defined from fixture
-            const username = login.admin_username;
+            const username = properties.admin.username;
 
             // Enter Admin Username and Assert it was entered correctly
             cy.get('input[id="username"]').type(username)

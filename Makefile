@@ -60,4 +60,5 @@ deploy/test:
 	cd ./build && zarf package deploy --tmpdir=/tmp --confirm zarf-package-podinfo-amd64-*.tar.zst
 
 test/idam: ## run all cypress tests
-	npm run cy.run
+	npm --prefix cypress/ install 
+	npm --prefix cypress/ run cy.run
