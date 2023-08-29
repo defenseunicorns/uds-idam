@@ -1,24 +1,23 @@
 // Cypress tests for validating the admin login process
 describe('Admin Login Tests', () => {
 
-    // Before each test go to the keycloak admin console page
-    beforeEach(() => {
+    // Assert that we can reach the admin console
+    it('Verify Keycloak Admin Console is Reachable', () => {
         cy.fixture('properties.json').then((properties) => {
             // Navigate to Keycloak Admin Console
             cy.visit('https://'+properties.admin.hostname+'/auth/admin/master/console')
+            // Assert that location is the login page
+            cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
         })
-    })
-
-    // Assert that we can reach the admin console
-    it('Verify Keycloak Admin Console is Reachable', () => {
-        // Assert that location is the login page
-        cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
     })
 
     // Attempt to Login as the Admin user to the Admin Console
     it('Successfully Login', () => {      
         // Use the properties fixture for configuring the admin username and password
         cy.fixture('properties.json').then((properties) => {
+            // Navigate to Keycloak Admin Console
+            cy.visit('https://'+properties.admin.hostname+'/auth/admin/master/console')
+
             // defined from fixture
             const username = properties.admin.username;
             const password = properties.admin.password;
@@ -48,6 +47,9 @@ describe('Admin Login Tests', () => {
     it('Invalid Credential Login', () => {
         // Use the properties fixture for configuring the admin username
         cy.fixture('properties.json').then((properties) => {
+            // Navigate to Keycloak Admin Console
+            cy.visit('https://'+properties.admin.hostname+'/auth/admin/master/console')
+
             // defined from fixture
             const username = properties.admin.username;
 

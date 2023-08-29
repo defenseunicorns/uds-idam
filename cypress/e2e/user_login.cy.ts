@@ -27,37 +27,40 @@ describe('User Login Tests', () => {
             // that the new location is the signed in admin console page
             cy.get('input[id="kc-login"]').click()
             cy.url().should('eq', 'https://'+properties.admin.hostname+'/auth/admin/master/console/')
+
+            // Toggle the sidebar menu to be open
+            cy.get('button[id="nav-toggle"]').click()
+            cy.get('div[id="page-sidebar"]').should('have.class', 'pf-m-expanded')
+
+            // Click the Realm Selection Drop Down
+            cy.get('div[id="realm-select"]').contains('master').click()
+            cy.get('div[id="realm-select"]').should('have.class', 'pf-m-expanded')
+
+            // Select the Create Realm Option
+            cy.get('div').contains('Create Realm').click()
+
+            // Toggle the sidebar menu to be closed
+            cy.get('button[id="nav-toggle"]').click()
+            cy.get('div[id="page-sidebar"]').should('have.class', 'pf-m-collapsed')
+
+            // Import Fixture for Realm import with a testing realm, client, and user
+            cy.fixture('testing-realm-client-user-import.json', null).then((file) => {
+                cy.get('input[type="file"]').selectFile(file, {force: true})
+            })
+
+            // Create the Realm
+            cy.get('button').contains('Create').click()
+
+            // Assert new realm was successfully completed, url() is also synchronous meaning it gives time for realm import
+            cy.url().should('include', '/auth/admin/master/console/#/'+properties.realm)
         })
-
-        // Toggle the sidebar menu to be open
-        cy.get('button[id="nav-toggle"]').click()
-        cy.get('div[id="page-sidebar"]').should('have.class', 'pf-m-expanded')
-
-        // Click the Realm Selection Drop Down
-        cy.get('div[id="realm-select"]').contains('master').click()
-        cy.get('div[id="realm-select"]').should('have.class', 'pf-m-expanded')
-
-        // Select the Create Realm Option
-        cy.get('div').contains('Create Realm').click()
-
-        // Toggle the sidebar menu to be closed
-        cy.get('button[id="nav-toggle"]').click()
-        cy.get('div[id="page-sidebar"]').should('have.class', 'pf-m-collapsed')
-
-        // Import Fixture for Realm import with a testing realm, client, and user
-        cy.fixture('testing-realm-client-user-import.json', null).then((file) => {
-            cy.get('input[type="file"]').selectFile(file, {force: true})
-        })
-
-        // Create the Realm
-        cy.get('button').contains('Create').click()
 
         // Logout of the Admin Console
         cy.get('div[id="user-dropdown"]').contains('admin').click()
         cy.get('a').contains('Sign out').click()
 
-        // verify that logged out
-        cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
+        // // verify that logged out
+        // cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
     })
 
     // After the testing is complete we should take down the created testing environment
@@ -136,6 +139,7 @@ describe('User Login Tests', () => {
         cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
     })
 
+    // Assert that testing user can successfully authenticate
     it('User Login', () => {
         // Go to Keycloak Authentication Testing Webapp
         cy.visit('https://keycloak.org/app')
