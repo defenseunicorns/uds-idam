@@ -65,6 +65,8 @@ When the change is merged to the trunk, Release Please will calculate what chang
 
 ### Cypress Testing
 
+These tests require that a local keycloak be deployed and running, by default it will look for keycloak at [https://keycloak.bigbang.dev](/cypress/fixtures/properties.json#L5). By using the make target `make test/idam` the npm install process will be run before the tests are run to hopefully make sure local environment is configured properly.
+
 #### [Cypress Docs](https://docs.cypress.io/)
 
 | FileName                  | Description                     |
