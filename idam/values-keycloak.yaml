@@ -50,13 +50,13 @@ extraInitContainers: |-
     - name: plugin
       mountPath: "/init"
   - name: theme
-    image: ###ZARF_VAR_THEME_IMAGE###
+    image: 127.0.0.1/defenseunicorns/uds-idam:0.1
     imagePullPolicy: Always
     command:
     - sh
     - -c
     - |
-      cp /app/theme.jar /init/default-theme.jar
+      cp /app/###ZARF_VAR_THEME_FILE### /init/theme.jar
       ls -l /init
     volumeMounts:
     - name: theme
@@ -83,8 +83,8 @@ extraVolumeMounts: |-
     mountPath: /opt/keycloak/conf/truststore.jks
     subPath: truststore.jks
   - name: theme
-    mountPath: /opt/keycloak/providers/default-theme.jar
-    subPath: default-theme.jar
+    mountPath: /opt/keycloak/providers/theme.jar
+    subPath: theme.jar
 extraVolumeMountsBigBang:
 - mountPath: /etc/x509/https/tls.crt
   name: tlscert

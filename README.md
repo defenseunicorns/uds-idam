@@ -32,6 +32,7 @@ make cluster/full
 | KEYCLOAK_VALUES       | Keycloak chart values file path     | values-keycloak.yaml     | FILE  |                         |
 | KEYCLOAK_DEPENDS_ON   | Keycloak dependencies               | []                       |       |                         |
 | KEYCLOAK_CREATE_NAMESPACE | Create Keycloak namespace       | true                     |       |                         |
+| THEME_FILE            | Theme file in .jar format           | theme.jar                | FILE  | MUST BE A .JAR FILE     |
 
 
 ### Creating releases

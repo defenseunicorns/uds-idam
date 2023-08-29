@@ -9,4 +9,4 @@ components:
   - name: theme
     required: true
     images:
-      - "127.0.0.1/defenseunicorns/uds-idam/theme:0.1"
+      - 127.0.0.1/defenseunicorns/uds-idam:0.1

@@ -80,7 +80,7 @@ components:
         target: customreg.yaml
       - source: realm/truststore.jks.b64
         target: truststore.jks.b64
-  - name: theme-image-upload
+  - name: theme-image-preload
     required: true
     files:
       - source: theme/theme.jar
@@ -92,7 +92,7 @@ components:
     actions:
       onDeploy:
         after:
-          - cmd: docker build . -t 127.0.0.1/defenseunicorns/uds-idam/theme:0.1
+          - cmd: docker build . -t 127.0.0.1/defenseunicorns/uds-idam:0.1
           - cmd: ./zarf package create theme --confirm
           - cmd: ./zarf package deploy zarf-package-uds-idam-theme-amd64.tar.zst --confirm
       onRemove:
