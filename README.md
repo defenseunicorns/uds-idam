@@ -49,6 +49,8 @@ More information on this can be found in [Release Please's documentation](https:
 
 ### How should I write my commits?
 
+Before commiting it is recommended to run tests. Use the make target: `make test/idam` to run the smoke tests.
+
 Release Please assumes you are using [Conventional Commit messages](https://www.conventionalcommits.org/).
 
 The most important prefixes you should have in mind are:
@@ -67,13 +69,13 @@ When the change is merged to the trunk, Release Please will calculate what chang
 
 | FileName                  | Description                     |
 |---------------------------|---------------------------------|
-| [package.json](package.json) | Cypress is a node based framework and depends on a lot of node artifacts. The package.json file defines useful scripts and dependencies that are necessary for running cypress tests.       |
-| [package-lock.json](package-lock.json) | File for maintaining and keep track of dependency versions across environments and developers      |
-| [cypress.config.js](cypress.config.js) | A configuration file that's a great place to put reusable behavior such as custom commands or global overrides that you want to be applied and available to all of your spec files. For example turning off video recording of tests run with `cypress run`. [More Configuration options](https://docs.cypress.io/guides/references/configuration)     |
-| [cypress/e2e/*.cy.js](cypress/e2e/) | These files are where the Cypress tests are kept and defined      |
-| [cypress/fixtures/*.json](cypress/fixtures/) | Fixtures are used as external pieces of static data that can be used by your tests    |
-| [cypress/support/commands.js](cypress/support/commands.js) | Very similiar to config files but for adding Cypress commands that are more complex, for example adding beforeEach and AfterEach methods or in the case of IdAM, a Login and Logout method    |
-| [cypress/support/e2e.js](cypress/support/e2e.js) | This file controls if the support/commands.js file is served up automatically to the e2e tests      |
+| [package.json](cypress/package.json) | Cypress is a node based framework and depends on a lot of node artifacts. The package.json file defines useful scripts and dependencies that are necessary for running cypress tests.       |
+| [package-lock.json](cypress/package-lock.json) | File for maintaining and keep track of dependency versions across environments and developers      |
+| [cypress.config.js](cypress/cypress.config.js) | A configuration file that's a great place to put reusable behavior such as custom commands or global overrides that you want to be applied and available to all of your spec files. For example turning off video recording of tests run with `cypress run`. [More Configuration options](https://docs.cypress.io/guides/references/configuration)     |
+| [e2e/*.cy.js](cypress/e2e/) | These files are where the Cypress tests are kept and defined      |
+| [fixtures/*.json](cypress/fixtures/) | Fixtures are used as external pieces of static data that can be used by your tests    |
+| [support/commands.js](cypress/support/commands.js) | Very similiar to config files but for adding Cypress commands that are more complex, for example adding beforeEach and AfterEach methods or in the case of IdAM, a Login and Logout method    |
+| [support/e2e.js](cypress/support/e2e.js) | This file controls if the support/commands.js file is served up automatically to the e2e tests      |
 
 #### Current Tests
 
@@ -85,15 +87,19 @@ When the change is merged to the trunk, Release Please will calculate what chang
 
 | [User Authn Console Tests](cypress/e2e/user.cy.js) | Description |
 |---------------------------|---------------------------------|
-| | |
+| Before | Before the tests in this spec, a test realm, client, and user will be created |
+| User Login | Test to verify that when a test user access a URL that is protected by keycloak, they are prompted to login, and can successfully authenticate. |
+| After | After the tests have completed the test realm, client, and user will be removed |
 
 #### NPM Scripts
 `cy.open` - `cypress open` - Setup the interactive Cypress Testing UI
 
-`cy.run` - `cypress run` - Shortcut for running cypress commands
+`cy.run` - `cypress run -browser chrome` - Script for running all cypress tests headlessly with a chrome browser
 
 #### Running Tests
 
-An [npm script](package.json#L7) has been configured to run all Cypress Tests with the `-q` flag for less output : `npm run cy.run`
+An [npm script](package.json#L7) has been configured to run all Cypress Tests : `npm run cy.run`
+
+Alternatively a [make target](Makefile#L62) has been created pointing to the npm script, this will also run the npm install process: `make test/idam`
 
 To run a specific spec file use the `-s <spec file name>` flag with the npm test script : `npm run cy.run -- -s cypress/e2e/example_spec.cy.js`
