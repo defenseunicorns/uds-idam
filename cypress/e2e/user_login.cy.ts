@@ -63,9 +63,52 @@ describe('User Login Tests', () => {
         // cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
     })
 
+    // Assert that testing user can successfully authenticate
+    it('User Login', () => {
+        // Go to Keycloak Authentication Testing Webapp
+        cy.visit('https://keycloak.org/app')
+
+        // Use the properties fixture for configuring the admin username and password
+        cy.fixture('properties.json').then((properties) => {
+
+            const hostname = properties.admin.hostname;
+
+            // Clear and Enter Keycloak information for Authentication
+            cy.get('input[id="url"]').clear().type('https://'+hostname+'/auth')
+            cy.get('input[id="realm"]').clear().type(properties.realm)
+            cy.get('input[id="client"]').clear().type(properties.client)
+
+            // Save configuration and assert URL is correct
+            cy.get('button').contains('Save').click()
+            cy.url().should('include', 'https://'+hostname+'/auth&realm='+properties.realm+'&client='+properties.client+'')
+
+            // Click on the Sign in button to initiate User Login and assert on the keycloak login page
+            cy.get('a[id="login"]').contains('Sign in').click()
+        })
+
+        //Due to changing URLs, need to encapsulate commands inside of the origin
+        cy.origin('https://keycloak.bigbang.dev', () => {
+            cy.get('header').contains('Sign in to your account')
+            cy.fixture('properties.json').then((properties) => {
+                // Enter Users Credentials and assert they are entered correcrtly 
+                cy.get('input[id="username"]').type(properties.user.username)
+                cy.get('input[id="password"]').type(properties.user.password)
+    
+                // Click Sign In to Authenticate User and assert that the terms and conditions prompt is displayed
+                cy.get('input[id="kc-login"]').click()
+                cy.url().should('include', '/auth/realms/'+properties.realm+'/login-actions/required-action?execution=TERMS_AND_CONDITIONS')
+                cy.get('header').contains('Terms and Conditions')
+    
+                // Accept the terms and conditions and assert that the MFA is then prompted
+                cy.get('input[id="kc-accept"]').contains('Accept').click()
+                cy.url().should('include', '/auth/realms/'+properties.realm+'/login-actions/required-action?execution=CONFIGURE_TOTP')
+                cy.get('header').contains('Mobile Authenticator Setup')
+            })
+        })
+    })
+
     // After the testing is complete we should take down the created testing environment
     after(() => {
-
         cy.origin('https://keycloak.bigbang.dev', () => {
             // Use the properties fixture for configuring the admin username and password
             cy.fixture('properties.json').then((properties) => {
@@ -140,48 +183,5 @@ describe('User Login Tests', () => {
             cy.url().should('include', '/auth/realms/master/protocol/openid-connect/auth?')
         })
     })
-
-    // Assert that testing user can successfully authenticate
-    it('User Login', () => {
-        // Go to Keycloak Authentication Testing Webapp
-        cy.visit('https://keycloak.org/app')
-
-        // Use the properties fixture for configuring the admin username and password
-        cy.fixture('properties.json').then((properties) => {
-
-            const hostname = properties.admin.hostname;
-
-            // Clear and Enter Keycloak information for Authentication
-            cy.get('input[id="url"]').clear().type('https://'+hostname+'/auth')
-            cy.get('input[id="realm"]').clear().type(properties.realm)
-            cy.get('input[id="client"]').clear().type(properties.client)
-
-            // Save configuration and assert URL is correct
-            cy.get('button').contains('Save').click()
-            cy.url().should('include', 'https://'+hostname+'/auth&realm='+properties.realm+'&client='+properties.client+'')
-
-            // Click on the Sign in button to initiate User Login and assert on the keycloak login page
-            cy.get('a[id="login"]').contains('Sign in').click()
-        })
-
-        //Due to changing URLs, need to encapsulate commands inside of the origin
-        cy.origin('https://keycloak.bigbang.dev', () => {
-            cy.get('header').contains('Sign in to your account')
-            cy.fixture('properties.json').then((properties) => {
-                // Enter Users Credentials and assert they are entered correcrtly 
-                cy.get('input[id="username"]').type(properties.user.username)
-                cy.get('input[id="password"]').type(properties.user.password)
     
-                // Click Sign In to Authenticate User and assert that the terms and conditions prompt is displayed
-                cy.get('input[id="kc-login"]').click()
-                cy.url().should('include', '/auth/realms/'+properties.realm+'/login-actions/required-action?execution=TERMS_AND_CONDITIONS')
-                cy.get('header').contains('Terms and Conditions')
-    
-                // Accept the terms and conditions and assert that the MFA is then prompted
-                cy.get('input[id="kc-accept"]').contains('Accept').click()
-                cy.url().should('include', '/auth/realms/'+properties.realm+'/login-actions/required-action?execution=CONFIGURE_TOTP')
-                cy.get('header').contains('Mobile Authenticator Setup')
-            })
-        })
-    })
 })
