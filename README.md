@@ -7,7 +7,7 @@ Pre-built Zarf Package of to support identity and access management to complimen
 - Zarf is installed locally with a minimum version of [v0.28.3](https://github.com/defenseunicorns/zarf/releases/tag/v0.28.3)
 - Optional: A working Kubernetes cluster on v1.26+ -- e.g k3d, k3s, KinD, etc (Zarf can be used to deploy a built-in k3s distribution)
 - Working kube context (`kubectl get nodes` <-- this command works)
-
+- `docker` command is available on the deploying node
 
 ### Getting Started
 ```bash
