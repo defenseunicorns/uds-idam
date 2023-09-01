@@ -58,3 +58,7 @@ deploy/metallb:
 deploy/test:
 	cd dev/test-mission-app && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../../build
 	cd ./build && zarf package deploy --tmpdir=/tmp --confirm zarf-package-podinfo-amd64-*.tar.zst
+
+test/idam: ## run all cypress tests
+	npm --prefix cypress/ install 
+	npm --prefix cypress/ run cy.run
