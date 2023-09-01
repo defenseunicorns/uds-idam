@@ -7,7 +7,7 @@
     "cy.run": "cypress run --browser chrome"
   },
   "devDependencies": {
-    "cypress": "12.17.3",
+    "cypress": "13.1.0",
     "typescript": "^5.2.2"
   }
 }
