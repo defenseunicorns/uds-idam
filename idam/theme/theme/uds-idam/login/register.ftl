@@ -182,6 +182,8 @@
                         ${msg("passwordCacMessage3")}
                     </div>
                     <label for="password" class="form-label ">${msg("passwordOptional")}</label>
+                <#else>
+                    <label for="password" class="form-label ">${msg("password")}</label>
                 </#if>
                 <input id="password" class="form-control " name="password"
                         type="password" autocomplete="new-password"/>
