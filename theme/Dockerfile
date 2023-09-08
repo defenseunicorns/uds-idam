@@ -12,9 +12,9 @@ RUN echo "bigbang:x:1000:1000::/home/bigbang:/sbin/nologin" >> /etc/passwd \
     && chmod 0750 /home/bigbang \
     && chown 1000:1000 /home/bigbang
 
-COPY "###ZARF_VAR_THEME_FILE###" /app/"###ZARF_VAR_THEME_FILE###"
+COPY theme.jar /app/theme.jar
 
-RUN chmod +rx "###ZARF_VAR_THEME_FILE###"
+RUN chmod +rx theme.jar
 
 USER 1000:1000
 

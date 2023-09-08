@@ -1,6 +1,6 @@
 
 # The version of the build harness container to use
-THEME_REPO := 127.0.0.1/defenseunicorns/uds-idam/theme
+THEME_REPO := ghcr.io/defenseunicorns/uds-idam/theme
 THEME_VERSION := 0.1
 
 .PHONY: help

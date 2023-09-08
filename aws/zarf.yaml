@@ -26,10 +26,6 @@ components:
     required: true
     import:
       path: ../idam
-  - name: theme-image-preload
-    required: true
-    import:
-      path: ../idam
   - name: keycloak-values
     required: true
     import:

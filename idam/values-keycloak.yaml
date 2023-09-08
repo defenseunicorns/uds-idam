@@ -50,13 +50,13 @@ extraInitContainers: |-
     - name: plugin
       mountPath: "/init"
   - name: theme
-    image: 127.0.0.1/defenseunicorns/uds-idam:0.1
+    image: "###ZARF_VAR_KEYCLOAK_THEME_IMAGE###"
     imagePullPolicy: Always
     command:
     - sh
     - -c
     - |
-      cp /app/###ZARF_VAR_THEME_FILE### /init/theme.jar
+      cp /app/theme.jar /init/theme.jar
       ls -l /init
     volumeMounts:
     - name: theme

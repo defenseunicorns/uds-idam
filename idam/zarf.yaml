@@ -51,8 +51,8 @@ variables:
     prompt: false
     type: file
     autoIndent: true
-  - name: THEME_FILE
-    default: "theme.jar"
+  - name: KEYCLOAK_THEME_IMAGE
+    default: "ghcr.io/defenseunicorns/uds-idam/theme:0.1"
   - name: KEYCLOAK_DEPENDS_ON
     default: "[]"
   - name: KEYCLOAK_CREATE_NAMESPACE
@@ -80,29 +80,16 @@ components:
         target: customreg.yaml
       - source: realm/truststore.jks.b64
         target: truststore.jks.b64
-  - name: theme-image-preload
-    required: true
-    files:
-      - source: theme/theme.jar
-        target: theme.jar
-      - source: theme/Dockerfile
-        target: Dockerfile
-      - source: theme/zarf.yaml
-        target: theme/zarf.yaml
-    actions:
-      onDeploy:
-        after:
-          - cmd: docker build . -t 127.0.0.1/defenseunicorns/uds-idam:0.1
-          - cmd: ./zarf package create theme --confirm
-          - cmd: ./zarf package deploy zarf-package-uds-idam-theme-amd64.tar.zst --confirm
-      onRemove:
-        after:
-          - cmd: ./zarf package remove uds-idam-theme --confirm
   - name: keycloak-values
     required: true
     files:
       - source: values-keycloak.yaml
         target: values-keycloak.yaml
+  - name: default-theme
+    required: true
+    import:
+      path: ../theme
+      name: theme
   - name: keycloak
     required: true
     description: "Deploy keycloak via flux"
