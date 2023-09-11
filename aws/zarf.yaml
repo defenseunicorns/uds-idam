@@ -30,6 +30,10 @@ components:
     required: true
     import:
       path: ../idam
+  - name: default-theme
+    required: true
+    import:
+      path: ../idam
   - name: keycloak
     required: true
     import:
