@@ -39,5 +39,5 @@ runs:
 
     - name: Create Zarf Package
       shell: bash
-      run: zarf package create --confirm
+      run: zarf package create --confirm --output ../build
       working-directory: ${{ inputs.working-dir }}

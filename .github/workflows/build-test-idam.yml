@@ -1,6 +1,7 @@
 name: Test UDS IDAM
 
 on:
+  push:
   pull_request:
     branches: [ "main" ]
 
@@ -36,16 +37,22 @@ jobs:
           aws-assume-role: ${{ secrets.AWS_COMMERCIAL_ROLE_TO_ASSUME }}
           aws-region: us-west-2
 
-      - name: Zarf init
-        run: zarf init -a amd64 --components=git-server --confirm
+      - name: Install uds-cli
+        uses: supplypike/setup-bin@v3
+        with:
+          # renovate: uds-cli-uri datasource=github-tags depName=defenseunicorns/uds-cli
+          uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.0.4-alpha/uds-cli_v0.0.4-alpha_Linux_amd64 '
+          name: 'uds'
+          # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
+          version: 'v0.0.4-alpha'
 
-      - name: Deploy DUBBD on k3d cluster
-        run: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-amd64 --no-progress --confirm
-        timeout-minutes: 60
+      - name: UDS CLI Bundle Creation
+        working-directory: dev
+        run: uds bundle create --set INIT_VERSION=v0.29.1 --set METALLB_VERSION=0.0.1 --set DUBBD_VERSION=0.7.0 --confirm
 
-      - name: Deploy IDAM package
-        run: zarf package deploy zarf-package-*.tar.zst  --no-progress --confirm
-        working-directory: idam
+      - name: CLI Bundle Deployment
+        working-directory: dev
+        run: uds bundle deploy uds-bundle-uds-core-*.tar.zst --confirm
 
       - name: Teardown k3d cluster
         if: always()
