@@ -1,7 +1,7 @@
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+) 
-DUBBD_K3D_VERSION := 0.9.0
+DUBBD_K3D_VERSION := 0.7.0
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-ZARF_VERSION := v0.29.2
+ZARF_VERSION := v0.29.1
 
 # renovate: datasource=github-tags depName=defenseunicorns/uds-package-metallb
 METALLB_VERSION := 0.0.1
@@ -32,7 +32,7 @@ build/idam: | build
 deploy/all: deploy/bundle
 
 deploy/bundle:
-	cd dev && uds bundle deploy uds-bundle-uds-core-amd64-0.0.1.tar.zst --confirm
+	cd dev && uds bundle deploy uds-bundle-uds-core-*.tar.zst --confirm
 
 test/idam: ## run all cypress tests
 	npm --prefix cypress/ install 
