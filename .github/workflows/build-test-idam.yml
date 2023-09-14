@@ -46,11 +46,9 @@ jobs:
           version: 'v0.0.4-alpha'
 
       - name: UDS CLI Bundle Creation
-        working-directory: dev
         run: make build/bundle
 
       - name: CLI Bundle Deployment
-        working-directory: dev
         run: make deploy/bundle
 
       - name: Teardown k3d cluster
