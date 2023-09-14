@@ -46,10 +46,12 @@ jobs:
           version: 'v0.0.5-alpha'
 
       - name: UDS CLI Bundle Creation
-        run: make build/bundle
+        working-directory: dev
+        run: uds bundle create --set INIT_VERSION=v0.29.2 --set METALLB_VERSION=0.0.1 --set DUBBD_VERSION=0.9.0 --confirm
 
       - name: CLI Bundle Deployment
-        run: make deploy/bundle
+        working-directory: dev
+        run: uds bundle deploy uds-bundle-uds-core-*.tar.zst --confirm
 
       - name: Teardown k3d cluster
         if: always()
