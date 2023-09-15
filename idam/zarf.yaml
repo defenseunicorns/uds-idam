@@ -113,4 +113,4 @@ components:
         after:
           - cmd: ./zarf tools wait-for HelmRelease keycloak ready -n bigbang
             maxRetries: 3
-            maxTotalSeconds: 300
+            maxTotalSeconds: 600
