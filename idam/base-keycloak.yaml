@@ -49,27 +49,6 @@ extraInitContainers: |-
     volumeMounts:
     - name: plugin
       mountPath: "/init"
-extraVolumeMounts: |-
-  - name: certauthority
-    mountPath: /etc/x509/https/cas.pem
-    subPath: cas.pem
-    readOnly: true
-  - name: customreg
-    mountPath: /opt/jboss/keycloak/customreg.yaml
-    subPath: customreg.yaml
-    readOnly: true
-  - name: plugin
-    mountPath: /opt/keycloak/providers/p1-keycloak-plugin.jar
-    subPath: p1-keycloak-plugin.jar
-  - name: quarkusproperties
-    mountPath: /opt/keycloak/conf/quarkus.properties
-    subPath: quarkus.properties
-  - name: realm
-    mountPath: /opt/keycloak/data/import/realm.json
-    subPath: realm.json
-  - name: truststore
-    mountPath: /opt/keycloak/conf/truststore.jks
-    subPath: truststore.jks
 extraVolumeMountsBigBang:
 - mountPath: /etc/x509/https/tls.crt
   name: tlscert
@@ -87,25 +66,26 @@ extraVolumeMountsBigBang:
   name: tlskey
   readOnly: true
   subPath: tls.key
-extraVolumes: |-
-  - name: plugin
-    emptyDir: {}
-  - name: certauthority
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-certauthority
-  - name: quarkusproperties
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-quarkusproperties
-      defaultMode: 0777
-  - name: realm
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-realm
-  - name: customreg
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-customreg
-  - name: truststore
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-truststore
+- name: plugin
+  mountPath: /opt/keycloak/providers/p1-keycloak-plugin.jar
+  subPath: p1-keycloak-plugin.jar
+- name: certauthority
+  mountPath: /etc/x509/https/cas.pem
+  subPath: cas.pem
+  readOnly: true
+- name: customreg
+  mountPath: /opt/jboss/keycloak/customreg.yaml
+  subPath: customreg.yaml
+  readOnly: true
+- name: quarkusproperties
+  mountPath: /opt/keycloak/conf/quarkus.properties
+  subPath: quarkus.properties
+- name: realm
+  mountPath: /opt/keycloak/data/import/realm.json
+  subPath: realm.json
+- name: truststore
+  mountPath: /opt/keycloak/conf/truststore.jks
+  subPath: truststore.jks
 extraVolumesBigBang:
 - name: tlscert
   secret:
@@ -113,6 +93,24 @@ extraVolumesBigBang:
 - name: tlskey
   secret:
     secretName: keycloak-tlskey
+- name: plugin
+  emptyDir: {}
+- name: certauthority
+  secret:
+    secretName: {{ include "keycloak.fullname" . }}-certauthority
+- name: quarkusproperties
+  secret:
+    secretName: {{ include "keycloak.fullname" . }}-quarkusproperties
+    defaultMode: 0777
+- name: realm
+  secret:
+    secretName: {{ include "keycloak.fullname" . }}-realm
+- name: customreg
+  secret:
+    secretName: {{ include "keycloak.fullname" . }}-customreg
+- name: truststore
+  secret:
+    secretName: {{ include "keycloak.fullname" . }}-truststore
 hostname: bigbang.dev
 istio:
   enabled: true

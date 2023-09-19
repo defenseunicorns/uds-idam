@@ -83,10 +83,18 @@ components:
   - name: keycloak-values
     required: true
     files:
-      - source: values-keycloak.yaml
-        target: values-keycloak.yaml
-  - name: default-theme
+      - source: base-keycloak.yaml
+        target: base-keycloak.yaml
+      - source: theme-values.yaml
+        target: theme-values.yaml
+  - name: keycloak-values-merge
     required: true
+    actions:
+      onDeploy:
+        before:
+          - cmd: yq eval-all '. as $item ireduce ({}; . *+ $item)' base-keycloak.yaml theme-values.yaml > values-keycloak.yaml
+  - name: default-theme
+    required: false
     import:
       path: ../theme
       name: theme
@@ -108,6 +116,7 @@ components:
       - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15
       - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
+      - ghcr.io/defenseunicorns/uds-idam/theme:0.1
     actions:
       onDeploy:
         after:

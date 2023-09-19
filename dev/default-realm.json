@@ -2704,9 +2704,9 @@
     "ssl": "",
     "user": ""
   },
-  "loginTheme": "keycloak",
-  "accountTheme": "p1-sso",
-  "adminTheme": "p1-sso",
+  "loginTheme": "uds-idam",
+  "accountTheme": "uds-idam",
+  "adminTheme": "uds-idam",
   "emailTheme": "keycloak",
   "eventsEnabled": false,
   "eventsExpiration": 1800,

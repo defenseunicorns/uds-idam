@@ -18,7 +18,7 @@ cluster/full: cluster/create build/all deploy/all  ## This will destroy any exis
 
 cluster/bundle: cluster/create build/bundle deploy/bundle
 
-build/all: build build/idam build/bundle
+build/all: build build/idam build/idam-theme build/bundle
 
 build: ## Create build directory
 	mkdir -p build
@@ -28,6 +28,9 @@ build/bundle: | build
 
 build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
+
+build/idam-theme: | build
+	cd theme && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
 
 deploy/all: deploy/bundle
 
