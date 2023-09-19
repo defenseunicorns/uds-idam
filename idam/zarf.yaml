@@ -68,7 +68,7 @@ variables:
     default: keycloak
     prompt: false
   - name: KEYCLOAK_DB_ENDPOINT
-    default: keycloak-postgresql.svc.cluster.local
+    default: keycloak-postgresql.keycloak.svc.cluster.local
     prompt: false
 components:
   - name: keycloak-ingressgateway-addon
