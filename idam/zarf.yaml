@@ -55,7 +55,21 @@ variables:
     default: "[]"
   - name: KEYCLOAK_CREATE_NAMESPACE
     default: "true"
-
+  - name: KEYCLOAK_DB_ENABLED
+    default: "true"
+    prompt: false
+  - name: KEYCLOAK_DB_USERNAME
+    default: kcadmin
+    prompt: false
+  - name: KEYCLOAK_DB_PASSWORD
+    default: sup3r-secret-p@ssword
+    prompt: false
+  - name: KEYCLOAK_DB_NAME
+    default: keycloak
+    prompt: false
+  - name: KEYCLOAK_DB_ENDPOINT
+    default: keycloak-postgresql.svc.cluster.local
+    prompt: false
 components:
   - name: keycloak-ingressgateway-addon
     required: true

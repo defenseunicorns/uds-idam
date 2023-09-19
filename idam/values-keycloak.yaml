@@ -133,6 +133,7 @@ networkPolicies:
     app: passthrough-ingressgateway
     istio: null
 postgresql:
+  enabled: ###ZARF_KEYCLOAK_DB_ENABLED###
   fullnameOverride: keycloak-postgresql
 replicas: 1
 secrets:
@@ -144,6 +145,10 @@ secrets:
       X509_CA_BUNDLE: /etc/x509/https/cas.pem
       KEYCLOAK_ADMIN: ###ZARF_VAR_KC_ADM_USER###
       KEYCLOAK_ADMIN_PASSWORD: ###ZARF_VAR_KC_ADM_PASSWORD###
+      KC_DB_USERNAME: ###ZARF_VAR_KEYCLOAK_DB_USERNAME###
+      KC_DB_PASSWORD: ###ZARF_VAR_KEYCLOAK_DB_PASSWORD###
+      KC_DB: postgresql
+      KC_DB_URL: jdbc:postgresql://###ZARF_VAR_KEYCLOAK_DB_ENDPOINT###/###ZARF_VAR_KEYCLOAK_DB_NAME###
   quarkusproperties:
     stringData:
       quarkus.properties: |-
