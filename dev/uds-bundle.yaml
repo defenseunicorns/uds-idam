@@ -24,6 +24,11 @@ zarf-packages:
     repository: ghcr.io/defenseunicorns/packages/dubbd-k3d
     ref: "###BNDL_TMPL_DUBBD_VERSION###"
 
+  # PostgreSQL
+  - name: keycloak-postgres
+    path: ../build
+    ref: 0.1.1
+
   # UDS IdAM
   - name: uds-idam
     path: ../build
