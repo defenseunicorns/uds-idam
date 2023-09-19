@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.10](https://github.com/defenseunicorns/uds-idam/compare/v0.1.9...v0.1.10) (2023-09-15)
+
+
+### Bug Fixes
+
+* add GH actions on push for testing purposes ([96eb272](https://github.com/defenseunicorns/uds-idam/commit/96eb272574a5a65f33b85b6293b6dca1c4d9d44a))
+* clean up async calls in tests ([5a1af61](https://github.com/defenseunicorns/uds-idam/commit/5a1af61aba3e1631d81e17bb9110010b65c13488))
+* cleanup for PR ([a58b221](https://github.com/defenseunicorns/uds-idam/commit/a58b2217ed78e32ad60e4276997e31cf9d08af7c))
+* nit picky change ([afedac7](https://github.com/defenseunicorns/uds-idam/commit/afedac711d12287e4e8e82dd22bd8b0c5d04960f))
+* refactor configuration variables ([838c210](https://github.com/defenseunicorns/uds-idam/commit/838c2101228ebb2ff690aa651d385eef8bdf5c67))
+* refactor cypress file locations, local testing ([b69fb8c](https://github.com/defenseunicorns/uds-idam/commit/b69fb8cd83c712992f17af3a16ea2d4fb03591d9))
+* refactor file location, local testing ([c655a33](https://github.com/defenseunicorns/uds-idam/commit/c655a33dfc1f940accd7ea9bda3838c37de9b94e))
+* remove sleep timer ([1bac844](https://github.com/defenseunicorns/uds-idam/commit/1bac844102ca0d6f8df42e117bdc80493dea58c4))
+* testing github action ([746c9ae](https://github.com/defenseunicorns/uds-idam/commit/746c9ae941785db272569ffc87f6c52b340ffea8))
+* update GUIDs for cypress-testing realm ([0380e19](https://github.com/defenseunicorns/uds-idam/commit/0380e19d3ae3175a72a840aedee6bd6972a02d3e))
+* update README one last time ([a29922d](https://github.com/defenseunicorns/uds-idam/commit/a29922d867ae2a7efe949560ef98d32135bc8e87))
+* update tsconfig to use import ([dc46241](https://github.com/defenseunicorns/uds-idam/commit/dc462416c35311f198803916a6a09badd3c8c2b7))
+
 ## [0.1.9](https://github.com/defenseunicorns/uds-idam/compare/v0.1.8...v0.1.9) (2023-08-23)
 
 
