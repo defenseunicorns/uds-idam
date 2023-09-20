@@ -133,7 +133,7 @@ networkPolicies:
     app: passthrough-ingressgateway
     istio: null
 postgresql:
-  enabled: ###ZARF_VAR_KEYCLOAK_DB_ENABLED###
+  enabled: ###ZARF_VAR_KEYCLOAK_DEV_DB_ENABLED###
   fullnameOverride: keycloak-postgresql
   postgresqlUsername: ###ZARF_VAR_KEYCLOAK_DB_USERNAME###
   postgresqlPassword: ###ZARF_VAR_KEYCLOAK_DB_PASSWORD###

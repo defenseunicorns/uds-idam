@@ -55,7 +55,7 @@ variables:
     default: "[]"
   - name: KEYCLOAK_CREATE_NAMESPACE
     default: "true"
-  - name: KEYCLOAK_DB_ENABLED
+  - name: KEYCLOAK_DEV_DB_ENABLED
     default: "false"
     prompt: false
   - name: KEYCLOAK_DB_USERNAME
