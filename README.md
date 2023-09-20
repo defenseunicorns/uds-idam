@@ -19,21 +19,25 @@ make cluster/full
 
 ### Zarf Variables Configuration
 
-| Name                  | Description                         | Default                  | Type  | Notes                   |
-|-----------------------|-------------------------------------|--------------------------|-------|-------------------------|
-| REALM                 | Keycloak realm name                 | default-realm            |       |                         |
-| DOMAIN                | Base Domain                         | bigbang.dev              |       |                         |
-| KC_ADM_USER           | Default admin username              | admin                    |       |                         |
-| KC_ADM_PASSWORD       | Default admin password              | sup3r-secret-p@ssword    |       |                         |
-| KEYCLOAK_KEY_FILE     | X509 key file path                  | bigbang.dev.key          | FILE  |                         |
-| KEYCLOAK_CERT_FILE    | X509 certificate file path          | bigbang.dev.cert         | FILE  |                         |
-| REALM_IMPORT_FILE     | JSON realm import file path         | realm.json               | FILE  |                         |
-| REALM_TRUSTSTORE_FILE | Keycloak truststore file path       | truststore.jks.b64       | FILE  | MUST BE BASE64 ENCODED  |
-| REALM_CUSTOM_REG_FILE | Platform One plugin config file path| customreg.yaml           | FILE  |                         |
-| KEYCLOAK_VALUES       | Keycloak chart values file path     | values-keycloak.yaml     | FILE  |                         |
-| KEYCLOAK_DEPENDS_ON   | Keycloak dependencies               | []                       |       |                         |
-| KEYCLOAK_CREATE_NAMESPACE | Create Keycloak namespace       | true                     |       |                         |
-
+| Name                      | Description                          | Default                                        | Type | Notes                  |
+|---------------------------|--------------------------------------|------------------------------------------------|------|------------------------|
+| REALM                     | Keycloak realm name                  | default-realm                                  |      |                        |
+| DOMAIN                    | Base Domain                          | bigbang.dev                                    |      |                        |
+| KEYCLOAK_ADMIN_USERNAME               | Default admin username               | admin                                          |      |                        |
+| KEYCLOAK_ADMIN_PASSWORD           | Default admin password               | sup3r-secret-p@ssword                          |      |                        |
+| KEYCLOAK_KEY_FILE         | X509 key file path                   | bigbang.dev.key                                | FILE |                        |
+| KEYCLOAK_CERT_FILE        | X509 certificate file path           | bigbang.dev.cert                               | FILE |                        |
+| REALM_IMPORT_FILE         | JSON realm import file path          | realm.json                                     | FILE |                        |
+| REALM_TRUSTSTORE_FILE     | Keycloak truststore file path        | truststore.jks.b64                             | FILE | MUST BE BASE64 ENCODED |
+| REALM_CUSTOM_REG_FILE     | Platform One plugin config file path | customreg.yaml                                 | FILE |                        |
+| KEYCLOAK_VALUES           | Keycloak chart values file path      | values-keycloak.yaml                           | FILE |                        |
+| KEYCLOAK_DEPENDS_ON       | Keycloak dependencies                | []                                             |      |                        |
+| KEYCLOAK_CREATE_NAMESPACE | Create Keycloak namespace            | true                                           |      |                        |
+| KEYCLOAK_DEV_DB_ENABLED   | Deploy in cluster database           | false                                          |      |                        |
+| KEYCLOAK_DB_USERNAME      | Database username                    | kcadmin                                        |      |                        |
+| KEYCLOAK_DB_PASSWORD      | Database password                    | sup3r-secret-p@ssword                          |      |                        |
+| KEYCLOAK_DB_NAME          | Database name                        | keycloak                                       |      |                        |
+| KEYCLOAK_DB_ENDPOINT      | Database endpoint                    | keycloak-postgresql.keycloak.svc.cluster.local |      |                        |
 
 ### Creating releases
 
