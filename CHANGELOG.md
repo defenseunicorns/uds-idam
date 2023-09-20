@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.11](https://github.com/defenseunicorns/uds-idam/compare/v0.1.10...v0.1.11) (2023-09-20)
+
+
+### Features
+
+* add postgres external dependency ([11e10f2](https://github.com/defenseunicorns/uds-idam/commit/11e10f25d4127a54ee7b82bd19719ebde9d1f9c2))
+
 ## [0.1.10](https://github.com/defenseunicorns/uds-idam/compare/v0.1.9...v0.1.10) (2023-09-15)
 
 
