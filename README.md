@@ -23,8 +23,8 @@ make cluster/full
 |---------------------------|--------------------------------------|------------------------------------------------|------|------------------------|
 | REALM                     | Keycloak realm name                  | default-realm                                  |      |                        |
 | DOMAIN                    | Base Domain                          | bigbang.dev                                    |      |                        |
-| KC_ADM_USER               | Default admin username               | admin                                          |      |                        |
-| KC_ADM_PASSWORD           | Default admin password               | sup3r-secret-p@ssword                          |      |                        |
+| KEYCLOAK_ADMIN_USERNAME               | Default admin username               | admin                                          |      |                        |
+| KEYCLOAK_ADMIN_PASSWORD           | Default admin password               | sup3r-secret-p@ssword                          |      |                        |
 | KEYCLOAK_KEY_FILE         | X509 key file path                   | bigbang.dev.key                                | FILE |                        |
 | KEYCLOAK_CERT_FILE        | X509 certificate file path           | bigbang.dev.cert                               | FILE |                        |
 | REALM_IMPORT_FILE         | JSON realm import file path          | realm.json                                     | FILE |                        |

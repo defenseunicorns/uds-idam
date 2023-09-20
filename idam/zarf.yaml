@@ -15,10 +15,10 @@ variables:
   - name: DOMAIN
     default: bigbang.dev
     prompt: false  
-  - name: KC_ADM_USER
+  - name: KEYCLOAK_ADMIN_USERNAME
     default: admin
     prompt: false
-  - name: KC_ADM_PASSWORD
+  - name: KEYCLOAK_ADMIN_PASSWORD
     default: sup3r-secret-p@ssword
     prompt: false
   - name: KEYCLOAK_KEY_FILE
