@@ -28,8 +28,14 @@ zarf-packages:
   - name: keycloak-postgres
     path: ../build
     ref: 0.0.1
+    exports:
+      - name: KEYCLOAK_DB_PASSWORD
 
   # UDS IdAM
   - name: uds-idam
     path: ../build
     ref: 0.1.10
+    imports:
+      - name: KEYCLOAK_DB_PASSWORD
+        package: keycloak-postgres
+

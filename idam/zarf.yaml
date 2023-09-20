@@ -56,7 +56,7 @@ variables:
   - name: KEYCLOAK_CREATE_NAMESPACE
     default: "true"
   - name: KEYCLOAK_DB_ENABLED
-    default: "true"
+    default: "false"
     prompt: false
   - name: KEYCLOAK_DB_USERNAME
     default: kcadmin
