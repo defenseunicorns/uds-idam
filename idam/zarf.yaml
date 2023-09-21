@@ -83,16 +83,8 @@ components:
   - name: keycloak-values
     required: true
     files:
-      - source: base-keycloak.yaml
-        target: base-keycloak.yaml
-      - source: theme-values.yaml
-        target: theme-values.yaml
-  - name: keycloak-values-merge
-    required: true
-    actions:
-      onDeploy:
-        before:
-          - cmd: yq eval-all '. as $item ireduce ({}; . *+ $item)' base-keycloak.yaml theme-values.yaml > values-keycloak.yaml
+      - source: values-keycloak.yaml
+        target: values-keycloak.yaml
   - name: default-theme
     required: false
     import:
