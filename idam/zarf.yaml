@@ -99,11 +99,6 @@ components:
     files:
       - source: values-keycloak.yaml
         target: values-keycloak.yaml
-  - name: default-theme
-    required: false
-    import:
-      path: ../theme
-      name: theme
   - name: keycloak
     required: true
     description: "Deploy keycloak via flux"
