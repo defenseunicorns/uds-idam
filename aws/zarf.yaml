@@ -4,7 +4,7 @@ metadata:
   name: uds-idam-aws
   description: "UDS Keycloak deployed via flux"
   # x-release-please-start-version
-  version: "0.1.9"
+  version: "0.1.11"
   # x-release-please-end
   architecture: amd64 
 

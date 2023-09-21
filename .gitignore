@@ -1,0 +1,9 @@
+build
+run
+/zarf-sbom/
+/bigbang.dev.cert
+/bigbang.dev.key
+/customreg.yaml
+/realm.json
+/truststore.jks.b64
+/values-keycloak.yaml

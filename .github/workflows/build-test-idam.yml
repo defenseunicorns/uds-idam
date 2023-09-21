@@ -46,7 +46,7 @@ jobs:
           version: 'v0.0.5-alpha'
 
       - name: UDS CLI Bundle Creation
-        run: make build/bundle
+        run: make build/all
 
       - name: CLI Bundle Deployment
         run: make deploy/bundle

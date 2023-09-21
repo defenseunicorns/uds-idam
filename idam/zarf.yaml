@@ -4,7 +4,7 @@ metadata:
   name: uds-idam
   description: "UDS Keycloak deployed via flux"
   # x-release-please-start-version
-  version: "0.1.9"
+  version: "0.1.11"
   # x-release-please-end
   architecture: amd64 
 
@@ -15,10 +15,10 @@ variables:
   - name: DOMAIN
     default: bigbang.dev
     prompt: false  
-  - name: KC_ADM_USER
+  - name: KEYCLOAK_ADMIN_USERNAME
     default: admin
     prompt: false
-  - name: KC_ADM_PASSWORD
+  - name: KEYCLOAK_ADMIN_PASSWORD
     default: sup3r-secret-p@ssword
     prompt: false
   - name: KEYCLOAK_KEY_FILE
@@ -57,7 +57,21 @@ variables:
     default: "[]"
   - name: KEYCLOAK_CREATE_NAMESPACE
     default: "true"
-
+  - name: KEYCLOAK_DEV_DB_ENABLED
+    default: "false"
+    prompt: false
+  - name: KEYCLOAK_DB_USERNAME
+    default: kcadmin
+    prompt: false
+  - name: KEYCLOAK_DB_PASSWORD
+    default: sup3r-secret-p@ssword
+    prompt: false
+  - name: KEYCLOAK_DB_NAME
+    default: keycloak
+    prompt: false
+  - name: KEYCLOAK_DB_ENDPOINT
+    default: keycloak-postgresql.keycloak.svc.cluster.local
+    prompt: false
 components:
   - name: keycloak-ingressgateway-addon
     required: true
