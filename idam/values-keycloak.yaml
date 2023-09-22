@@ -2,6 +2,7 @@ fullnameOverride: keycloak
 args:
 - start
 - --import-realm
+- --features=fips --fips-mode=strict
 command:
 - /opt/keycloak/bin/kc.sh
 domain: bigbang.dev
@@ -13,7 +14,7 @@ extraEnv: |-
   - name: KC_HTTPS_CERTIFICATE_KEY_FILE
     value: /opt/keycloak/conf/tls.key
   - name: KC_HTTPS_TRUST_STORE_FILE
-    value: /opt/keycloak/conf/truststore.jks
+    value: /opt/keycloak/conf/truststore.bcfks
   - name: KC_HTTPS_TRUST_STORE_PASSWORD
     value: password
   - name: KC_HTTPS_CLIENT_AUTH
@@ -67,9 +68,6 @@ extraVolumeMounts: |-
   - name: realm
     mountPath: /opt/keycloak/data/import/realm.json
     subPath: realm.json
-  - name: truststore
-    mountPath: /opt/keycloak/conf/truststore.jks
-    subPath: truststore.jks
 extraVolumeMountsBigBang:
 - mountPath: /etc/x509/https/tls.crt
   name: tlscert
@@ -103,9 +101,6 @@ extraVolumes: |-
   - name: customreg
     secret:
       secretName: {{ include "keycloak.fullname" . }}-customreg
-  - name: truststore
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-truststore
 extraVolumesBigBang:
 - name: tlscert
   secret:
@@ -181,6 +176,3 @@ secrets:
     stringData:
       customreg.yaml: |
         ###ZARF_VAR_REALM_CUSTOM_REG_FILE###
-  truststore:
-    data: 
-      truststore.jks: ###ZARF_VAR_REALM_TRUSTSTORE_FILE###

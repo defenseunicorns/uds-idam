@@ -32,6 +32,12 @@ build/idam: | build
 build/idam-postgres: | build
 	cd build && zarf package create ../pkg-deps/postgres --confirm 
 
+build/image:
+	docker build -t $(REPO):$(TAG) .
+
+push/image: build/image
+	docker push $(REPO):$(TAG)
+
 deploy/all: deploy/bundle
 
 deploy/bundle:
