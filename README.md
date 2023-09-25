@@ -9,6 +9,9 @@ Pre-built Zarf Package of to support identity and access management to complimen
 - Working kube context (`kubectl get nodes` <-- this command works)
 - Cypress testing requires [Node.js version 16.x, 18.x, 20.x](https://docs.cypress.io/guides/getting-started/installing-cypress#Nodejs)
 
+>[!IMPORTANT]  
+>In preparation for an external DB, Keycloak variables have been exposed for [connecting to those DB's](https://github.com/defenseunicorns/uds-idam/blob/main/idam/zarf.yaml#L58-L72). By default IdAM no longer supplies it's own in-cluster postgresql DB, however [the orignial DB can be enabled by setting this variable](./idam/zarf.yaml#L58) to `true`. 
+
 
 ### Getting Started
 ```bash
