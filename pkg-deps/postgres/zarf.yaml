@@ -5,6 +5,10 @@ metadata:
   version: "0.0.1"
   architecture: amd64
 
+variables:
+  - name: POSTGRES_PASSWORD
+    default: ""
+    prompt: false
 components:
   - name: postgres-kyverno-exceptions
     required: true

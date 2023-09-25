@@ -1,0 +1,70 @@
+name: Test UDS IDAM Upgrade 
+
+on:
+  push:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test-clean-install:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/create-zarf-package
+        with:
+          username: ${{ secrets.REGISTRY1_USERNAME }}
+          password: ${{ secrets.REGISTRY1_PASSWORD }}
+          working-dir: idam
+          download-init-package: true
+
+      - name: Create k3d cluster
+        id: create-cluster
+        # renovate: datasource=github-tags depName=defenseunicorns/uds-aws-ci-k3d versioning=semver
+        uses: defenseunicorns/uds-aws-ci-k3d@v0.0.3
+        with:
+          cluster-action: create
+          aws-assume-role: ${{ secrets.AWS_COMMERCIAL_ROLE_TO_ASSUME }}
+          aws-region: us-west-2
+
+      - name: Install uds-cli
+        uses: supplypike/setup-bin@v3
+        with:
+          # renovate: uds-cli-uri datasource=github-tags depName=defenseunicorns/uds-cli
+          uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.0.5-alpha/uds-cli_v0.0.5-alpha_Linux_amd64 '
+          name: 'uds'
+          # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
+          version: 'v0.0.5-alpha'
+
+      # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES)
+      - name: IdAM CI Build Test Setup Bundle
+        run: make build/all-ci
+
+      # Deploy IdAM Test Setup Bundle 
+      - name: IdAM CI Deploy Test Setup Bundle
+        run: make deploy/ci-test-setup
+
+      # Deploy Latest Published IdAM 
+      - name: Deploy Latest Published IdAM
+        run: make deploy/published-idam
+
+      # Remove latest published version of IDAM for Deploying IdAM from source
+      - name: Remove Published IDAM Deployment
+        run: make remove/published-idam
+
+      # Deploy new IDAM changes from source
+      - name: Install New IDAM Changes from source
+        run: make deploy/source-idam
+
+      - name: Teardown k3d cluster
+        if: always()
+        # renovate: datasource=github-tags depName=defenseunicorns/uds-aws-ci-k3d versioning=semver
+        uses: defenseunicorns/uds-aws-ci-k3d@v0.0.3
+        with:
+          cluster-action: destroy

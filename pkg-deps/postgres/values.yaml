@@ -1,3 +1,4 @@
 auth:
   username: kcadmin
   database: keycloak
+  password: ###ZARF_VAR_POSTGRES_PASSWORD###
