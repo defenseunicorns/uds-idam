@@ -43,21 +43,25 @@ test/idam: ## run all cypress tests
 	npm --prefix test/cypress/ run cy.run
 
 
-# CI TEST TARGETS
-
+# Build all CI Test requirements (Postgres, idam from source, uds bundle with zarf / metallb / dubbd )
 build/all-ci: build build/idam-postgres build/idam build/ci-test-setup
 
+# Build the CI upgrade test setup bundle (zarf / metallb / dubbd)
 build/ci-test-setup: | build
 	cd test/ci-upgrade-idam && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --confirm
 
+# Deploy the CI upgrade test bundle
 deploy/ci-test-setup:
 	cd test/ci-upgrade-idam && uds bundle deploy uds-bundle-uds-core-*.tar.zst --confirm
 
+# Deploy the latest published idam image
 deploy/published-idam:
 	zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:$(IDAM_VERSION)-amd64 --confirm
 	
+# Deploy idam branch from source
 deploy/source-idam:	
 	zarf package deploy build/zarf-package-uds-idam*.tar.zst --confirm
 
+# Remove the latest published idam image
 remove/published-idam:
 	zarf package remove oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:$(IDAM_VERSION)-amd64 --confirm
