@@ -1,6 +1,7 @@
 name: Test UDS IDAM Upgrade 
 
 on:
+  push:
   pull_request:
     branches: [ "main" ]
 
@@ -41,25 +42,39 @@ jobs:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
           version: 'v0.0.5-alpha'
 
+
       # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES)
-      - name: IdAM CI Build Test Setup Bundle
+      - name: Build CI Upgrade Test for Published IDAM
         run: make build/all-ci
 
       # Deploy IdAM Test Setup Bundle 
-      - name: IdAM CI Deploy Test Setup Bundle
-        run: make deploy/ci-test-setup
+      - name: Deploy CI Upgrade Test Published IDAM
+        run: make deploy/ci-upgrade-idam-published
 
       # Deploy Latest Published IdAM 
-      - name: Deploy Latest Published IdAM
-        run: make deploy/published-idam
+      - name: Deploy CI Upgrade Test Source IDAM
+        run: make deploy/ci-upgrade-idam-source
 
-      # Remove latest published version of IDAM for Deploying IdAM from source
-      - name: Remove Published IDAM Deployment
-        run: make remove/published-idam
 
-      # Deploy new IDAM changes from source
-      - name: Install New IDAM Changes from source
-        run: make deploy/source-idam
+      # # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES)
+      # - name: IdAM CI Build Test Setup Bundle
+      #   run: make build/all-ci
+
+      # # Deploy IdAM Test Setup Bundle 
+      # - name: IdAM CI Deploy Test Setup Bundle
+      #   run: make deploy/ci-test-setup
+
+      # # Deploy Latest Published IdAM 
+      # - name: Deploy Latest Published IdAM
+      #   run: make deploy/published-idam
+
+      # # Remove latest published version of IDAM for Deploying IdAM from source
+      # - name: Remove Published IDAM Deployment
+      #   run: make remove/published-idam
+
+      # # Deploy new IDAM changes from source
+      # - name: Install New IDAM Changes from source
+      #   run: make deploy/source-idam
 
       - name: Teardown k3d cluster
         if: always()
