@@ -55,10 +55,6 @@ build/all-ci: build build/idam-postgres build/idam build/ci-upgrade-idam-publish
 build/ci-upgrade-idam-published: | build
 	cd test/ci-upgrade-idam && uds bundle create --set IDAM_VERSION=$(IDAM_VERSION) --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --confirm
 
-
-
-
-
 # Build the CI upgrade test for source IDAM image
 build/ci-upgrade-idam-source: | build
 	cd test/ci-upgrade-idam/source-idam && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --confirm
@@ -70,27 +66,3 @@ deploy/ci-upgrade-idam-published:
 # Deploy the CI upgrade test for source IDAM image
 deploy/ci-upgrade-idam-source:
 	cd test/ci-upgrade-idam/source-idam && uds bundle deploy uds-bundle-*.tar.zst --confirm
-
-
-
-
-
-# # Deploy the CI upgrade test bundle
-# deploy/ci-test-setup:
-# 	cd test/ci-upgrade-idam && uds bundle deploy uds-bundle-*.tar.zst --confirm
-
-# # Deploy the latest published idam image
-# deploy/published-idam:
-# 	zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:$(IDAM_VERSION)-amd64 --confirm
-	
-# # Deploy idam branch from source
-# deploy/source-idam:	
-# 	zarf package deploy build/zarf-package-uds-idam*.tar.zst --confirm
-
-# # Remove the latest published idam image
-# remove/published-idam:
-# 	zarf package remove oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:$(IDAM_VERSION)-amd64 --confirm
-
-
-cleanup:
-	rm -rf build run tmp on_failure.sh bigbang.dev.cert bigbang.dev.key customreg.yaml realm.json truststore.jks.b64 values-keycloak.yaml test/ci-upgrade-idam/run test/ci-upgrade-idam/tmp test/ci-upgrade-idam/bigbang.dev.cert test/ci-upgrade-idam/bigbang.dev.key test/ci-upgrade-idam/customreg.yaml test/ci-upgrade-idam/on_failure.sh test/ci-upgrade-idam/realm.json test/ci-upgrade-idam/truststore.jks.b64 test/ci-upgrade-idam/uds-bundle-uds-idam* test/ci-upgrade-idam/values-keycloak.yaml test/ci-upgrade-idam/source-idam/uds-bundle-uds-idam* test/ci-upgrade-idam/source-idam/run test/ci-upgrade-idam/source-idam/tmp test/ci-upgrade-idam/source-idam/bigbang.dev.cert test/ci-upgrade-idam/source-idam/bigbang.dev.key test/ci-upgrade-idam/source-idam/customreg.yaml test/ci-upgrade-idam/source-idam/on_failure.sh test/ci-upgrade-idam/source-idam/realm.json test/ci-upgrade-idam/source-idam/truststore.jks.b64 test/ci-upgrade-idam/source-idam/values-keycloak.yaml
