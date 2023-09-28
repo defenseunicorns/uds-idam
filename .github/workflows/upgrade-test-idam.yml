@@ -43,15 +43,15 @@ jobs:
           version: 'v0.0.5-alpha'
 
 
-      # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES)
+      # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES, Source IDAM, Published IDAM)
       - name: Build CI Upgrade Test for Published IDAM
         run: make build/all-ci
 
-      # Deploy IdAM Test Setup Bundle 
+      # Deploy IdAM Published Bundle 
       - name: Deploy CI Upgrade Test Published IDAM
         run: make deploy/ci-upgrade-idam-published
 
-      # Deploy Latest Published IdAM 
+      # Deploy IdAM Source Bundle
       - name: Deploy CI Upgrade Test Source IDAM
         run: make deploy/ci-upgrade-idam-source
 
