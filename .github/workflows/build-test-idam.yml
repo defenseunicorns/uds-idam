@@ -1,6 +1,7 @@
 name: Test UDS IDAM
 
 on:
+  push:
   pull_request:
     branches: [ "main" ]
 
@@ -8,24 +9,32 @@ permissions:
   id-token: write
   contents: read
 
+
 jobs:
   test-clean-install:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Free GH runner space
+        run: |
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          df -h
 
-      - name: Fail if Draft PR
-        if: github.event.pull_request.draft == true
-        run: exit 1
-
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - uses: ./.github/actions/create-zarf-package
         with:
           username: ${{ secrets.REGISTRY1_USERNAME }}
           password: ${{ secrets.REGISTRY1_PASSWORD }}
-          working-dir: idam
+          working-dir: k3d
           download-init-package: true
+          timeout-minutes: 60
 
       - name: Create k3d cluster
         id: create-cluster
@@ -36,20 +45,19 @@ jobs:
           aws-assume-role: ${{ secrets.AWS_COMMERCIAL_ROLE_TO_ASSUME }}
           aws-region: us-west-2
 
-      - name: Install uds-cli
-        uses: supplypike/setup-bin@v3
-        with:
-          # renovate: uds-cli-uri datasource=github-tags depName=defenseunicorns/uds-cli
-          uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.0.5-alpha/uds-cli_v0.0.5-alpha_Linux_amd64 '
-          name: 'uds'
-          # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: 'v0.0.5-alpha'
+      - name: Zarf init
+        run: zarf init -a amd64 --components=git-server --confirm
 
-      - name: UDS CLI Bundle Creation
-        run: make build/all
+      - name: Deploy DUBBD on k3d cluster
+        run: zarf package deploy zarf-package-*.tar.zst --confirm
+        working-directory: k3d
+        timeout-minutes: 60
 
-      - name: CLI Bundle Deployment
-        run: make deploy/bundle
+      - name: Remove DUBBD from k3d cluster
+        if: always()
+        run: zarf package remove zarf-package-*.tar.zst --confirm
+        working-directory: k3d
+        timeout-minutes: 60
 
       - name: Teardown k3d cluster
         if: always()
