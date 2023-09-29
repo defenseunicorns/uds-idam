@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.12](https://github.com/defenseunicorns/uds-idam/compare/v0.1.11...v0.1.12) (2023-09-29)
+
+
+### Bug Fixes
+
+* update readme for external db addition ([64d7f93](https://github.com/defenseunicorns/uds-idam/commit/64d7f93e38a920f0e73d96970696d7c94680675c))
+* upsert postgres dependency db secret ([95d2163](https://github.com/defenseunicorns/uds-idam/commit/95d2163ce06c184884e4c6a52fd6d7249c3c48c5))
+
+
+### Miscellaneous
+
+* fix spacing in makefile ([9bce00a](https://github.com/defenseunicorns/uds-idam/commit/9bce00abfae1d4dd4ff96ad7fdf0912c97cef2ba))
+
 ## [0.1.11](https://github.com/defenseunicorns/uds-idam/compare/v0.1.10...v0.1.11) (2023-09-20)
 
 
