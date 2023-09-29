@@ -14,6 +14,11 @@ zarf-packages:
     optional-components:
       - git-server
 
+  # Sleep preload
+  - name: sleep
+    path: ../build
+    ref: 0.0.1
+
   # Metallb
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb

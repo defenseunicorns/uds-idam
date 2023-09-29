@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: sleep
+  version: "0.0.1"
+  architecture: amd64
+
+components:
+  - name: sleep
+    required: true
+    repos:
+      - https://github.com/rjferguson21/monitoring-rob.git@refs/heads/job-sleep
