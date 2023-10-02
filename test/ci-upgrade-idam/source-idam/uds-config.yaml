@@ -6,7 +6,4 @@ bundle:
           APPROVED_REGISTRIES: "127.0.0.1* | ghcr.io/defenseunicorns/pepr* | registry1.dso.mil"
       metallb:
         set:
-          IP_ADDRESS_POOL: 172.28.0.8/29  
-      # keycloak-postgres:
-      #   set:
-      #     POSTGRES_PASSWORD: sup3r-secret-p@ssword 
+          IP_ADDRESS_POOL: 172.28.0.8/29
