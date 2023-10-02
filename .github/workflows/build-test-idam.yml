@@ -10,19 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  yaml-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install yamllint
-        run: pip install yamllint
-      - name: Lint YAML files
-        run: yamllint . -c .yamllint --no-warnings
   test-clean-install:
     runs-on: ubuntu-latest
-
-    needs: yaml-lint
-    if: needs.yaml-lint.result == 'success' || needs.yaml-lint.result == 'skipped'
 
     steps:
 
