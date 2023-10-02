@@ -30,7 +30,7 @@ build: ## Create build directory
 	mkdir -p build
 
 build/bundle: | build
-	cd dev && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION)  --confirm
+	cd dev && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
 
 build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
@@ -53,11 +53,11 @@ build/all-ci: build build/idam-postgres build/idam build/ci-upgrade-idam-publish
 
 # Build the CI upgrade test for published IDAM image
 build/ci-upgrade-idam-published: | build
-	cd test/ci-upgrade-idam && uds bundle create --set IDAM_VERSION=$(IDAM_VERSION) --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --confirm
+	cd test/ci-upgrade-idam && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
 
 # Build the CI upgrade test for source IDAM image
 build/ci-upgrade-idam-source: | build
-	cd test/ci-upgrade-idam/source-idam && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --confirm
+	cd test/ci-upgrade-idam/source-idam && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
 
 # Deploy the CI upgrade test for published IDAM image
 deploy/ci-upgrade-idam-published:
