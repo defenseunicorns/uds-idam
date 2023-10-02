@@ -48,7 +48,7 @@ components:
               - name: KEYCLOAK_DB_PASSWORD
                 sensitive: true
         after:
-          - cmd: kubectl create secret generic keycloak-postgres -n keycloak --from-literal=password=${ZARF_VAR_KEYCLOAK_DB_PASSWORD} --dry-run=client -o yaml | kubectl apply -f -
+          - cmd: kubectl create secret generic keycloak-postgres -n keycloak --from-literal=password=${ZARF_VAR_KEYCLOAK_DB_PASSWORD}
   - name: postgres-service
     required: true
     manifests:
