@@ -49,23 +49,3 @@ deploy/bundle:
 test/idam: ## run all cypress tests
 	npm --prefix test/cypress/ install 
 	npm --prefix test/cypress/ run cy.run
-
-
-# Build all CI Test requirements (Postgres, IDAM from oci, IDAM from source, uds bundle with zarf / metallb / dubbd )
-build/all-ci: build build/idam-postgres build/idam build/ci-upgrade-idam-published build/ci-upgrade-idam-source
-
-# Build the CI upgrade test for published IDAM image
-build/ci-upgrade-idam-published: | build
-	cd test/ci-upgrade-idam && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
-
-# Build the CI upgrade test for source IDAM image
-build/ci-upgrade-idam-source: | build
-	cd test/ci-upgrade-idam/source-idam && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
-
-# Deploy the CI upgrade test for published IDAM image
-deploy/ci-upgrade-idam-published:
-	cd test/ci-upgrade-idam && uds bundle deploy uds-bundle-*.tar.zst --confirm
-
-# Deploy the CI upgrade test for source IDAM image
-deploy/ci-upgrade-idam-source:
-	cd test/ci-upgrade-idam/source-idam && uds bundle deploy uds-bundle-*.tar.zst --confirm
