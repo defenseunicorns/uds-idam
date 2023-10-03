@@ -24,7 +24,7 @@ cluster/full: cluster/create build/all deploy/all  ## This will destroy any exis
 
 cluster/bundle: cluster/create build/bundle deploy/bundle
 
-build/all: build build/idam-postgres build/idam build/sleep build/bundle
+build/all: build build/idam-postgres build/idam build/bundle
 
 build: ## Create build directory
 	mkdir -p build
@@ -37,9 +37,6 @@ build/idam: | build
 
 build/idam-postgres: | build
 	cd build && zarf package create ../pkg-deps/postgres --confirm 
-
-build/sleep: | build
-	cd build && zarf package create ../pkg-deps/pre-load --confirm 
 
 deploy/all: deploy/bundle
 
