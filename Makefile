@@ -26,6 +26,8 @@ cluster/bundle: cluster/create build/bundle deploy/bundle
 
 build/all: build build/idam-postgres build/idam build/bundle
 
+build/published: build build/idam-postgres pull/published build/bundle
+
 build: ## Create build directory
 	mkdir -p build
 
@@ -46,3 +48,7 @@ deploy/bundle:
 test/idam: ## run all cypress tests
 	npm --prefix test/cypress/ install 
 	npm --prefix test/cypress/ run cy.run
+
+pull/published:
+	cd build && rm zarf-package-uds-idam-amd64-*.tar.zst
+	cd build && zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:$(IDAM_VERSION)-amd64

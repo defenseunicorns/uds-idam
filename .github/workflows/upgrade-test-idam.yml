@@ -42,21 +42,18 @@ jobs:
           version: 'v0.0.5-alpha'
 
       # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES, Source IDAM, Published IDAM)
-      - name: Build CI Upgrade Test for Published IDAM
-        run: make build/all
+      - name: Build bundle with published IDAM
+        run: make build/published
 
       # Deploy IdAM Published Bundle 
       - name: Deploy CI Upgrade Test Published IDAM
         run: make deploy/bundle
 
-      - name: Debug Neuvector
-        run: kubectl logs -l app=neuvector-enforcer-pod -n neuvector --tail=500
-
-      - name: Debug Promtail
-        run: kubectl logs -l app.kubernetes.io/name=promtail -n promtail --tail=500
+      - name: Build bundle with source IDAM
+        run: make build/all
 
       # Deploy IdAM Source Bundle
-      - name: Deploy CI Upgrade Test Source IDAM
+      - name: Deploy source IDAM bundle
         run: make deploy/bundle
 
       - name: Teardown k3d cluster
