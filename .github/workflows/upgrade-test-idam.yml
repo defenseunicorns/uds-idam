@@ -49,6 +49,12 @@ jobs:
       - name: Deploy CI Upgrade Test Published IDAM
         run: make deploy/bundle
 
+      - name: Debug Neuvector
+        run: kubectl logs -l app=neuvector-enforcer-pod -n neuvector --tail=500
+
+      - name: Debug Promtail
+        run: kubectl logs -l app.kubernetes.io/name=promtail -n promtail --tail=500
+
       # Deploy IdAM Source Bundle
       - name: Deploy CI Upgrade Test Source IDAM
         run: make deploy/bundle
