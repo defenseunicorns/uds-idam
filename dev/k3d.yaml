@@ -4,6 +4,7 @@ kind: Simple
 metadata:
   name: uds-test-cluster
 subnet: "172.28.0.0/16"
+agents: 1
 hostAliases:
   - ip: 172.28.0.10
     hostnames:

@@ -41,8 +41,6 @@ kiali:
 monitoring:
   enabled: true
 
-  git:
-    repo: https://github.com/rjferguson21/monitoring-rob.git
-    path: "./chart"
-    tag: null
-    branch: job-sleep
+  values:
+    networkPolicies:
+      enabled: false
