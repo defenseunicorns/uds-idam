@@ -36,16 +36,6 @@ variables:
     prompt: false
     type: file
     autoIndent: true
-  - name: REALM_TRUSTSTORE_FILE
-    default: truststore.jks.b64
-    prompt: false
-    type: file
-    autoIndent: true
-  - name: REALM_CUSTOM_REG_FILE
-    default: customreg.yaml
-    prompt: false
-    type: file
-    autoIndent: true
   - name: KEYCLOAK_VALUES
     default: values-keycloak.yaml
     prompt: false
@@ -88,10 +78,6 @@ components:
         target: bigbang.dev.key
       - source: realm/default-realm.json
         target: realm.json
-      - source: realm/baby-yoda.yaml
-        target: customreg.yaml
-      - source: realm/truststore.jks.b64
-        target: truststore.jks.b64
   - name: keycloak-values
     required: true
     files:
@@ -113,9 +99,8 @@ components:
       # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
       - https://repo1.dso.mil/big-bang/product/packages/keycloak.git@18.4.3-bb.10
     images:
-      - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
+      - ghcr.io/defenseunicorns/uds-idam/keycloak:21.1.2-0.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15
-      - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
     actions:
       onDeploy:
         after:
