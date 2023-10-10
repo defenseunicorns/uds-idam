@@ -36,40 +36,17 @@ extraEnv: |-
     value: ispn
   - name: KC_CACHE_STACK
     value: kubernetes
-extraInitContainers: |-
-  - name: plugin
-    image: registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
-    imagePullPolicy: Always
-    command:
-    - sh
-    - -c
-    - |
-      cp /app/p1-keycloak-plugin.jar /init
-      ls -l /init
-    volumeMounts:
-    - name: plugin
-      mountPath: "/init"
 extraVolumeMounts: |-
   - name: certauthority
     mountPath: /etc/x509/https/cas.pem
     subPath: cas.pem
     readOnly: true
-  - name: customreg
-    mountPath: /opt/jboss/keycloak/customreg.yaml
-    subPath: customreg.yaml
-    readOnly: true
-  - name: plugin
-    mountPath: /opt/keycloak/providers/p1-keycloak-plugin.jar
-    subPath: p1-keycloak-plugin.jar
   - name: quarkusproperties
     mountPath: /opt/keycloak/conf/quarkus.properties
     subPath: quarkus.properties
   - name: realm
     mountPath: /opt/keycloak/data/import/realm.json
     subPath: realm.json
-  - name: truststore
-    mountPath: /opt/keycloak/conf/truststore.jks
-    subPath: truststore.jks
 extraVolumeMountsBigBang:
 - mountPath: /etc/x509/https/tls.crt
   name: tlscert
@@ -91,8 +68,6 @@ extraVolumes: |-
   - name: certauthority
     secret:
       secretName: {{ include "keycloak.fullname" . }}-certauthority
-  - name: plugin
-    emptyDir: {}
   - name: quarkusproperties
     secret:
       secretName: {{ include "keycloak.fullname" . }}-quarkusproperties
@@ -100,12 +75,6 @@ extraVolumes: |-
   - name: realm
     secret:
       secretName: {{ include "keycloak.fullname" . }}-realm
-  - name: customreg
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-customreg
-  - name: truststore
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-truststore
 extraVolumesBigBang:
 - name: tlscert
   secret:
@@ -177,10 +146,3 @@ secrets:
     stringData: 
       tls.key: |
         ###ZARF_VAR_KEYCLOAK_KEY_FILE###
-  customreg:
-    stringData:
-      customreg.yaml: |
-        ###ZARF_VAR_REALM_CUSTOM_REG_FILE###
-  truststore:
-    data: 
-      truststore.jks: ###ZARF_VAR_REALM_TRUSTSTORE_FILE###
