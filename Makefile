@@ -49,6 +49,6 @@ test/idam: ## run all cypress tests
 	npm --prefix test/cypress/ install 
 	npm --prefix test/cypress/ run cy.run
 
-pull/published:
-	cd build && rm zarf-package-uds-idam-amd64-*.tar.zst
+pull/published: | build
+	cd build && rm -f zarf-package-uds-idam-amd64-*.tar.zst 2> /dev/null || true
 	cd build && zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:$(IDAM_VERSION)-amd64
