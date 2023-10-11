@@ -1,4 +1,7 @@
 fullnameOverride: keycloak
+image:
+  repository: ghcr.io/defenseunicorns/uds-idam/keycloak
+  tag: "21.1.2-0.1"
 args:
 - start
 - --import-realm
