@@ -1,4 +1,4 @@
-name: Test UDS IDAM
+name: Test UDS IDAM Upgrade 
 
 on:
   pull_request:
@@ -14,22 +14,7 @@ jobs:
 
     steps:
 
-      - name: Fail if Draft PR
-        if: github.event.pull_request.draft == true
-        run: exit 1
-
-      - name: Free GH runner space
-        run: |
-          df -h
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          sudo docker image prune --all --force
-          df -h
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - uses: ./.github/actions/create-zarf-package
         with:
@@ -56,10 +41,19 @@ jobs:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
           version: 'v0.0.5-alpha'
 
-      - name: UDS CLI Bundle Creation
+      # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES, Source IDAM, Published IDAM)
+      - name: Build bundle with published IDAM
+        run: make build/published
+
+      # Deploy IdAM Published Bundle 
+      - name: Deploy CI Upgrade Test Published IDAM
+        run: make deploy/bundle
+
+      - name: Build bundle with source IDAM
         run: make build/all
 
-      - name: CLI Bundle Deployment
+      # Deploy IdAM Source Bundle
+      - name: Deploy source IDAM bundle
         run: make deploy/bundle
 
       - name: Teardown k3d cluster

@@ -37,3 +37,11 @@ kiali:
               - openid
               - email
             username_claim: email
+
+# This is included to workaround https://repo1.dso.mil/big-bang/product/packages/monitoring/-/issues/118
+monitoring:
+  enabled: true
+
+  values:
+    networkPolicies:
+      enabled: false
