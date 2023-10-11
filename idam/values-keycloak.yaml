@@ -9,16 +9,10 @@ command:
 - /opt/keycloak/bin/kc.sh
 domain: bigbang.dev
 extraEnv: |-
-  - name: CUSTOM_REGISTRATION_CONFIG
-    value: /opt/jboss/keycloak/customreg.yaml
   - name: KC_HTTPS_CERTIFICATE_FILE
     value: /opt/keycloak/conf/tls.crt
   - name: KC_HTTPS_CERTIFICATE_KEY_FILE
     value: /opt/keycloak/conf/tls.key
-  - name: KC_HTTPS_TRUST_STORE_FILE
-    value: /opt/keycloak/conf/truststore.jks
-  - name: KC_HTTPS_TRUST_STORE_PASSWORD
-    value: password
   - name: KC_HTTPS_CLIENT_AUTH
     value: request
   - name: KC_PROXY
@@ -40,16 +34,9 @@ extraEnv: |-
   - name: KC_CACHE_STACK
     value: kubernetes
 extraVolumeMounts: |-
-  - name: certauthority
-    mountPath: /etc/x509/https/cas.pem
-    subPath: cas.pem
-    readOnly: true
   - name: quarkusproperties
     mountPath: /opt/keycloak/conf/quarkus.properties
     subPath: quarkus.properties
-  - name: realm
-    mountPath: /opt/keycloak/data/import/realm.json
-    subPath: realm.json
 extraVolumeMountsBigBang:
 - mountPath: /etc/x509/https/tls.crt
   name: tlscert
@@ -68,16 +55,10 @@ extraVolumeMountsBigBang:
   readOnly: true
   subPath: tls.key
 extraVolumes: |-
-  - name: certauthority
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-certauthority
   - name: quarkusproperties
     secret:
       secretName: {{ include "keycloak.fullname" . }}-quarkusproperties
       defaultMode: 0777
-  - name: realm
-    secret:
-      secretName: {{ include "keycloak.fullname" . }}-realm
 extraVolumesBigBang:
 - name: tlscert
   secret:
@@ -111,12 +92,8 @@ postgresql:
   postgresqlPassword: ###ZARF_VAR_KEYCLOAK_DB_PASSWORD###
 replicas: 1
 secrets:
-  certauthority:
-    stringData:
-      cas.pem: '{{ .Files.Get "resources/dev/dod_cas.pem" }}'
   env:
     stringData:
-      X509_CA_BUNDLE: /etc/x509/https/cas.pem
       KEYCLOAK_ADMIN: ###ZARF_VAR_KEYCLOAK_ADMIN_USERNAME###
       KEYCLOAK_ADMIN_PASSWORD: ###ZARF_VAR_KEYCLOAK_ADMIN_PASSWORD###
       KC_DB_USERNAME: ###ZARF_VAR_KEYCLOAK_DB_USERNAME###
@@ -137,10 +114,6 @@ secrets:
         # block metrics and health enpoints from being exposed through the istio ingress
         quarkus.kc-routing.path-recursive-block./metrics=8443
         quarkus.kc-routing.path-recursive-block./health=8443
-  realm:
-    stringData:
-      realm.json: |
-        ###ZARF_VAR_REALM_IMPORT_FILE###
   tlscert:
     stringData:
       tls.crt: |

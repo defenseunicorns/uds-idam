@@ -24,13 +24,12 @@ make cluster/full
 
 | Name                      | Description                          | Default                                        | Type | Notes                  |
 |---------------------------|--------------------------------------|------------------------------------------------|------|------------------------|
-| REALM                     | Keycloak realm name                  | default-realm                                  |      |                        |
+| REALM                     | Keycloak realm name                  | baby-yoda                                      |      |                        |
 | DOMAIN                    | Base Domain                          | bigbang.dev                                    |      |                        |
 | KEYCLOAK_ADMIN_USERNAME   | Default admin username               | admin                                          |      |                        |
 | KEYCLOAK_ADMIN_PASSWORD   | Default admin password               | sup3r-secret-p@ssword                          |      |                        |
 | KEYCLOAK_KEY_FILE         | X509 key file path                   | bigbang.dev.key                                | FILE |                        |
 | KEYCLOAK_CERT_FILE        | X509 certificate file path           | bigbang.dev.cert                               | FILE |                        |
-| REALM_IMPORT_FILE         | JSON realm import file path          | realm.json                                     | FILE |                        |
 | KEYCLOAK_VALUES           | Keycloak chart values file path      | values-keycloak.yaml                           | FILE |                        |
 | KEYCLOAK_DEPENDS_ON       | Keycloak dependencies                | []                                             |      |                        |
 | KEYCLOAK_CREATE_NAMESPACE | Create Keycloak namespace            | true                                           |      |                        |
