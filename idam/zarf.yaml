@@ -121,7 +121,7 @@ components:
           - wait:
               cluster:
                 kind: helmRelease
-                name: keycloack
+                name: keycloak
                 condition: Ready
                 namespace: bigbang
             maxTotalSeconds: 600
