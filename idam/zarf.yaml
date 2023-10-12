@@ -9,9 +9,6 @@ metadata:
   architecture: amd64
 
 variables:
-  - name: REALM
-    default: baby-yoda
-    prompt: false
   - name: DOMAIN
     default: bigbang.dev
     prompt: false
@@ -28,11 +25,6 @@ variables:
     autoIndent: true
   - name: KEYCLOAK_CERT_FILE
     default: bigbang.dev.cert
-    prompt: false
-    type: file
-    autoIndent: true
-  - name: REALM_IMPORT_FILE
-    default: realm.json
     prompt: false
     type: file
     autoIndent: true
@@ -76,8 +68,6 @@ components:
         target: bigbang.dev.cert
       - source: certs/bigbang.dev.key
         target: bigbang.dev.key
-      - source: realm/default-realm.json
-        target: realm.json
   - name: keycloak-values
     required: true
     files:
