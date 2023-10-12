@@ -125,3 +125,4 @@ components:
                 condition: Ready
                 namespace: bigbang
             maxTotalSeconds: 600
+            description: Keycloak HelmRelease to be Ready
