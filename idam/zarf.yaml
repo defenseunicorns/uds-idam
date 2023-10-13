@@ -118,6 +118,11 @@ components:
     actions:
       onDeploy:
         after:
-          - cmd: ./zarf tools wait-for HelmRelease keycloak ready -n bigbang
-            maxRetries: 3
+          - wait:
+              cluster:
+                kind: helmRelease
+                name: keycloak
+                condition: Ready
+                namespace: bigbang
             maxTotalSeconds: 600
+            description: Keycloak HelmRelease to be Ready
