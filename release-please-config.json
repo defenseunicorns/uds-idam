@@ -12,7 +12,6 @@
       "versioning": "always-bump-patch",
       "extra-files": [
         "idam/zarf.yaml",
-        "aws/zarf.yaml",
         "Makefile"
       ]
     }
