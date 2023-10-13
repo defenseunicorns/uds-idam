@@ -1,5 +1,5 @@
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+)
-DUBBD_K3D_VERSION := 0.9.0
+DUBBD_K3D_VERSION := 0.11.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
 ZARF_VERSION := v0.29.2
@@ -11,7 +11,7 @@ METALLB_VERSION := 0.0.1
 SSO_VERSION := 0.1.3
 
 # x-release-please-start-version
-IDAM_VERSION := 0.1.12
+IDAM_VERSION := 0.1.13
 # x-release-please-end
 
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
@@ -38,7 +38,7 @@ build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
 
 build/idam-postgres: | build
-	cd build && zarf package create ../pkg-deps/postgres --confirm 
+	cd build && zarf package create ../pkg-deps/postgres --confirm
 
 deploy/all: deploy/bundle
 
@@ -46,7 +46,7 @@ deploy/bundle:
 	cd dev && uds bundle deploy uds-bundle-uds-core-*.tar.zst --confirm
 
 test/idam: ## run all cypress tests
-	npm --prefix test/cypress/ install 
+	npm --prefix test/cypress/ install
 	npm --prefix test/cypress/ run cy.run
 
 pull/published: | build
