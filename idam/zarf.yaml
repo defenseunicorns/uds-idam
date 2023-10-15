@@ -6,7 +6,7 @@ metadata:
   # x-release-please-start-version
   version: "0.1.12"
   # x-release-please-end
-  architecture: amd64 
+  architecture: amd64
 
 variables:
   - name: REALM
@@ -14,7 +14,7 @@ variables:
     prompt: false
   - name: DOMAIN
     default: bigbang.dev
-    prompt: false  
+    prompt: false
   - name: KEYCLOAK_ADMIN_USERNAME
     default: admin
     prompt: false
@@ -110,7 +110,8 @@ components:
         valuesFiles:
           - keycloak-flux-values.yaml
     repos:
-      - https://repo1.dso.mil/big-bang/product/packages/keycloak.git
+      # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
+      - https://repo1.dso.mil/big-bang/product/packages/keycloak.git@18.4.3-bb.10
     images:
       - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15
