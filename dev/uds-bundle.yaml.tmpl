@@ -13,3 +13,29 @@ zarf-packages:
     ref: ${ZARF_VERSION}
     optional-components:
       - git-server
+
+  # Metallb
+  - name: metallb
+    repository: ghcr.io/defenseunicorns/packages/metallb
+    ref: ${METALLB_VERSION}
+
+  # Defense Unicorns Big Bang Distro
+  - name: dubbd-k3d
+    repository: ghcr.io/defenseunicorns/packages/dubbd-k3d
+    ref: ${DUBBD_VERSION}
+
+  # PostgreSQL
+  - name: keycloak-postgres
+    path: ../build
+    ref: 0.0.1
+    exports:
+      - name: KEYCLOAK_DB_PASSWORD
+
+  # UDS IdAM
+  - name: uds-idam
+    path: ../build
+    ref: ${IDAM_VERSION}
+    imports:
+      - name: KEYCLOAK_DB_PASSWORD
+        package: keycloak-postgres
+
