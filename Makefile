@@ -36,7 +36,7 @@ build: ## Create build directory
 
 build/bundle: | build
 	cd dev && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
-	cd dev && uds --log-level trace --insecure create 
+	cd dev && uds --log-level trace create 
 
 build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
