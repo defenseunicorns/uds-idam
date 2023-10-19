@@ -3,7 +3,7 @@ bundle:
     zarf-packages:
       dubbd-k3d:
         set:
-          APPROVED_REGISTRIES: "127.0.0.1* | ghcr.io/defenseunicorns/pepr* | registry1.dso.mil"
+          APPROVED_REGISTRIES: "127.0.0.1* | ghcr.io/defenseunicorns/* | registry1.dso.mil"
       uds-idam:
         set:
           REALM_IMPORT_FILE: default-realm.json
