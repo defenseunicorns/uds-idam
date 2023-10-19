@@ -127,7 +127,7 @@ component-definition:
       - uuid: 9e19167c-b29f-44c8-8075-95fe53770f05
         control-id: ac-4.4
         description: >-
-          Keycloak is designed and recommended to be deployed in a stand-alone BB cluster with TLS passthrough for OIDC/SAML integration.
+          Keycloak is designed and recommended to be deployed in a stand-alone DUBBD cluster with TLS passthrough for OIDC/SAML integration.
           Controls are inherited from istio via network policies, virtual services and gateway configs.
       - uuid: 810053a7-b1d3-4476-8b0b-2eeed796c0f7
         control-id: ac-5
