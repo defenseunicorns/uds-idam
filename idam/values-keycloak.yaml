@@ -4,7 +4,7 @@ args:
 - --import-realm
 command:
 - /opt/keycloak/bin/kc.sh
-domain: bigbang.dev
+domain: ###ZARF_VAR_DOMAIN###
 extraEnv: |-
   - name: CUSTOM_REGISTRATION_CONFIG
     value: /opt/jboss/keycloak/customreg.yaml
@@ -25,7 +25,7 @@ extraEnv: |-
   - name: KC_HTTP_RELATIVE_PATH
     value: /auth
   - name: KC_HOSTNAME
-    value: keycloak.###ZARF_VAR_DOMAIN###
+    value: ###ZARF_VAR_SUBDOMAIN###.###ZARF_VAR_DOMAIN###
   - name: KC_HOSTNAME_STRICT
     value: "true"
   - name: KC_HOSTNAME_STRICT_HTTPS
@@ -113,7 +113,7 @@ extraVolumesBigBang:
 - name: tlskey
   secret:
     secretName: keycloak-tlskey
-hostname: bigbang.dev
+hostname: ###ZARF_VAR_DOMAIN###
 istio:
   enabled: true
   injection: enabled
@@ -122,7 +122,7 @@ istio:
     gateways:
     - istio-system/passthrough
     hosts:
-    - keycloak.###ZARF_VAR_DOMAIN###
+    - '###ZARF_VAR_SUBDOMAIN###.###ZARF_VAR_DOMAIN###'
 
 monitoring:
   enabled: false
