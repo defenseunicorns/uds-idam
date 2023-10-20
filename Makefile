@@ -14,8 +14,6 @@ SSO_VERSION := 0.1.3
 IDAM_VERSION := 0.1.12
 # x-release-please-end
 
-ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
-
 # Export all make variables to subsequent subshells running recipes below
 export
 
