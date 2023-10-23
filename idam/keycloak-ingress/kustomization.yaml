@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - istio-passthrough-ingressgateway.yaml
   - passthrough-gateway.yaml
+  - vs.yaml

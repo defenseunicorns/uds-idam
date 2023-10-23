@@ -36,6 +36,8 @@ extraEnv: |-
     value: ispn
   - name: KC_CACHE_STACK
     value: kubernetes
+  - name: KC_HOSTNAME_ADMIN
+    value: keycloak.admin.###ZARF_VAR_DOMAIN###
 extraInitContainers: |-
   - name: plugin
     image: registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1

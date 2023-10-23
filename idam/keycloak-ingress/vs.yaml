@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: keycloak-admin
+  namespace: keycloak
+spec:
+  gateways:
+    - istio-system/admin # Admin gateway for the admin console
+  hosts:
+    - keycloak.admin.###ZARF_VAR_DOMAIN###
+  http:
+    - match:
+        - uri:
+            prefix: /auth/admin # Match the /auth/admin path for admin console
+      route:
+        - destination:
+            host: keycloak-http # Destination for admin path
+            port:
+              number: 80
