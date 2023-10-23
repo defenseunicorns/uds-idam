@@ -5,6 +5,8 @@ image:
 args:
 - start
 - --import-realm
+- --features=fips
+- --fips-mode=strict
 command:
 - /opt/keycloak/bin/kc.sh
 domain: bigbang.dev
@@ -50,6 +52,10 @@ extraVolumeMountsBigBang:
   name: tlskey
   readOnly: true
   subPath: tls.key
+extraVolumeMounts: |-
+  - name: quarkusproperties
+    mountPath: /opt/keycloak/conf/quarkus.properties
+    subPath: quarkus.properties
 extraVolumesBigBang:
 - name: tlscert
   secret:
@@ -57,7 +63,11 @@ extraVolumesBigBang:
 - name: tlskey
   secret:
     secretName: keycloak-tlskey
-hostname: bigbang.dev
+extraVolumes: |-
+  - name: quarkusproperties
+    secret:
+      secretName: {{ include "keycloak.fullname" . }}-quarkusproperties
+      defaultMode: 0777
 istio:
   enabled: true
   injection: enabled
@@ -67,7 +77,6 @@ istio:
     - istio-system/passthrough
     hosts:
     - keycloak.###ZARF_VAR_DOMAIN###
-
 monitoring:
   enabled: false
 networkPolicies:
@@ -83,6 +92,20 @@ postgresql:
   postgresqlPassword: ###ZARF_VAR_KEYCLOAK_DB_PASSWORD###
 replicas: 1
 secrets:
+  quarkusproperties:
+    stringData:
+      quarkus.properties: |-
+        quarkus.http.non-application-root-path=/
+        # custom redirects
+        quarkus.kc-routing.path-redirect./=/auth/realms/baby-yoda/account
+        quarkus.kc-routing.path-redirect./auth=/auth/realms/baby-yoda/account
+        quarkus.kc-routing.path-redirect./register=/auth/realms/baby-yoda/protocol/openid-connect/registrations?client_id=account&response_type=code
+        quarkus.kc-routing.path-prefix./oauth/authorize=/auth/realms/baby-yoda/protocol/openid-connect/auth
+        quarkus.kc-routing.path-filter./api/v4/user=/auth/realms/baby-yoda/protocol/openid-connect/userinfo
+        quarkus.kc-routing.path-filter./oauth/token=/auth/realms/baby-yoda/protocol/openid-connect/token
+        # block metrics and health enpoints from being exposed through the istio ingress
+        quarkus.kc-routing.path-recursive-block./metrics=8443
+        quarkus.kc-routing.path-recursive-block./health=8443
   env:
     stringData:
       KEYCLOAK_ADMIN: ###ZARF_VAR_KEYCLOAK_ADMIN_USERNAME###
