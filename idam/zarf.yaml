@@ -12,6 +12,9 @@ variables:
   - name: REALM
     default: baby-yoda
     prompt: false
+  - name: SUBDOMAIN
+    default: keycloak
+    prompt: false
   - name: DOMAIN
     default: bigbang.dev
     prompt: false
