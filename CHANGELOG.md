@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.13](https://github.com/defenseunicorns/uds-idam/compare/v0.1.12...v0.1.13) (2023-10-24)
+
+
+### Features
+
+* expose subdomain variable ([#107](https://github.com/defenseunicorns/uds-idam/issues/107)) ([2fe2746](https://github.com/defenseunicorns/uds-idam/commit/2fe2746f766cfc445086ebc7f572bfa80c95b5df))
+
+
+### Bug Fixes
+
+* HelmRelease wait not respecting --no-progress ([#95](https://github.com/defenseunicorns/uds-idam/issues/95)) ([c163537](https://github.com/defenseunicorns/uds-idam/commit/c163537d90b3f24400c0374ba14e4e0ed2ace88a))
+
+
+### Miscellaneous
+
+* specify tag for keycloak chart  ([#99](https://github.com/defenseunicorns/uds-idam/issues/99)) ([31a3a16](https://github.com/defenseunicorns/uds-idam/commit/31a3a16b496514ccf6bf6faf12c196874843a4b0))
+
 ## [0.1.12](https://github.com/defenseunicorns/uds-idam/compare/v0.1.11...v0.1.12) (2023-09-29)
 
 
