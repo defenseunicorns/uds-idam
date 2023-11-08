@@ -2,7 +2,7 @@
 DUBBD_K3D_VERSION := 0.11.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-ZARF_VERSION := v0.31.0-amd64
+ZARF_VERSION := v0.31.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/uds-package-metallb
 METALLB_VERSION := 0.0.5
