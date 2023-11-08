@@ -2,7 +2,7 @@
 DUBBD_VERSION := 0.11.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-ZARF_VERSION := v0.31.1
+ZARF_VERSION := v0.31.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/uds-package-metallb
 METALLB_VERSION := 0.0.1
@@ -36,7 +36,7 @@ build: ## Create build directory
 
 build/bundle: | build
 	cd dev && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
-	cd dev && uds --log-level trace create 
+	cd dev && uds create --confirm
 
 build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
