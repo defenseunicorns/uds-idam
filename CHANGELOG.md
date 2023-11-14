@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.14](https://github.com/defenseunicorns/uds-idam/compare/v0.1.13...v0.1.14) (2023-11-14)
+
+
+### Bug Fixes
+
+* update ci secrets ([a56df68](https://github.com/defenseunicorns/uds-idam/commit/a56df68b29c877c6a631a0e81524b3ba33790b05))
+* update default bigbang.dev certificate ([#115](https://github.com/defenseunicorns/uds-idam/issues/115)) ([593beb4](https://github.com/defenseunicorns/uds-idam/commit/593beb4f992e97397eeabb9e449531b2629ab38b))
+
 ## [0.1.13](https://github.com/defenseunicorns/uds-idam/compare/v0.1.12...v0.1.13) (2023-10-24)
 
 

@@ -11,7 +11,7 @@ METALLB_VERSION := 0.0.1
 SSO_VERSION := 0.1.3
 
 # x-release-please-start-version
-IDAM_VERSION := 0.1.13
+IDAM_VERSION := 0.1.14
 # x-release-please-end
 
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
