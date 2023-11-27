@@ -130,3 +130,9 @@ components:
                 namespace: bigbang
             maxTotalSeconds: 600
             description: Keycloak HelmRelease to be Ready
+      onRemove:
+        after:
+          - cmd: |
+              ./zarf tools kubectl delete namespace keycloak
+            description: "Cleaning up Keycloak Namespace"
+            maxTotalSeconds: 600

@@ -10,19 +10,19 @@ zarf-packages:
   # Zarf init
   - name: init
     repository: ghcr.io/defenseunicorns/packages/init
-    ref: "###BNDL_TMPL_INIT_VERSION###"
+    ref: ${ZARF_VERSION}
     optional-components:
       - git-server
 
   # Metallb
   - name: metallb
     repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: "###BNDL_TMPL_METALLB_VERSION###"
+    ref: ${METALLB_VERSION}
 
   # Defense Unicorns Big Bang Distro
   - name: dubbd-k3d
     repository: ghcr.io/defenseunicorns/packages/dubbd-k3d
-    ref: "###BNDL_TMPL_DUBBD_VERSION###"
+    ref: ${DUBBD_VERSION}
 
   # PostgreSQL
   - name: keycloak-postgres
@@ -34,7 +34,7 @@ zarf-packages:
   # UDS IdAM
   - name: uds-idam
     path: ../build
-    ref: "###BNDL_TMPL_IDAM_VERSION###"
+    ref: ${IDAM_VERSION}
     imports:
       - name: KEYCLOAK_DB_PASSWORD
         package: keycloak-postgres

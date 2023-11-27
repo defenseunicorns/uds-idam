@@ -15,4 +15,6 @@ zarf-package-*
 realm.json
 dst-values-keycloak.yaml
 values-keycloak.yaml
-uds-bundle-*.tar.zst
+*.tar.zst
+# This is now intermediate file rendered from uds-bundle.yaml.tmpl
+uds-bundle.yaml
