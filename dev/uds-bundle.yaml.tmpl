@@ -2,28 +2,11 @@
 
 kind: UDSBundle
 metadata:
-  name: uds-core
-  description: uds core
+  name: uds-core-idam
+  description: uds core idam
   version: 0.0.1
 
 zarf-packages:
-  # Zarf init
-  - name: init
-    repository: ghcr.io/defenseunicorns/packages/init
-    ref: ${ZARF_VERSION}
-    optional-components:
-      - git-server
-
-  # Metallb
-  - name: metallb
-    repository: ghcr.io/defenseunicorns/packages/metallb
-    ref: ${METALLB_VERSION}
-
-  # Defense Unicorns Big Bang Distro
-  - name: dubbd-k3d
-    repository: ghcr.io/defenseunicorns/packages/dubbd-k3d
-    ref: ${DUBBD_VERSION}
-
   # PostgreSQL
   - name: keycloak-postgres
     path: ../build
@@ -38,4 +21,3 @@ zarf-packages:
     imports:
       - name: KEYCLOAK_DB_PASSWORD
         package: keycloak-postgres
-
