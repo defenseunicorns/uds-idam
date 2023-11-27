@@ -47,7 +47,7 @@ jobs:
 
       # Deploy IdAM Published Bundle 
       - name: Deploy CI Upgrade Test Published IDAM
-        run: make deploy/idam-bundle
+        run: make deploy/all
 
       - name: Build bundle with source IDAM
         run: make build/all
