@@ -47,7 +47,7 @@ build/idam-postgres: | build
 deploy/all: deploy/bundle
 
 deploy/bundle:
-	cd dev && uds bundle deploy uds-bundle-uds-core-*.tar.zst --confirm
+	cd dev && uds deploy uds-bundle-uds-core-*.tar.zst --confirm
 
 test/idam: ## run all cypress tests
 	npm --prefix test/cypress/ install
