@@ -60,7 +60,7 @@ jobs:
         run: make build/all
 
       - name: CLI Bundle Deployment
-        run: make deploy/bundle
+        run: make deploy/all
 
       - name: Teardown k3d cluster
         if: always()
