@@ -4,3 +4,4 @@ bundle:
       uds-idam:
         set:
           REALM_IMPORT_FILE: default-realm.json
+          KEYCLOAK_VALUES: extra-keycloak-values.yaml

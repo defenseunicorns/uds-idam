@@ -27,7 +27,7 @@ cluster/full: cluster/create build/all deploy/all  ## This will destroy any exis
 
 cluster/bundle: cluster/create build/bundles deploy/bundle
 
-build/all: build build/idam-postgres build/idam build/bundles
+build/all: build build/extra-jar build/idam-postgres build/idam build/bundles
 
 build/published: build build/idam-postgres pull/published build/bundles
 
@@ -43,6 +43,9 @@ build/dubbd-bundle: | build
 build/idam-bundle: | build
 	cd dev && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
 	cd dev && uds create --confirm
+
+build/extra-jar: | build
+	cd build && zarf package create ../dev/extra-jar --confirm
 
 build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build

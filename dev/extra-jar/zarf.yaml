@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: extra-jar
+  description: "UDS IDAM Default Theme Image"
+  architecture: amd64
+  version: 0.0.1
+
+components:
+  - name: jar-pre-build
+    required: true
+    actions: 
+      onCreate:
+        before:
+          - cmd: docker build . -t 127.0.0.1/defenseunicorns/extra-jar:0.0.1
+  - name: theme
+    required: true
+    images:
+      - "127.0.0.1/defenseunicorns/extra-jar:0.0.1"
+    actions:
+      onDeploy:
+        after:
+          - cmd: echo "127.0.0.1/defenseunicorns/extra-jar:0.0.1"
+            setVariables:
+              - name: KEYCLOAK_THEME_IMAGE
