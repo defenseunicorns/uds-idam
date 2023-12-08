@@ -12,9 +12,9 @@ RUN echo "bigbang:x:1000:1000::/home/bigbang:/sbin/nologin" >> /etc/passwd \
     && chmod 0750 /home/bigbang \
     && chown 1000:1000 /home/bigbang
 
-COPY theme.jar /app/theme.jar
+COPY extra.jar /app/extra.jar
 
-RUN chmod +rx theme.jar
+RUN chmod +rx extra.jar
 
 USER 1000:1000
 

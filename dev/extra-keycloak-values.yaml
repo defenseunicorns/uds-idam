@@ -50,13 +50,13 @@ extraInitContainers: |-
     - name: plugin
       mountPath: "/init"
   - name: extra-jar
-    image: 127.0.0.1/defenseunicorns/extra-jar:0.0.1
+    image: defenseunicorns/extra-jar:0.0.1
     imagePullPolicy: Always
     command:
     - sh
     - -c
     - |
-      cp /app/theme.jar /init
+      cp /app/extra.jar /init
       ls -l /init
     volumeMounts:
     - name: extra
@@ -83,8 +83,8 @@ extraVolumeMounts: |-
     mountPath: /opt/keycloak/conf/truststore.jks
     subPath: truststore.jks
   - name: extra
-    mountPath: /opt/keycloak/providers/theme.jar
-    subPath: theme.jar
+    mountPath: /opt/keycloak/providers/extra.jar
+    subPath: extra.jar
 extraVolumeMountsBigBang:
 - mountPath: /etc/x509/https/tls.crt
   name: tlscert

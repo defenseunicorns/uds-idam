@@ -45,7 +45,7 @@ build/idam-bundle: | build
 	cd dev && uds create --confirm
 
 build/extra-jar: | build
-	cd build && zarf package create ../dev/extra-jar --confirm
+	cd build && zarf package create ../pkg-deps/extra-jar --confirm
 
 build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
