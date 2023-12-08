@@ -6,6 +6,12 @@ metadata:
   architecture: amd64
   version: 0.0.1
 
+variables:
+  - name: KEYCLOAK_EXTRA_JAR
+    default: theme.jar
+  - name: KEYCLOAK_EXTRA_JAR_IMAGE
+    default: defenseunicorns/extra-jar:0.0.1
+
 components:
   - name: files
     required: true
@@ -18,16 +24,11 @@ components:
         target: Dockerfile
       - source: extra-jar-zarf.yaml
         target: deploy-time-jar/zarf.yaml
-  - name: example-jar
-    required: true
-    files:
-      - source: theme.jar
-        target: extra.jar
   - name: jar-deploy
     required: true
     actions: 
       onDeploy:
         before:
-          - cmd: docker build . -t defenseunicorns/extra-jar:0.0.1
-          - cmd: zarf package create deploy-time-jar --confirm
+          - cmd: docker build . -t ${ZARF_VAR_KEYCLOAK_EXTRA_JAR_IMAGE}
+          - cmd: zarf package create deploy-time-jar --confirm --set IMAGE=${ZARF_VAR_KEYCLOAK_EXTRA_JAR_IMAGE}
           - cmd: zarf package deploy zarf-package-deploy-time-jar-amd64-0.0.1.tar.zst --confirm

@@ -10,4 +10,4 @@ components:
   - name: jar-image-push
     required: true
     images: 
-      - defenseunicorns/extra-jar:0.0.1
+      - "###ZARF_PKG_TMPL_IMAGE###"

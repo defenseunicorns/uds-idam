@@ -12,7 +12,7 @@ RUN echo "bigbang:x:1000:1000::/home/bigbang:/sbin/nologin" >> /etc/passwd \
     && chmod 0750 /home/bigbang \
     && chown 1000:1000 /home/bigbang
 
-COPY extra.jar /app/extra.jar
+COPY ###ZARF_VAR_KEYCLOAK_EXTRA_JAR### /app/extra.jar
 
 RUN chmod +rx extra.jar
 
