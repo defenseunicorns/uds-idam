@@ -12,6 +12,65 @@ Pre-built Zarf Package of to support identity and access management to complimen
 >[!IMPORTANT]  
 >In preparation for an external DB, Keycloak variables have been exposed for [connecting to those DB's](https://github.com/defenseunicorns/uds-idam/blob/main/idam/zarf.yaml#L58-L72). By default IdAM no longer supplies it's own in-cluster postgresql DB, however [the orignial DB can be enabled by setting this variable](./idam/zarf.yaml#L58) to `true`. 
 
+### Client Credentials
+
+[Official Documentation here.](https://www.keycloak.org/docs/latest/server_admin/#:~:text=OIDC%20specification.-,Confidential%20client%20credentials,-Edit%20this%20section)
+
+The [default-realm.json](idam/realm/default-realm.json) does not incorporate client credential secrets by default. This means that since the secret is not defined it will be generated when Keycloak is created. Below is an example of how to setup the realm import file to have a static client credential that is user defined rather than generated value. 
+
+Add the following to a client object in a realm import json file:
+
+`"secret": "client-credential-secret-value"`
+
+<details>
+<summary> Client Definition Example</summary>
+
+```json
+    {
+      "id": "b6d2395b-3e78-4d61-96cd-3ab2ae0ef7ed",
+      "clientId": "account",
+      "name": "<h1>Developer</h1><h4>Account Login</h4>",
+      "description": "",
+      "rootUrl": "${authBaseUrl}",
+      "baseUrl": "/realms/myrealm/account/",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "client-credential-secret-value",
+      "redirectUris": [
+        "/realms/myrealm/account/*"
+      ],
+      "webOrigins": [],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "publicClient": false,
+      "frontchannelLogout": false,
+      "protocol": "openid-connect",
+      "attributes": {},
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": false,
+      "nodeReRegistrationTimeout": 0,
+      "defaultClientScopes": [],
+      "optionalClientScopes": []
+    },
+```
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1ace673 (fix: remove secrets and update readme)
+=======
+>>>>>>> 474aed8 (fix: signed commit)
+=======
+>>>>>>> 474aed8 (fix: signed commit)
+</details>
 
 ### Getting Started
 ```bash
