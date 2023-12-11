@@ -3,7 +3,7 @@ bundle:
     zarf-packages:
       dubbd-k3d:
         set:
-          APPROVED_REGISTRIES: "127.0.0.1* | ghcr.io/defenseunicorns/* | registry1.dso.mil"
+          APPROVED_REGISTRIES: "127.0.0.1* | ghcr.io/defenseunicorns/* | defenseunicorns/* | registry1.dso.mil"
       metallb:
         set:
           IP_ADDRESS_POOL: 172.28.0.8/29
