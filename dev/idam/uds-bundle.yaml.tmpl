@@ -9,14 +9,14 @@ metadata:
 zarf-packages:
   # PostgreSQL
   - name: keycloak-postgres
-    path: ../build
+    path: ../../build
     ref: 0.0.1
     exports:
       - name: KEYCLOAK_DB_PASSWORD
 
   # UDS IdAM
   - name: uds-idam
-    path: ../build
+    path: ../../build
     ref: ${IDAM_VERSION}
     imports:
       - name: KEYCLOAK_DB_PASSWORD

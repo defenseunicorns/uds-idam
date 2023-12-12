@@ -7,9 +7,6 @@ ZARF_VERSION := v0.31.0
 # renovate: datasource=github-tags depName=defenseunicorns/uds-package-metallb
 METALLB_VERSION := 0.0.1
 
-# renovate: datasource=docker depName=ghcr.io/defenseunicorns/uds-capability/uds-sso extractVersion=^(?<version>\d+\.\d+\.\d+)
-SSO_VERSION := 0.1.3
-
 # x-release-please-start-version
 IDAM_VERSION := 0.1.14
 # x-release-please-end
@@ -20,8 +17,8 @@ ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 export
 
 cluster/create:
-	k3d cluster delete -c dev/dubbd-bundle/k3d.yaml
-	k3d cluster create -c dev/dubbd-bundle/k3d.yaml
+	k3d cluster delete -c dev/k3d.yaml
+	k3d cluster create -c dev/k3d.yaml
 
 cluster/full: cluster/create build/all deploy/all  ## This will destroy any existing cluster, create a new one, then build and deploy all
 
@@ -41,8 +38,8 @@ build/dubbd-bundle: | build
 	cd dev/dubbd-bundle && uds create --confirm
 
 build/idam-bundle: | build
-	cd dev && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
-	cd dev && uds create --confirm
+	cd dev/idam && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
+	cd dev/idam && uds create --confirm
 
 build/idam: | build
 	cd idam && zarf package create --tmpdir=/tmp --architecture amd64 --confirm --output ../build
@@ -56,7 +53,7 @@ deploy/dubbd-bundle:
 	cd dev/dubbd-bundle && uds deploy uds-bundle-uds-core-dubbd-*.tar.zst --confirm
 
 deploy/idam-bundle:
-	cd dev && uds deploy uds-bundle-uds-core-idam-*.tar.zst --confirm
+	cd dev/idam && uds deploy uds-bundle-uds-core-idam-*.tar.zst --confirm
 
 test/idam: ## run all cypress tests
 	npm --prefix test/cypress/ install
