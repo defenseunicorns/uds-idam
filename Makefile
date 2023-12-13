@@ -38,8 +38,6 @@ build/dubbd-bundle: | build
 	cd dev/dubbd-bundle && uds create --confirm
 
 build/idam-bundle: | build
-	cd dev && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
-	cd dev && uds create --confirm
 	cd dev/idam && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
 	cd dev/idam && uds create --confirm
 
