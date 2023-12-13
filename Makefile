@@ -1,14 +1,11 @@
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+)
-DUBBD_VERSION := 0.11.0
+DUBBD_VERSION := 0.15.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
 ZARF_VERSION := v0.31.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/uds-package-metallb
 METALLB_VERSION := 0.0.1
-
-# renovate: datasource=docker depName=ghcr.io/defenseunicorns/uds-capability/uds-sso extractVersion=^(?<version>\d+\.\d+\.\d+)
-SSO_VERSION := 0.1.3
 
 # x-release-please-start-version
 IDAM_VERSION := 0.1.14
@@ -43,6 +40,8 @@ build/dubbd-bundle: | build
 build/idam-bundle: | build
 	cd dev && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
 	cd dev && uds create --confirm
+	cd dev/idam && cat uds-bundle.yaml.tmpl | envsubst > uds-bundle.yaml
+	cd dev/idam && uds create --confirm
 
 build/extra-jar: | build
 	cd build && zarf package create ../pkg-deps/extra-jar --confirm
@@ -59,7 +58,7 @@ deploy/dubbd-bundle:
 	cd dev/dubbd-bundle && uds deploy uds-bundle-uds-core-dubbd-*.tar.zst --confirm
 
 deploy/idam-bundle:
-	cd dev && uds deploy uds-bundle-uds-core-idam-*.tar.zst --confirm
+	cd dev/idam && uds deploy uds-bundle-uds-core-idam-*.tar.zst --confirm
 
 test/idam: ## run all cypress tests
 	npm --prefix test/cypress/ install
