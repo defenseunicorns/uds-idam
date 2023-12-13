@@ -60,16 +60,6 @@ Add the following to a client object in a realm import json file:
       "optionalClientScopes": []
     },
 ```
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 1ace673 (fix: remove secrets and update readme)
-=======
->>>>>>> 474aed8 (fix: signed commit)
-=======
->>>>>>> 474aed8 (fix: signed commit)
 </details>
 
 ### Getting Started
