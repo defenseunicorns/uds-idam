@@ -729,7 +729,7 @@
     "ssl": "",
     "user": ""
   },
-  "loginTheme": "keycloak",
+  "loginTheme": "p1-sso",
   "accountTheme": "p1-sso",
   "adminTheme": "p1-sso",
   "emailTheme": "keycloak",
