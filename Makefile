@@ -8,7 +8,7 @@ ZARF_VERSION := v0.31.0
 METALLB_VERSION := 0.0.1
 
 # x-release-please-start-version
-IDAM_VERSION := 0.1.14
+IDAM_VERSION := 0.1.15
 # x-release-please-end
 
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
