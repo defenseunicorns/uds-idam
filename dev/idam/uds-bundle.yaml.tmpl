@@ -14,6 +14,11 @@ zarf-packages:
     exports:
       - name: KEYCLOAK_DB_PASSWORD
 
+  # Extra Jar
+  - name: deploy-time-jar-wrapper
+    path: ../../build
+    ref: 0.0.1
+
   # UDS IdAM
   - name: uds-idam
     path: ../../build

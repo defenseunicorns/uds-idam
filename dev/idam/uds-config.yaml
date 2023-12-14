@@ -1,5 +1,6 @@
 bundle:
   deploy:
+    zarf-packages:
       uds-idam:
         set:
           REALM_IMPORT_FILE: default-realm.json
