@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.15](https://github.com/defenseunicorns/uds-idam/compare/v0.1.14...v0.1.15) (2023-12-14)
+
+
+### Bug Fixes
+
+* remove secrets and update readme ([#120](https://github.com/defenseunicorns/uds-idam/issues/120)) ([9f44f2c](https://github.com/defenseunicorns/uds-idam/commit/9f44f2ca26f041e7459d3297ca4d6650393f07d2))
+* Use correct loginTheme ([be5394f](https://github.com/defenseunicorns/uds-idam/commit/be5394fa4a540216f7941bf2a978fdb2a5af9720))
+
+
+### Miscellaneous
+
+* update uds-cli to v0.3.1 ([a9bf356](https://github.com/defenseunicorns/uds-idam/commit/a9bf3561c4bf5637a6f35a9a0b9b75118d85700f))
+
 ## [0.1.14](https://github.com/defenseunicorns/uds-idam/compare/v0.1.13...v0.1.14) (2023-11-14)
 
 
