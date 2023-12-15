@@ -102,34 +102,22 @@ components:
         target: values-keycloak.yaml
   - name: keycloak
     required: true
-    description: "Deploy keycloak via flux"
+    description: "Deploy keycloak"
     charts:
-    # renovate: datasource=helm
-      - name: flux-app
-        url: https://defenseunicorns.github.io/uds-support-charts/
-        version: 1.0.5
-        releaseName: keycloak-flux
-        namespace: bigbang
+      - name: keycloak
+        url: oci://registry1.dso.mil/bigbang/keycloak
+        # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
+        version: 18.4.3-bb.10
+        releaseName: keycloak
+        namespace: keycloak
         valuesFiles:
-          - keycloak-flux-values.yaml
-    repos:
-      # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
-      - https://repo1.dso.mil/big-bang/product/packages/keycloak.git@18.4.3-bb.10
+          - values-keycloak.yaml
+          - override-values.yaml
     images:
       - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15
       - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
     actions:
-      onDeploy:
-        after:
-          - wait:
-              cluster:
-                kind: helmRelease
-                name: keycloak
-                condition: Ready
-                namespace: bigbang
-            maxTotalSeconds: 600
-            description: Keycloak HelmRelease to be Ready
       onRemove:
         after:
           - cmd: |
