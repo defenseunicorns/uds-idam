@@ -657,11 +657,11 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "https://keycloak.bigbang.dev/*",
+        "https://keycloak.uds.dev/*",
         "https://www.keycloak.org/app/*"
       ],
       "webOrigins": [
-        "https://keycloak.bigbang.dev",
+        "https://keycloak.uds.dev",
         "https://www.keycloak.org"
       ],
       "notBefore": 0,

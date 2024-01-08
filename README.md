@@ -63,9 +63,12 @@ Add the following to a client object in a realm import json file:
 </details>
 
 ### Getting Started
+
+UDS CLI is required, as we use the UDS Taskrunner for simplifying our commands.
+
 ```bash
-# Create a new k3d cluster with DUBBD + UDS-SSO + UDS-IDAM and an example mission application protected by SSO:
-make cluster/full
+# Create a new k3d cluster with DUBBD + UDS-IDAM:
+uds run cluster-full
 ```
 
 
@@ -75,11 +78,11 @@ make cluster/full
 |---------------------------|--------------------------------------|------------------------------------------------|------|------------------------|
 | REALM                     | Keycloak realm name                  | default-realm                                  |      |                        |
 | SUBDOMAIN                 | Subdomain for keycloak deployment    | keycloak                                       |      |                        |
-| DOMAIN                    | Base Domain                          | bigbang.dev                                    |      |                        |
+| DOMAIN                    | Base Domain                          | uds.dev                                    |      |                        |
 | KEYCLOAK_ADMIN_USERNAME   | Default admin username               | admin                                          |      |                        |
 | KEYCLOAK_ADMIN_PASSWORD   | Default admin password               | sup3r-secret-p@ssword                          |      |                        |
-| KEYCLOAK_KEY_FILE         | X509 key file path                   | bigbang.dev.key                                | FILE |                        |
-| KEYCLOAK_CERT_FILE        | X509 certificate file path           | bigbang.dev.cert                               | FILE |                        |
+| KEYCLOAK_KEY_FILE         | X509 key file path                   | uds.dev.key                                | FILE |                        |
+| KEYCLOAK_CERT_FILE        | X509 certificate file path           | uds.dev.cert                               | FILE |                        |
 | REALM_IMPORT_FILE         | JSON realm import file path          | realm.json                                     | FILE |                        |
 | REALM_TRUSTSTORE_FILE     | Keycloak truststore file path        | truststore.jks.b64                             | FILE | MUST BE BASE64 ENCODED |
 | REALM_CUSTOM_REG_FILE     | Platform One plugin config file path | customreg.yaml                                 | FILE |                        |
@@ -106,7 +109,7 @@ More information on this can be found in [Release Please's documentation](https:
 
 ### How should I write my commits?
 
-Before commiting it is recommended to run tests. Use the make target: `make test/idam` to run the smoke tests.
+Before commiting it is recommended to run tests. Use the Task Runner: `uds run idam-tests` to run the smoke tests.
 
 Release Please assumes you are using [Conventional Commit messages](https://www.conventionalcommits.org/).
 
@@ -120,9 +123,28 @@ The most important prefixes you should have in mind are:
 
 When the change is merged to the trunk, Release Please will calculate what changes are included and will create another PR to increase the version and tag a new release. This will also automatically generate a new set of packages in the OCI registry.
 
-### Cypress Testing
+# Task Runner Commands
 
-These tests require that a local keycloak be deployed and running, by default it will look for keycloak at [https://keycloak.bigbang.dev](/cypress/fixtures/properties.json#L5). By using the make target `make test/idam` the npm install process will be run before the tests are run to hopefully make sure local environment is configured properly.
+These commands can be found [here](tasks.yaml).
+
+| Command                         | Description                                                   |
+|---------------------------------|---------------------------------------------------------------|
+| `uds run cluster-full`          | Create a K3d Cluster with Istio and IDAM package.             |
+| `uds run cluster-create`        | Create only K3d cluster with Istio.                           |
+| `uds run deploy-idam`           | Deploy IDAM package, requires K3d and Istio.                  |
+| `uds run idam-tests`            | Run IDAM Cypress tests against K3d / IDAM Cluster.            |
+| `uds run remove-idam`           | Remove the IDAM Bundle from K3d Cluster.                      |
+| `uds run clean`                 | Clean up uds-idam directory of generated files.               |
+| `uds run ci-dubbd-test`         | Create cluster and deploy uds-idam on top of DUBBD.           |
+| `uds run ci-upgrade-test`       | Create cluster and deploy published uds idam package.         |
+
+
+Some of these commands are nested and refer to each other, sub task files can be found [here](tasks/).
+
+
+# Cypress Testing
+
+These tests require that a local keycloak be deployed and running, by default it will look for keycloak at [https://keycloak.uds.dev](/cypress/fixtures/properties.json#L5). By using the Task Runner: `uds run idam-tests` the npm install process will be run before the tests are run to hopefully make sure local environment is configured properly.
 
 #### [Cypress Docs](https://docs.cypress.io/)
 
@@ -159,6 +181,6 @@ These tests require that a local keycloak be deployed and running, by default it
 
 An [npm script](package.json#L7) has been configured to run all Cypress Tests : `npm run cy.run`
 
-Alternatively a [make target](Makefile#L62) has been created pointing to the npm script, this will also run the npm install process: `make test/idam`
+Alternatively a [task runner](tasks.yaml#L30) has been created pointing to the npm script, this will also run the npm install process: `uds run idam-tests`
 
 To run a specific spec file use the `-s <spec file name>` flag with the npm test script : `npm run cy.run -- -s cypress/e2e/example_spec.cy.js`

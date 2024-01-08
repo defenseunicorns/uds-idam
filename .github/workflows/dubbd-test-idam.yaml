@@ -1,0 +1,38 @@
+name: Test UDS IDAM with DUBBD
+
+on:
+  push:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test-clean-install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup
+        with:
+          username: ${{ secrets.IRON_BANK_ROBOT_USERNAME }}
+          password: ${{ secrets.IRON_BANK_ROBOT_PASSWORD }}
+          download-init-package: true
+
+      - name: Create k3d cluster
+        id: create-cluster
+        # renovate: datasource=github-tags depName=defenseunicorns/uds-aws-ci-k3d versioning=semver
+        uses: defenseunicorns/uds-aws-ci-k3d@v0.0.3
+        with:
+          cluster-action: create
+          aws-assume-role: ${{ secrets.AWS_COMMERCIAL_ROLE_TO_ASSUME }}
+          aws-region: us-west-2
+
+      - name: Create Cluster and Deploy IDAM with DUBBD
+        run: uds run ci-dubbd-test
+
+      - name: Teardown k3d cluster
+        if: always()
+        run: k3d cluster delete uds

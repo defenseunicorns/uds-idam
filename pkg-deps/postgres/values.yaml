@@ -1,3 +1,11 @@
 auth:
   username: kcadmin
   database: keycloak
+
+primary:
+  podSecurityContext:
+    enabled: true
+    fsGroup: 0
+  containerSecurityContext:
+    enabled: true
+    priveleged: true

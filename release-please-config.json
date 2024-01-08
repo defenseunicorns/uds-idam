@@ -13,7 +13,7 @@
       "extra-files": [
         "idam/zarf.yaml",
         "aws/zarf.yaml",
-        "Makefile"
+        "tasks/idam.yaml"
       ]
     }
   }

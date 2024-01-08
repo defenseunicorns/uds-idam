@@ -1,0 +1,6 @@
+tasks:
+  - name: idam-cypress
+    actions:
+      - description: "Run all uds-idam cypress tests"
+        cmd: npm --prefix test/cypress/ install && npm --prefix test/cypress/ run cy.run
+

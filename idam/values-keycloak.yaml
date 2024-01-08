@@ -120,7 +120,7 @@ istio:
   keycloak:
     enabled: true
     gateways:
-    - istio-system/passthrough
+    - istio-passthrough-gateway/passthrough-gateway
     hosts:
     - '###ZARF_VAR_SUBDOMAIN###.###ZARF_VAR_DOMAIN###'
 
@@ -128,7 +128,7 @@ monitoring:
   enabled: false
 networkPolicies:
   controlPlaneCidr: 0.0.0.0/0
-  enabled: true
+  enabled: false
   ingressLabels:
     app: passthrough-ingressgateway
     istio: null

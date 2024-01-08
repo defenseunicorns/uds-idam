@@ -16,7 +16,7 @@ variables:
     default: keycloak
     prompt: false
   - name: DOMAIN
-    default: bigbang.dev
+    default: uds.dev
     prompt: false
   - name: KEYCLOAK_ADMIN_USERNAME
     default: admin
@@ -25,12 +25,12 @@ variables:
     default: sup3r-secret-p@ssword
     prompt: false
   - name: KEYCLOAK_KEY_FILE
-    default: bigbang.dev.key
+    default: uds.dev.key
     prompt: false
     type: file
     autoIndent: true
   - name: KEYCLOAK_CERT_FILE
-    default: bigbang.dev.cert
+    default: uds.dev.cert
     prompt: false
     type: file
     autoIndent: true
@@ -59,7 +59,7 @@ variables:
   - name: KEYCLOAK_CREATE_NAMESPACE
     default: "true"
   - name: KEYCLOAK_DEV_DB_ENABLED
-    default: "false"
+    default: "true"
     prompt: false
   - name: KEYCLOAK_DB_USERNAME
     default: kcadmin
@@ -85,10 +85,10 @@ components:
   - name: realm-config-default-files
     required: true
     files:
-      - source: certs/bigbang.dev.cert
-        target: bigbang.dev.cert
-      - source: certs/bigbang.dev.key
-        target: bigbang.dev.key
+      - source: certs/uds.dev.cert
+        target: uds.dev.cert
+      - source: certs/uds.dev.key
+        target: uds.dev.key
       - source: realm/default-realm.json
         target: realm.json
       - source: realm/baby-yoda.yaml
@@ -102,37 +102,24 @@ components:
         target: values-keycloak.yaml
   - name: keycloak
     required: true
-    description: "Deploy keycloak via flux"
+    description: "Deploy keycloak"
     charts:
-    # renovate: datasource=helm
-      - name: flux-app
-        url: https://defenseunicorns.github.io/uds-support-charts/
-        version: 1.0.5
-        releaseName: keycloak-flux
-        namespace: bigbang
+      - name: keycloak
+        url: oci://registry1.dso.mil/bigbang/keycloak
+        # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
+        version: 18.4.3-bb.10
+        releaseName: keycloak
+        namespace: keycloak
         valuesFiles:
-          - keycloak-flux-values.yaml
-    repos:
-      # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
-      - https://repo1.dso.mil/big-bang/product/packages/keycloak.git@18.4.3-bb.10
+          - values-keycloak.yaml
     images:
       - registry1.dso.mil/ironbank/opensource/keycloak/keycloak:21.1.1
       - registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15
       - registry1.dso.mil/ironbank/big-bang/p1-keycloak-plugin:3.2.1
     actions:
-      onDeploy:
-        after:
-          - wait:
-              cluster:
-                kind: helmRelease
-                name: keycloak
-                condition: Ready
-                namespace: bigbang
-            maxTotalSeconds: 600
-            description: Keycloak HelmRelease to be Ready
       onRemove:
         after:
           - cmd: |
               ./zarf tools kubectl delete namespace keycloak
             description: "Cleaning up Keycloak Namespace"
-            maxTotalSeconds: 600
+            maxTotalSeconds: 600            

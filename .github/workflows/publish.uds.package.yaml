@@ -19,11 +19,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create UDS Package
-        uses: ./.github/actions/create-zarf-package
+      - uses: ./.github/actions/setup
         with:
           username: ${{ secrets.IRON_BANK_ROBOT_USERNAME }}
           password: ${{ secrets.IRON_BANK_ROBOT_PASSWORD }}
+
+      - uses: ./.github/actions/create-zarf-package
+        with:
           working-dir: ${{ inputs.working_dir }}
       
       - name: Login to GHCR

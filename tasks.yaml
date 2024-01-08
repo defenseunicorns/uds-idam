@@ -1,0 +1,53 @@
+includes:
+  - setup: ./tasks/setup.yaml
+  - idam: ./tasks/idam.yaml
+  - tests: ./tasks/tests.yaml
+  - remove: ./tasks/remove.yaml
+
+tasks:
+  - name: cluster-full
+    actions:
+      - task: cluster-create
+      - task: deploy-idam
+
+  - name: cluster-create
+    actions:
+      - task: setup:core-istio-bundle
+
+  - name: deploy-idam
+    actions:
+      - task: remove:idam-package
+      - task: idam:build-package
+      - task: idam:deploy-package
+
+  - name: idam-tests
+    actions:
+      - task: tests:idam-cypress
+  
+  - name: remove-idam-bundle
+    actions:
+      - task: remove:idam-bundle
+
+  - name: remove-idam-package
+    actions:
+      - task: remove:idam-package      
+
+  - name: clean
+    actions:
+      - cmd: git clean -dfx
+
+#######################################
+############ CI Test Tasks ############
+#######################################
+
+  - name: ci-dubbd-test
+    actions:
+      # - task: setup:k3d-cluster
+      - task: setup:dubbd-package
+      - task: idam:build-package
+      - task: idam:deploy-package
+
+  - name: ci-upgrade-test
+    actions:
+      - task: idam:build-published-bundle
+      - task: idam:deploy-package

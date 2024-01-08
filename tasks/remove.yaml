@@ -1,0 +1,11 @@
+tasks:
+  - name: idam-bundle
+    actions:
+      - description: "Remove uds-idam bundle from the k3d cluster"
+        cmd: uds remove dev/idam/uds-bundle-uds-core-idam-amd64-0.0.1.tar.zst --confirm --no-progress
+  
+  - name: idam-package
+    actions:
+      - description: "Remove uds-idam package from k3d cluster"
+        # todo: this works to ignore errors when package isnt deployed, but hides other good output for real failures
+        cmd: zarf package remove build/zarf-package-uds-idam-*.tar.zst --confirm 2> /dev/null || true

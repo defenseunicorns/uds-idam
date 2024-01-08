@@ -7,17 +7,7 @@ metadata:
   version: 0.0.1
 
 zarf-packages:
-  # PostgreSQL
-  - name: keycloak-postgres
-    path: ../../build
-    ref: 0.0.1
-    exports:
-      - name: KEYCLOAK_DB_PASSWORD
-
   # UDS IdAM
   - name: uds-idam
     path: ../../build
-    ref: ${IDAM_VERSION}
-    imports:
-      - name: KEYCLOAK_DB_PASSWORD
-        package: keycloak-postgres
+    ref: ${IDAM_VERSION}  

@@ -8,7 +8,7 @@ subnet: "172.28.0.0/16"
 hostAliases:
   - ip: 172.28.0.10
     hostnames:
-      - keycloak.bigbang.dev
+      - keycloak.uds.dev
 options:
   k3s:
     extraArgs:

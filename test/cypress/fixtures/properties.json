@@ -2,7 +2,7 @@
     "admin": {
         "username": "admin",
         "password": "sup3r-secret-p@ssword",
-        "hostname": "keycloak.bigbang.dev"
+        "hostname": "keycloak.uds.dev"
     },
     "user": {
         "username": "test-user",

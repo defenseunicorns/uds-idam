@@ -41,7 +41,3 @@ runs:
       # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
       run: brew install defenseunicorns/tap/uds@0.5.2
 
-    - name: Create Zarf Package
-      shell: bash
-      run: zarf package create --confirm --output ../build
-      working-directory: ${{ inputs.working-dir }}

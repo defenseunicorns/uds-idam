@@ -1,0 +1,27 @@
+tasks:
+  - name: k3d-cluster
+    actions:
+      - description: "Deploy the K3d cluster from GHCR"
+        # renovate: datasource=github-tags depName=ghcr.io/defenseunicorns/packages/uds-k3d versioning=semver
+        cmd: zarf package deploy oci://ghcr.io/defenseunicorns/packages/uds-k3d:0.2.1-multi --confirm --no-progress
+      - task: zarf-init
+
+  - name: dubbd-package
+    actions:
+      - task: zarf-init
+      - description: "Deploy the DUBBD K3d Package from GHCR"
+        # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+)
+        cmd: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.16.0-amd64 --confirm
+
+  - name: zarf-init
+    actions:
+      - description: "Deploy Zarf Init to the cluster from GHCR"
+        # renovate: datasource=github-tags depName=ghcr.io/defenseunicorns/init versioning=semver
+        cmd: zarf package deploy oci://defenseunicorns/init:v0.31.1-amd64 --components=git-server --confirm --no-progress
+
+  - name: core-istio-bundle
+    actions:
+      - description: "Create K3d cluster with istio"
+        # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/uds/bundles/k3d-core-istio extractVersion=^(?<version>\d+\.\d+\.\d+)
+        cmd: uds deploy oci://ghcr.io/defenseunicorns/packages/uds/bundles/k3d-core-istio:0.7.0-amd64 --confirm
+      - task: zarf-init
