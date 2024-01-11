@@ -81,7 +81,7 @@ components:
         kustomizations:
           - ./keycloak-ingress
     images:
-      - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.18.2-tetratefips-v0
+      - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.19.3-tetratefips-v0
   - name: realm-config-default-files
     required: true
     files:

@@ -17,7 +17,7 @@ tasks:
     actions:
       - description: "Deploy Zarf Init to the cluster from GHCR"
         # renovate: datasource=github-tags depName=ghcr.io/defenseunicorns/init versioning=semver
-        cmd: zarf package deploy oci://defenseunicorns/init:v0.31.1-amd64 --components=git-server --confirm --no-progress
+        cmd: zarf package deploy oci://defenseunicorns/init:v0.32.1-amd64 --components=git-server --confirm --no-progress
 
   - name: core-istio-bundle
     actions:
