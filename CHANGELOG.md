@@ -5,7 +5,7 @@
 
 ### ⚠ BREAKING CHANGES
 
-* Scope subdomain
+* SUBDOMAIN variable has been renamed to KEYCLOAK_SUBDOMAIN
 
 ### Bug Fixes
 
