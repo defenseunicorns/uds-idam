@@ -9,7 +9,9 @@
         { "type": "fix", "section": "Bug Fixes", "hidden": false },
         { "type": "chore", "section": "Miscellaneous", "hidden": false }
       ],
-      "versioning": "always-bump-patch",
+      "versioning": "default",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
       "extra-files": [
         "idam/zarf.yaml",
         "aws/zarf.yaml",
