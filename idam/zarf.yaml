@@ -12,7 +12,7 @@ variables:
   - name: REALM
     default: baby-yoda
     prompt: false
-  - name: SUBDOMAIN
+  - name: KEYCLOAK_SUBDOMAIN
     default: keycloak
     prompt: false
   - name: DOMAIN
