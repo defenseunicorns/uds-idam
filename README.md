@@ -74,7 +74,7 @@ make cluster/full
 | Name                      | Description                          | Default                                        | Type | Notes                  |
 |---------------------------|--------------------------------------|------------------------------------------------|------|------------------------|
 | REALM                     | Keycloak realm name                  | default-realm                                  |      |                        |
-| SUBDOMAIN                 | Subdomain for keycloak deployment    | keycloak                                       |      |                        |
+| KEYCLOAK_SUBDOMAIN                 | Subdomain for keycloak deployment    | keycloak                                       |      |                        |
 | DOMAIN                    | Base Domain                          | bigbang.dev                                    |      |                        |
 | KEYCLOAK_ADMIN_USERNAME   | Default admin username               | admin                                          |      |                        |
 | KEYCLOAK_ADMIN_PASSWORD   | Default admin password               | sup3r-secret-p@ssword                          |      |                        |
