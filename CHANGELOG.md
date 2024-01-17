@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.16](https://github.com/defenseunicorns/uds-idam/compare/v0.1.15...v0.1.16) (2024-01-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Scope subdomain
+
+### Bug Fixes
+
+* rename SUBDOMAIN to KEYCLOAK_SUBDOMAIN ([#124](https://github.com/defenseunicorns/uds-idam/issues/124)) ([089a13d](https://github.com/defenseunicorns/uds-idam/commit/089a13d726a2a011bd1dafead7541de41997a4dc))
+
 ## [0.1.15](https://github.com/defenseunicorns/uds-idam/compare/v0.1.14...v0.1.15) (2023-12-14)
 
 
