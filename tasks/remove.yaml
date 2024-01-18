@@ -2,7 +2,7 @@ tasks:
   - name: idam-bundle
     actions:
       - description: "Remove uds-idam bundle from the k3d cluster"
-        cmd: uds remove dev/idam/uds-bundle-uds-core-idam-amd64-0.0.1.tar.zst --confirm --no-progress
+        cmd: uds remove dev/idam/uds-bundle-uds-core-idam-*.tar.zst --confirm --no-progress
   
   - name: idam-package
     actions:

@@ -39,7 +39,7 @@ runs:
     - name: Install UDS CLI
       shell: bash
       # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-      run: brew install defenseunicorns/tap/uds@0.5.3
+      run: brew install defenseunicorns/tap/uds@0.6.1
 
     - name: Create Zarf Package
       shell: bash
