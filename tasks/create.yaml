@@ -6,35 +6,44 @@ variables:
     # x-release-please-end
 
 tasks:
-  - name: build-package
+  - name: idam-package
     actions:
       - description: "Build IDAM ZARF Package"
         cmd: zarf package create idam/ --architecture amd64 --confirm --no-progress --output build/
 
-  - name: deploy-package
+  - name: deploy-idam-package
     actions:
       - description: "Deploy the IDAM ZARF Package"
         cmd: zarf package deploy build/zarf-package-uds-idam-*.tar.zst --confirm
 
-  - name: build-bundle-dependencies
+  - name: idam-bundle-dependencies
     actions:
       - description: "Build IDAM Postgres Dependency"
         cmd: zarf package create pkg-deps/postgres --confirm --no-progress --output build/
 
-  - name: build-bundle
+  - name: idam-bundle
     actions:
       - description: "Build IDAM Bundle (IDAM Package and IDAM Dependencies)"
         cmd: export IDAM_VERSION=${IDAM_VERSION} && cat dev/idam/uds-bundle.yaml.tmpl | envsubst > dev/idam/uds-bundle.yaml && uds create dev/idam/ --confirm --no-progress
 
-  - name: deploy-bundle
+  - name: deploy-idam-bundle
     actions:
       - description: "Deploy the uds-idam and dependencies bundle"
         cmd: uds deploy dev/idam/uds-bundle-uds-core-idam-amd64-0.0.1.tar.zst --confirm
 
-  - name: build-published-bundle
+  - name: idam-published-bundle
     actions:
       - description: "Remove Existing uds-idam Package"
         cmd: rm -f build/zarf-package-uds-idam-amd64-*.tar.zst 2> /dev/null || true
 
       - description: "Pull the Published uds-idam Package"
         cmd: zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:${IDAM_VERSION}-amd64 -o build/
+
+  - name: dubbd-package
+    actions:
+      - description: "Deploy Zarf Init to the cluster from GHCR"
+        # renovate: datasource=github-tags depName=ghcr.io/defenseunicorns/init versioning=semver
+        cmd: zarf package deploy oci://defenseunicorns/init:v0.32.1 --components=git-server --confirm --no-progress
+      - description: "Deploy the DUBBD K3d Package from GHCR"
+        # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+)
+        cmd: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.16.0-amd64 --confirm

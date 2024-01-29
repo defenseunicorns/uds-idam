@@ -1,53 +1,57 @@
 includes:
-  - setup: ./tasks/setup.yaml
-  - idam: ./tasks/idam.yaml
+  - create: ./tasks/create.yaml
   - tests: ./tasks/tests.yaml
   - remove: ./tasks/remove.yaml
+  - setup: https://raw.githubusercontent.com/defenseunicorns/uds-common-tasks/v0.1.1/tasks/setup.yaml
 
 tasks:
   - name: cluster-full
+    description: Setup k3d cluster, build IDAM package, deploy IDAM package
     actions:
       - task: cluster-create
       - task: deploy-idam
 
   - name: cluster-create
+    description: Setup k3d cluster w/ istio from uds-common-tasks
     actions:
-      - task: setup:core-istio-bundle
+      - task: setup:k3d-test-cluster
 
   - name: deploy-idam
+    description: Remove existing IDAM package, build IDAM package, deploy IDAM package to existing cluster
     actions:
       - task: remove:idam-package
-      - task: idam:build-package
-      - task: idam:deploy-package
+      - task: create:idam-package
+      - task: create:deploy-idam-package
 
   - name: idam-tests
+    description: Run Cypress tests against existing IDAM
     actions:
       - task: tests:idam-cypress
   
   - name: remove-idam-bundle
+    description: Remove a deployed IDAM bundle from K8's cluster
     actions:
       - task: remove:idam-bundle
 
   - name: remove-idam-package
+    description: Remove a deployed IDAM package from K8's cluster
     actions:
       - task: remove:idam-package      
-
-  - name: clean
-    actions:
-      - cmd: git clean -dfx
 
 #######################################
 ############ CI Test Tasks ############
 #######################################
 
   - name: ci-dubbd-test
+    description: Test for CI for testing IDAM against DUBBD 
     actions:
       # - task: setup:k3d-cluster
       - task: setup:dubbd-package
-      - task: idam:build-package
-      - task: idam:deploy-package
+      - task: create:idam-package
+      - task: create:deploy-idam-package
 
   - name: ci-upgrade-test
+    description: Test for CI for testing IDAM against Published version of IDAM
     actions:
-      - task: idam:build-published-bundle
-      - task: idam:deploy-package
+      - task: create:idam-published-bundle
+      - task: create:deploy-idam-package
