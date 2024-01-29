@@ -15,6 +15,7 @@ tasks:
     description: Setup k3d cluster w/ istio from uds-common-tasks
     actions:
       - task: setup:k3d-test-cluster
+      - task: create:dubbd-package
 
   - name: deploy-idam
     description: Remove existing IDAM package, build IDAM package, deploy IDAM package to existing cluster
