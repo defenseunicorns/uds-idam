@@ -45,8 +45,7 @@ tasks:
   - name: ci-dubbd-test
     description: Test for CI for testing IDAM against DUBBD 
     actions:
-      # - task: setup:k3d-cluster
-      - task: setup:dubbd-package
+      - task: create:dubbd-package
       - task: create:idam-package
       - task: create:deploy-idam-package
 
