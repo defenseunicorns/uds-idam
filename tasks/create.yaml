@@ -39,11 +39,14 @@ tasks:
       - description: "Pull the Published uds-idam Package"
         cmd: zarf package pull oci://ghcr.io/defenseunicorns/uds-capability/uds-idam:${IDAM_VERSION}-amd64 -o build/
 
-  - name: dubbd-package
+  - name: zarf-init
     actions:
       - description: "Deploy Zarf Init to the cluster from GHCR"
         # renovate: datasource=github-tags depName=ghcr.io/defenseunicorns/init versioning=semver
         cmd: zarf package deploy oci://defenseunicorns/init:v0.32.1 --components=git-server --confirm --no-progress
+
+  - name: dubbd-package
+      - task: zarf-init
       - description: "Deploy the DUBBD K3d Package from GHCR"
         # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+)
         cmd: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.16.0-amd64 --confirm
