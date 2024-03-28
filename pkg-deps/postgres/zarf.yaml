@@ -23,7 +23,7 @@ components:
         valuesFiles:
           - "values.yaml"
     images:
-      - docker.io/bitnami/postgresql:15.3.0-debian-11-r24
+      - docker.io/bitnami/postgresql:16.1.0-debian-11-r24
     actions:
       onDeploy:
         after:
