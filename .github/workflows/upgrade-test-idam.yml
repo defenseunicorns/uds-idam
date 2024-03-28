@@ -39,7 +39,7 @@ jobs:
           uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.6.1/uds-cli_v0.6.1_Linux_amd64'
           name: 'uds'
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: 'v0.6.1'
+          version: 'v0.10.1'
 
       # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES, Source IDAM, Published IDAM)
       - name: Build bundle with published IDAM

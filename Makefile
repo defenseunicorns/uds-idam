@@ -1,11 +1,11 @@
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+)
-DUBBD_VERSION := 0.15.0-amd64
+DUBBD_VERSION := 0.21.0
 
 # renovate: datasource=github-tags depName=defenseunicorns/zarf
-ZARF_VERSION := v0.32.1
+ZARF_VERSION := v0.32.6
 
 # renovate: datasource=github-tags depName=defenseunicorns/uds-package-metallb
-METALLB_VERSION := 0.0.1-amd64
+METALLB_VERSION := v0.0.5
 
 # x-release-please-start-version
 IDAM_VERSION := 0.2.0

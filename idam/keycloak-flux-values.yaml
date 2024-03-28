@@ -6,7 +6,7 @@ application:
   repository: https://repo1.dso.mil/big-bang/product/packages/keycloak.git
   ref:
     # renovate: datasource=gitlab-tags depName=big-bang/product/packages/keycloak versioning=loose registryUrl=https://repo1.dso.mil
-    tag: 18.4.3-bb.10
+    tag: 23.0.7-bb.2
   values: |
     ###ZARF_VAR_KEYCLOAK_VALUES###
   dependsOn:
